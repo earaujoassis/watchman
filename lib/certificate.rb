@@ -8,10 +8,10 @@ module Watchman
       def verify_uri(uri)
         cert = nil
         uri = URI.parse(uri)
-        https = Net::HTTP.new(uri.host,uri.port)
-        https.use_ssl = true
-        https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        https.start{|h| cert = h.peer_cert}
+        request = Net::HTTP.new(uri.host, uri.port)
+        request.use_ssl = true if uri.scheme == 'https'
+        request.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        request.start{|h| cert = h.peer_cert}
         {
           subject: cert.subject.to_s,
           serial: cert.serial.to_s,
