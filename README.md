@@ -2,6 +2,30 @@
 
 > Watch for a domain status and take some actions if it gets into trouble
 
+## Usage
+
+You may use the `watchman-expiry` CLI tool to retrieve expiry information for
+domain names and SSL certificates, provided the guide below. For more options, please
+run `./watchman-expiry -h`.
+
+### 1. To retrive expiration date for a given domain:
+
+```sh
+$ ./watchman-expiry domain -u earaujoassis.com
+```
+
+or
+
+```sh
+$ ./watchman-expiry certificate -u https://earaujoassis.com
+```
+
+### 2. To retrive expiration date for a SSL certificate, for a given domain:
+
+```sh
+$ ./watchman-expiry certificate -u https://earaujoassis.com
+```
+
 ## Issues
 
 Please take a look at [/issues](https://github.com/earaujoassis/watchman/issues)
