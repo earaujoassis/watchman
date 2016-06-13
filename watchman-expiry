@@ -1,0 +1,102 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'optparse/uri'
+require './lib/watchman'
+
+HELP_SUBTEXT = <<HELP
+Subcommands:
+  domain:           display domain expiration information for an URI (domain)
+  certificate:      display certificate expiration information for an URI
+HELP
+
+class Parser
+  def self.parse(args)
+    options = {}
+
+    global_parser = OptionParser.new do |opts|
+      opts.banner = "Usage: watchman-expiry [subcommand] [uri]"
+
+      opts.on_tail("-h", "--help", "Prints this help") do
+        puts opts
+        exit
+      end
+      opts.separator ""
+      opts.separator HELP_SUBTEXT
+    end
+
+    subcommands = {
+      'domain' => OptionParser.new do |opts|
+        opts.banner = "Usage: domain [uri]"
+        opts.on_tail("-h", "--help", "Prints this help") do
+          puts opts
+          exit
+        end
+        opts.on('-u', '--uri URI', URI, "Mandatory URI") do |uri|
+          options[:uri] = uri
+        end
+      end,
+
+      'certificate' => OptionParser.new do |opts|
+        opts.banner = "Usage: certificate [uri]"
+        opts.on_tail("-h", "--help", "Prints this help") do
+          puts opts
+          exit
+        end
+        opts.on('-u', '--uri URI', URI, "Mandatory URI") do |uri|
+          options[:uri] = uri
+        end
+      end
+    }
+
+    global_parser.order! args
+    subcommand = args.shift
+    if subcommands.has_key? subcommand
+      options[:command] = subcommand.to_sym
+      subcommands[subcommand].order! args
+    else
+      puts "Invalid subcommand: #{subcommand}"
+      puts global_parser
+      exit
+    end
+
+    unless options.has_key? :uri
+      puts "Missing required argument [uri]"
+      puts global_parser
+      exit
+    end
+
+    if options[:uri].scheme.nil?
+      options[:uri] = URI.parse("http://#{options[:uri].to_s}")
+    end
+
+    return options
+  end
+end
+
+class WatchmanExpiry
+  def self.resolve(command, uri)
+    puts "Retriving information..."
+    begin
+      case command
+      when :domain
+        data = Watchman::WHOIS.verify_uri(uri.to_s)
+        puts "Expiration date for `#{uri.host}` (domain)"
+        puts "#{data[:expires_on].inspect}"
+      when :certificate
+        if uri.scheme != 'https'
+          puts "URI scheme must be `https`; URI given: `#{uri.to_s}`"
+          exit
+        end
+        data = Watchman::Certificate.verify_uri(uri.to_s)
+        puts "Expiration date for `#{uri.to_s}` (certificate)"
+        puts "#{data[:expire_at].inspect}"
+      end
+    rescue
+      puts "Unable to retrieve information; please make sure it is a valid URI/domain"
+    end
+  end
+end
+
+options = Parser.parse(ARGV)
+WatchmanExpiry.resolve(options[:command], options[:uri])
