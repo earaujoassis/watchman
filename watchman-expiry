@@ -6,7 +6,7 @@ require './lib/watchman'
 
 HELP_SUBTEXT = <<HELP
 Subcommands:
-  domain:           display domain expiration information for an URI (domain)
+  domain:           display domain expiration information for an URI or domain name
   certificate:      display certificate expiration information for an URI
 HELP
 
@@ -76,7 +76,7 @@ end
 
 class WatchmanExpiry
   def self.resolve(command, uri)
-    puts "Retriving information..."
+    puts "Retrieving information..."
     begin
       case command
       when :domain
