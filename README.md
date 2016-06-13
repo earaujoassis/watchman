@@ -2,6 +2,12 @@
 
 > Watch for a domain status and take some actions if it gets into trouble
 
+## Setup
+
+```sh
+$ bundle install
+```
+
 ## Usage
 
 You may use the `watchman-expiry` CLI tool to retrieve expiry information for
