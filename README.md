@@ -17,19 +17,19 @@ run `./watchman-expiry -h`.
 #### 1. Retrieve expiration date for a given domain:
 
 ```sh
-$ ./watchman-expiry domain -u earaujoassis.com
+$ bin/watchman-expiry domain -u earaujoassis.com
 ```
 
 or
 
 ```sh
-$ ./watchman-expiry domain -u https://earaujoassis.com
+$ bin/watchman-expiry domain -u https://earaujoassis.com
 ```
 
 #### 2. Retrieve expiration date for a SSL certificate, for a given domain:
 
 ```sh
-$ ./watchman-expiry certificate -u https://earaujoassis.com
+$ bin/watchman-expiry certificate -u https://earaujoassis.com
 ```
 
 ## Issues
