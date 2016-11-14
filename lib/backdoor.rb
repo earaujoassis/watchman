@@ -1,0 +1,16 @@
+module Backdoor
+  require 'lib/backdoor'
+  require 'lib/extensions'
+  require 'lib/extensions/hash'
+  require 'lib/extensions/config'
+  require 'lib/extensions/logger'
+  require 'lib/extensions/api'
+  require 'lib/extensions/application'
+  require 'lib/middleware'
+  require 'lib/middleware/logger'
+  require 'lib/core/executor'
+  require 'lib/core/git_executor'
+  require 'lib/routes'
+  require 'lib/routes/base'
+  require 'lib/routes/webhook'
+end
