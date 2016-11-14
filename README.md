@@ -6,19 +6,51 @@ Watchman is a Continuous Deployment server and a set of tools to keep track of p
 deployments and servers. A previous project, Backdoor (a GitHub Webhook server), was merged
 into it.
 
-## Setup
+## Backdoor
+
+> A simple webhook to GitHub's API to make a git pull in the endpoint (webhook payload-er)
+once a repository receives a push event – TL;DR it does a git pull in a server everytime a
+repository receives a push
+
+### Setup and running
+
+You should set the environment variables according to the `.sample.env` and create a `.env`
+file. Once you're done, run the following commands:
+
+  ```sh
+  $ bundle install
+  $ thin start -d
+  ```
+
+The server is now working. You need to setup the Webhook under your repository's Settings
+page now. For more information on how to proceed with that, please refer to the
+[official documentation](https://developer.github.com/webhooks/).
+
+### Caution
+
+The current implementation doesn't worry about HTTPS and any other measure to secure the
+communication between GitHub and your server. It's not a serious problem because no sensitive
+data is transmitted if you're working with public repositories; but you should avoid this
+if you plan to use it with a private repository.
+
+Future implementations should expand the possibilities to watch several repositories and
+secure the communication between GitHub and the Webhook endpoint.
+
+## Watchman Expiry
+
+### Setup
 
 ```sh
 $ bundle install
 ```
 
-## Usage
+### Usage
 
 You may use the `watchman-expiry` CLI tool to retrieve expiry information for
 domain names and SSL certificates, provided the guide below. For more options, please
 run `bin/watchman-expiry -h`.
 
-#### 1. Retrieve expiration date for a given domain:
+##### 1. Retrieve expiration date for a given domain:
 
 ```sh
 $ bin/watchman-expiry domain -u earaujoassis.com
@@ -30,7 +62,7 @@ or
 $ bin/watchman-expiry domain -u https://earaujoassis.com
 ```
 
-#### 2. Retrieve expiration date for a SSL certificate, for a given domain:
+##### 2. Retrieve expiration date for a SSL certificate, for a given domain:
 
 ```sh
 $ bin/watchman-expiry certificate -u https://earaujoassis.com
