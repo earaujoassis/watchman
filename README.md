@@ -8,9 +8,7 @@ into it.
 
 ## Backdoor
 
-> A simple webhook to GitHub's API to make a git pull in the endpoint (webhook payload-er)
-once a repository receives a push event – TL;DR it does a git pull in a server everytime a
-repository receives a push
+> A simple webhook to GitHub's API to make deployments every time a release is created
 
 ### Setup and running
 
@@ -19,7 +17,7 @@ file. Once you're done, run the following commands:
 
   ```sh
   $ bundle install
-  $ thin start -d
+  $ bundle exec hanami server
   ```
 
 The server is now working. You need to setup the Webhook under your repository's Settings
@@ -32,9 +30,6 @@ The current implementation doesn't worry about HTTPS and any other measure to se
 communication between GitHub and your server. It's not a serious problem because no sensitive
 data is transmitted if you're working with public repositories; but you should avoid this
 if you plan to use it with a private repository.
-
-Future implementations should expand the possibilities to watch several repositories and
-secure the communication between GitHub and the Webhook endpoint.
 
 ## Watchman Expiry
 

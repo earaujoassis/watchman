@@ -1,4 +1,3 @@
-require './backdoor'
+require './config/environment'
 
-use Backdoor::Middleware::Logger
-run Backdoor::App
+run Hanami::Container.new

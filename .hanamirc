@@ -1,0 +1,4 @@
+project=backdoor
+architecture=container
+test=minitest
+template=erb
