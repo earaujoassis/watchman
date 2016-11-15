@@ -14,7 +14,7 @@ Basically, every time a `ReleaseEvent` is sent to the GitHub webhook, a new acti
 is created in Backdoor's message broker and a given Agent is responsible to act upon that
 action/message. The Backdoor's server is written in Ruby and Hanami (a really cool web
 framework) and it uses RethinkDB to save application state. The Agents are written in
-JavaScript. The message broker is based on RabbitMQ.
+Python. The message broker is based on RabbitMQ.
 
 Backdoor and Agents are decoupled because we could have an Agent for every server and a master
 Backdoor instance. It reminds the ideas used in [Kubernetes](http://kubernetes.io/). Kubernetes
