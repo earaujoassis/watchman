@@ -10,6 +10,23 @@ into it.
 
 > A simple webhook to GitHub's API to make deployments every time a release is created
 
+Basically, every time a `ReleaseEvent` is sent to the GitHub webhook, a new action/message
+is created in Backdoor's message broker and a given Agent is responsible to act upon that
+action/message. The Backdoor's server is written in Ruby and Hanami (a really cool web
+framework) and it uses RethinkDB to save application state. The Agents are written in
+JavaScript. The message broker is based on RabbitMQ.
+
+Backdoor and Agents are decoupled because we could have an Agent for every server and a master
+Backdoor instance. It reminds the ideas used in [Kubernetes](http://kubernetes.io/). Kubernetes
+goes (way) beyond the scope of Backdoor's intentions: it offers service discovery and load
+balancing, horizontal scaling, batch execution etc. With Backdoor, I'm not really worried
+about this because I'm not offering services to a lot of users. I'm only interested to guarantee
+Continuous Deployment for a small set of projects, in one or a few server instances, used by a
+small portion of people and with GitHub's integration (the webhook is the main requirement here).
+
+Backdoor is also influenced by YouGov's velociraptor ([yougov/velociraptor](https://github.com/yougov/velociraptor)).
+But again velociraptor goes (way) beyond what is offered here.
+
 ### Setup and running
 
 You should set the environment variables according to the `.sample.env` and create a `.env`
@@ -29,7 +46,8 @@ page now. For more information on how to proceed with that, please refer to the
 The current implementation doesn't worry about HTTPS and any other measure to secure the
 communication between GitHub and your server. It's not a serious problem because no sensitive
 data is transmitted if you're working with public repositories; but you should avoid this
-if you plan to use it with a private repository.
+if you plan to use it with a private repository. Ideally, Agents shouldn't be allowed to write
+in your repository.
 
 ## Watchman Expiry
 
