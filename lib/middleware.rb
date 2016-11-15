@@ -1,1 +1,0 @@
-Backdoor::Middleware = Module.new
