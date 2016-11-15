@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'bundler'
 gem 'rake'
 gem 'hanami',       '~> 0.8'
-gem 'hanami-model', '~> 0.6'
 
 # Watchman
 gem 'whois'
