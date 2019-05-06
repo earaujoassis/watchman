@@ -1,8 +1,8 @@
 # Watchman
 
-> Watchman helps me keep track of QuatroLabs projects
+> Watchman helps keep track of GitHub projects; a tiny continuous deployment service
 
-Watchman is a Continuous Deployment server and a set of tools to keep track of projects,
+Watchman is a tiny continuous deployment service and a set of tools to keep track of projects,
 deployments and servers. A previous project, Backdoor (a GitHub Webhook server), was merged
 into it.
 
@@ -16,12 +16,12 @@ action/message. The Backdoor's server is written in Ruby and Hanami (a really co
 framework) and it uses RethinkDB to save application state. The Agents are written in
 Python. The message broker is based on RabbitMQ.
 
-Backdoor and Agents are decoupled because we could have an Agent for every server and a master
-Backdoor instance. It reminds the ideas used in [Kubernetes](http://kubernetes.io/). Kubernetes
-goes (way) beyond the scope of Backdoor's intentions: it offers service discovery and load
-balancing, horizontal scaling, batch execution etc. With Backdoor, I'm not really worried
-about this because I'm not offering services to a lot of users. I'm only interested to guarantee
-Continuous Deployment for a small set of projects, in one or a few server instances, used by a
+Backdoor and Agents are decoupled because we could have an Agent for every single service
+and a master Backdoor instance. It reminds the ideas used in [Kubernetes](http://kubernetes.io/).
+Kubernetes goes (way) beyond the scope of Backdoor's intentions: it offers service discovery and load
+balancing, horizontal scaling, batch execution etc. Backdoor is not really worried about this
+because it's not offering services to a lot of users. It is only interested in providing
+continuous deployment to a small set of projects, in one or a few server instances, used by a
 small portion of people and with GitHub's integration (the webhook is the main requirement here).
 
 Backdoor is also influenced by YouGov's velociraptor ([yougov/velociraptor](https://github.com/yougov/velociraptor)).
