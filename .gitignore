@@ -11,3 +11,5 @@ log
 /db/backdoor_test
 /public/assets*
 /tmp
+
+package-lock.json
