@@ -24,3 +24,8 @@ desc 'Open an IRB console with the Watchman module available'
 task :console do
   sh %{irb -r ./console}
 end
+
+desc 'Run the foreman Procfile'
+task :foreman do
+  sh 'foreman start -p 3000 -e /dev/null'
+end
