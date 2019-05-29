@@ -31,9 +31,6 @@ const app = (
 
 document.addEventListener('DOMContentLoaded', () => {
   const div = document.createElement('div');
-  div.style.height = '100%';
-  ReactDOM.render(
-    app,
-    document.body.appendChild(div)
-  );
+  div.className = 'application-root';
+  ReactDOM.render(app, document.body.appendChild(div));
 });

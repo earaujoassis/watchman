@@ -26,6 +26,7 @@
     "semi": ["error", "always"],
     "no-useless-escape": 0,
     "react/prop-types": 0,
+    "react/self-closing-comp": ["error", { "component": true, "html": false }],
     "jsx-quotes": ["error", "prefer-double"]
   }
 }
