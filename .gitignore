@@ -5,11 +5,10 @@ node_modules
 .sass-cache
 tmp
 log
+package-lock.json
 
 # Hanami's
 /db/backdoor_development
 /db/backdoor_test
 /public/assets*
 /tmp
-
-package-lock.json

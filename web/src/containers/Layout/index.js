@@ -2,10 +2,10 @@ import React from 'react';
 
 import './style.css';
 
-const layout = props => {
+const layout = ({ children }) => {
   return (
-    <div role="main" className="root-layout">
-      {props.children}
+    <div role="main" className="layout-root">
+      {children}
     </div>
   );
 };
