@@ -1,4 +1,3 @@
 project=backdoor
-architecture=container
-test=minitest
+test=rspec
 template=erb

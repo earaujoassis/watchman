@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 gem 'bundler'
 gem 'rake'
-gem 'hanami',       '~> 0.8'
+gem 'hanami'
+
+gem 'pg'
 
 # Watchman
 gem 'whois'
@@ -10,11 +12,12 @@ gem 'whois'
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/applications/code-reloading
-  gem 'shotgun'
+  gem 'shotgun', platforms: :ruby
+  gem 'hanami-webconsole'
 end
 
 group :test, :development do
-  gem 'dotenv', '~> 2.0'
+  gem 'dotenv', '~> 2.4'
 end
 
 group :test do
@@ -25,5 +28,5 @@ group :test do
 end
 
 group :production do
-  # gem 'puma'
+  gem 'puma'
 end
