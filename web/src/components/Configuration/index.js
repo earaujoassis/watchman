@@ -1,10 +1,14 @@
 import React from 'react';
 
+import Header from '../Header';
+
 import './style.css';
 
 const configuration = (props) => {
   return (
-    <div className="configuration-root"></div>
+    <div className="configuration-root">
+      <Header displayMenu={false} />
+    </div>
   );
 };
 
