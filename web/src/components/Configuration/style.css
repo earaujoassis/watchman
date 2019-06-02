@@ -1,6 +1,9 @@
 .configuration-root {
+  position: relative;
   flex: 1;
-  background: url('/assets/undraw_operating_system_4lr6.svg') no-repeat;
-  background-size: auto 80%;
-  background-position: center;
+  padding: 20px;
+}
+
+.configuration-section {
+  margin-bottom: 40px;
 }

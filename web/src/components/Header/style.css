@@ -1,9 +1,21 @@
 .header-root {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
   text-align: center;
-  padding: 40px 0;
+  padding: 22px 28px;
+  min-height: 200px;
+  background: #240090 url('/assets/971.jpg') no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  color: #FFF;
 }
 
 .header-title {
+  position: relative;
+  z-index: 1000;
   margin: 0;
-  font-size: 5rem;
+  font-size: 4rem;
 }

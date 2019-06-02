@@ -1,0 +1,18 @@
+.terminal-root {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+  background: linear-gradient(to right,#191a1c,#1b212d);
+  color: #FFF;
+}
+
+.terminal-status {
+  right: 20px;
+  top: 25px;
+  position: absolute;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5CDB95;
+}
