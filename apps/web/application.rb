@@ -234,7 +234,7 @@ module Web
         connect-src *;
         img-src 'self' https: data:;
         style-src 'self' 'unsafe-inline' https:;
-        font-src 'self' https://fonts.gstatic.com;
+        font-src *;
         object-src 'none';
         plugin-types application/pdf;
         child-src 'self';

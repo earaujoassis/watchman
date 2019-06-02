@@ -1,6 +1,6 @@
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Julius Sans One', sans-serif;
-  font-weight: normal;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -9,10 +9,58 @@ body {
   font-weight: normal;
   font-style: normal;
   font-size: 101%;
+  font-size: 14px;
 }
 
 .application-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+p {
+  margin: 0;
+}
+
+label {
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 8px 10px;
+  border: 1px solid #240090;
+  border-radius: 4px;
+  min-width: 75%;
+  outline: none;
+  transition: all 0.4s ease;
+}
+
+input:focus {
+  box-shadow: 0 0 6px rgba(36, 0, 144, 0.33);
+  transition: all 0.4s ease;
+}
+
+.input-box ~ .input-box {
+  margin-top: 14px;
+}
+
+.button {
+  display: block;
+  position: relative;
+  margin: 16px 0;
+  border: 0;
+  border-bottom: 4px solid #240090;
+  border-radius: 8px;
+  padding: 8px 24px;
+  background: #3500D3;
+  color: #FFF;
+  outline: none;
+  cursor: pointer;
+}
+
+.button:active {
+  border-bottom: 0;
+  top: 4px;
 }

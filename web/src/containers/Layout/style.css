@@ -1,4 +1,18 @@
 .layout-root {
   display: flex;
+  flex-direction: row;
+  flex: 1;
+  color: #282828;
+}
+
+.layout-root__corpus {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.layout-root__siblings {
+  display: flex;
+  flex-direction: row;
   flex: 1;
 }
