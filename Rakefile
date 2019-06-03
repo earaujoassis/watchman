@@ -16,7 +16,7 @@ Rake::TestTask.new do |t|
 end
 
 desc 'Run the specs for the Watchman subproject as well'
-task :watchtest do
+task 'watchman:test' do
   sh %{#{FileUtils::RUBY} -S bundle exec rspec}
 end
 

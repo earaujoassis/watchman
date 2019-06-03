@@ -6,7 +6,8 @@ const terminal = (props) => {
   return (
     <div className="terminal-root">
       <span className="terminal-status" title="Active"></span>
-      <i className="fas fa-greater-than"></i>
+      <p><i className="fas fa-angle-right"></i> whoami</p>
+      <p>watchman</p>
     </div>
   );
 };
