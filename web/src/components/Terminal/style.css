@@ -3,7 +3,19 @@
   flex: 1;
   padding: 20px;
   background: linear-gradient(to right,#191a1c,#1b212d);
+  font-family: 'Inconsolata', monospace;
+  font-style: normal;
+  font-weight: normal;
   color: #FFF;
+}
+
+.terminal-root .fa-angle-right {
+  position: relative;
+  top: 2px;
+}
+
+.terminal-root p {
+  margin-bottom: 2px;
 }
 
 .terminal-status {

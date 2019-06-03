@@ -10,6 +10,7 @@ body {
   font-style: normal;
   font-size: 101%;
   font-size: 14px;
+  color: #282828;
 }
 
 .application-root {
@@ -63,4 +64,10 @@ input:focus {
 .button:active {
   border-bottom: 0;
   top: 4px;
+}
+
+.monospace {
+  font-family: 'Inconsolata', monospace;
+  font-style: normal;
+  font-weight: normal;
 }

@@ -30,6 +30,7 @@ run the following commands:
 
 ```sh
 $ bundle install
+$ bundle exec hanami db prepare
 $ rake foreman
 ```
 

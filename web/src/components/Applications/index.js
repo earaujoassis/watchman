@@ -9,9 +9,9 @@ const applications = (props) => {
       <p className="application-name">Space</p>
       <div className="application-box">
         <span className="app-square app-normal"></span>
-        <span className="app-square app-warning"></span>
-        <span className="app-square app-warning"></span>
-        <span className="app-square app-error"></span>
+        <span className="app-square app-normal"></span>
+        <span className="app-square app-normal"></span>
+        <span className="app-square app-normal"></span>
       </div>
     </div>
   );

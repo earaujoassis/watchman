@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'bundler'
 gem 'rake'
 gem 'hanami'
+gem 'hanami-model'
 gem 'foreman'
 
 gem 'pg'
