@@ -71,3 +71,19 @@ input:focus {
   font-style: normal;
   font-weight: normal;
 }
+
+.anchor {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  display: inline-block;
+  font-weight: inherit;
+  color: #0366d6;
+  background: transparent;
+  cursor: pointer;
+}
+
+.anchor:hover,
+.anchor:active {
+  text-decoration: underline;
+}
