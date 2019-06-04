@@ -1,5 +1,2 @@
-export {
-  fetchUser,
-  createUser,
-  updateUser
-} from './users';
+export { fetchUser, createUser, updateUser } from './users';
+export { fetchProjects } from './projects';

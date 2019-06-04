@@ -7,6 +7,7 @@ gem 'hanami-model'
 gem 'foreman'
 
 gem 'pg'
+gem 'octokit', '~> 4.0'
 
 # Watchman
 gem 'whois'
