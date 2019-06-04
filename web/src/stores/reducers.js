@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/types';
 const initialState = {
   user: undefined,
   projects: undefined,
+  applications: undefined,
   error: undefined,
   loading: false,
   success: false
@@ -42,6 +43,23 @@ const projectRecordError = (state, action) => {
   return Object.assign({}, state, { loading: false, success: false, error: action.error });
 };
 
+const applicationRecordStart = (state, action) => {
+  return Object.assign({}, state, { loading: true });
+};
+
+const applicationRecordSuccess = (state, action) => {
+  return Object.assign({}, state, {
+    loading: false,
+    success: true,
+    error: null,
+    applications: action.user.apps
+  });
+};
+
+const applicationRecordError = (state, action) => {
+  return Object.assign({}, state, { loading: false, success: false, error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.USER_RECORD_START: return userRecordStart(state, action);
@@ -50,6 +68,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.PROJECT_RECORD_START: return projectRecordStart(state, action);
     case actionTypes.PROJECT_RECORD_SUCCESS: return projectRecordSuccess(state, action);
     case actionTypes.PROJECT_RECORD_ERROR: return projectRecordError(state, action);
+    case actionTypes.APPLICATION_RECORD_START: return applicationRecordStart(state, action);
+    case actionTypes.APPLICATION_RECORD_SUCCESS: return applicationRecordSuccess(state, action);
+    case actionTypes.APPLICATION_RECORD_ERROR: return applicationRecordError(state, action);
     default: return state;
   }
 };

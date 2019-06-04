@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 import { extractDataForm } from '../../utils';
+import { SpinningSquare } from '../UI';
 
 import './style.css';
 
-const root = ({ children, user, fetchUser, createUser }) => {
+const root = ({ children, loading, user, fetchUser, createUser }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+
+  if (loading && !user) {
+    return <div className="galaxy-center"><SpinningSquare /></div>;
+  }
 
   return (
     <div className="userRealm-root">
@@ -20,7 +25,8 @@ const root = ({ children, user, fetchUser, createUser }) => {
             <div className="userRealm-creation-overlay"></div>
             <div className="userRealm-creation-box">
               <h2>Master user creation</h2>
-              <p>In order to you this application, you must create a master user with your e-mail and GitHub Token with the following access scopes:</p>
+              <p>In order to you this application, you must create a master user with your e-mail and GitHub
+              Token with the following access scopes:</p>
               <ul className="userRealm-scopes-list">
                 <li>
                   <span className="monospace">repo</span> <span>(Full control of private repositories)</span>
@@ -64,6 +70,7 @@ const root = ({ children, user, fetchUser, createUser }) => {
 
 const mapStateToProps = state => {
   return {
+    loading: state.root.loading,
     user: state.root.user
   };
 };
