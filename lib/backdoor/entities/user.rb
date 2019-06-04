@@ -3,7 +3,7 @@ class User < Hanami::Entity
 
   def serialize
     {
-      id: self.id,
+      id: self.uuid,
       email: self.email,
       github_token: self.github_token
     }
