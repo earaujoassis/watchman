@@ -1,13 +1,13 @@
 module Api
   module Controllers
     module User
-      class Create
+      class AppCreate
         include Api::Action
 
         params do
-          required(:user).schema do
-            required(:email).filled(:str?, format?: /@/)
-            required(:github_token).filled(:str?)
+          required(:application).schema do
+            required(:full_name).filled(:str?)
+            optional(:description).filled(:str?)
           end
         end
 
@@ -20,8 +20,9 @@ module Api
           end
 
           repository = UserRepository.new
-          repository.create_master_user(params[:user])
-          status 201, { user: repository.master_user.serialize }.to_json
+          user = repository.find(params[:id])
+          application = repository.add_project(user, params[:application])
+          status 201, { application: application.serialize }.to_json
         end
       end
     end

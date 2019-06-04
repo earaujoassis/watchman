@@ -6,8 +6,8 @@ module Api
 
         params do
           required(:user).schema do
-            required(:email).filled
-            required(:github_token).filled
+            required(:email).filled(:str?, format?: /@/)
+            required(:github_token).filled(:str?)
           end
         end
 

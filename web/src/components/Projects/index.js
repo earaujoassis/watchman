@@ -6,7 +6,7 @@ import { SpinningSquare } from '../UI';
 
 import './style.css';
 
-const projects = ({ fetchProjects, loading, user, projects = [] }) => {
+const projects = ({ fetchProjects, createApplication, loading, user, projects = [] }) => {
   useEffect(() => {
     if (user) {
       fetchProjects(user.id);
@@ -24,7 +24,20 @@ const projects = ({ fetchProjects, loading, user, projects = [] }) => {
                 <h3 className="project-title"><a href={project.html_url}>{project.full_name}</a></h3>
                 <p className="project-description">{project.description}</p>
                 <ul className="project-actions">
-                  <li><button className="anchor">Deploy project</button></li>
+                  <li>
+                    <button className="anchor"
+                      onClick={e => {
+                        e.preventDefault();
+                        createApplication(user.id, {
+                          application: {
+                            full_name: project.full_name,
+                            description: project.description
+                          }
+                        });
+                      }}>
+                      Deploy project
+                    </button>
+                  </li>
                 </ul>
               </div>
             </li>
@@ -45,7 +58,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProjects: (id, data) => dispatch(actions.fetchProjects(id, data))
+    fetchProjects: (id) => dispatch(actions.fetchProjects(id)),
+    createApplication: (id, data) => dispatch(actions.createApplication(id, data))
   };
 };
 

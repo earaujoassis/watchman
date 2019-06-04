@@ -7,4 +7,6 @@
 post '/user', to: 'user#create'
 get '/user', to: 'user#index'
 patch '/user/:id', to: 'user#update'
-get '/user/:id/repos', to: 'user#repos'
+get '/user/:id/repositories', to: 'user#repos'
+post '/user/:id/applications', to: 'user#app_create'
+get '/user/:id/applications', to: 'user#app_index'
