@@ -21,10 +21,10 @@ export const projectRecordError = (error) => {
   };
 };
 
-export const fetchProjects = (userId) => {
+export const fetchProjects = (id) => {
   return dispatch => {
     dispatch(projectRecordStart());
-    fetch.get(`user/${userId}/repos`)
+    fetch.get(`user/${id}/repositories`)
       .then(response => {
         dispatch(projectRecordSuccess(response.data));
       })

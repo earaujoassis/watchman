@@ -24,27 +24,27 @@
   text-decoration: underline;
 }
 
-.project-box .project-title {
+.project-title {
   font-size: 0.9rem;
   margin: 0 0 8px;
 }
 
-.project-box .project-description {
+.project-description {
   font-weight: 200;
   margin: 0 0 6px;
 }
 
-.project-box .project-actions {
+.project-actions {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.project-box .project-actions > li {
+.project-actions > li {
   display: inline-block;
 }
 
-.project-box .project-actions > li ~ li {
+.project-actions > li ~ li {
   margin-left: 12px;
 }
 
