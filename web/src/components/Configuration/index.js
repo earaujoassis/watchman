@@ -24,6 +24,12 @@ const configuration = ({ updateUser, user = {} }) => {
             <label htmlFor="user_github_token">GitHub Token</label>
             <input type="text" id="user_github_token" name="github_token" defaultValue={user.github_token} />
           </div>
+          <div className="input-box">
+            <a href={`/api/users/${user.id}/credentials`}
+              title="It regenerates the client's key &amp; secret for security reasons"
+              rel="noopener noreferrer"
+              target="_blank">Download credentials for agents</a>
+          </div>
           <button type="submit" className="button">Save</button>
         </form>
       </div>

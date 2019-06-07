@@ -24,7 +24,7 @@ export const applicationRecordError = (error) => {
 export const fetchApplications = (id) => {
   return dispatch => {
     dispatch(applicationRecordStart());
-    fetch.get(`user/${id}/applications`)
+    fetch.get(`users/${id}/applications`)
       .then(response => {
         dispatch(applicationRecordSuccess(response.data));
       })
@@ -37,7 +37,7 @@ export const fetchApplications = (id) => {
 export const createApplication = (id, data) => {
   return dispatch => {
     dispatch(applicationRecordStart());
-    fetch.post(`user/${id}/applications`, data)
+    fetch.post(`users/${id}/applications`, data)
       .then(response => {
         dispatch(applicationRecordSuccess(response.data));
       })

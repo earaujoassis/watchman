@@ -20,7 +20,7 @@ const root = ({ children, loading, user, fetchUser, createUser }) => {
     <div className="userRealm-root">
       {children}
       {
-        user == null ? (
+        user == null || user.error ? (
           <div>
             <div className="userRealm-creation-overlay"></div>
             <div className="userRealm-creation-box">
