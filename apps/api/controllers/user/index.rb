@@ -6,7 +6,8 @@ module Api
 
         def call(params)
           self.format = :json
-          self.body = { user: UserRepository.new.master_user.serialize }.to_json
+          user = UserRepository.new.master_user&.serialize
+          self.body = { user: user }.to_json
         end
       end
     end

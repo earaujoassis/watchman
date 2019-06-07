@@ -1,6 +1,4 @@
 .menu-root {
-  position: sticky;
-  top: 0;
   position: relative;
   z-index: 100;
   display: flex;
@@ -14,6 +12,7 @@
 }
 
 .menu-list {
+  position: fixed;
   margin: 0;
   padding: 0;
   list-style: none;

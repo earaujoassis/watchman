@@ -4,11 +4,27 @@
   padding: 20px;
 }
 
+.applications-list {
+  list-style: none;
+  padding: 0;
+}
+
 .application-name {
-  margin-bottom: 6px;
+  font-size: 0.9rem;
+  margin: 0 0 8px;
+}
+
+.application-description {
+  font-weight: 200;
+  margin: 0 0 6px;
 }
 
 .application-box {
+  border-top: 1px solid #e1e4e8;
+  padding: 18px 0 18px;
+}
+
+.application-deploys-box {
   margin-bottom: 12px;
 }
 
