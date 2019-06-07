@@ -1,4 +1,4 @@
-RSpec.describe Api::Controllers::User::AppIndex, type: :action do
+RSpec.describe Api::Controllers::Server::Notify, type: :action do
   let(:action) { described_class.new }
   let(:params) { Hash[] }
 

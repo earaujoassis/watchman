@@ -4,6 +4,7 @@ const initialState = {
   user: undefined,
   projects: undefined,
   applications: undefined,
+  servers: undefined,
   error: undefined,
   loading: false,
   success: false
@@ -18,7 +19,7 @@ const userRecordSuccess = (state, action) => {
     loading: false,
     success: true,
     error: null,
-    user: action.user
+    user: action.user || { error: true }
   });
 };
 
@@ -60,6 +61,23 @@ const applicationRecordError = (state, action) => {
   return Object.assign({}, state, { loading: false, success: false, error: action.error });
 };
 
+const serverRecordStart = (state, action) => {
+  return Object.assign({}, state, { loading: true });
+};
+
+const serverRecordSuccess = (state, action) => {
+  return Object.assign({}, state, {
+    loading: false,
+    success: true,
+    error: null,
+    servers: action.servers
+  });
+};
+
+const serverRecordError = (state, action) => {
+  return Object.assign({}, state, { loading: false, success: false, error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.USER_RECORD_START: return userRecordStart(state, action);
@@ -71,6 +89,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.APPLICATION_RECORD_START: return applicationRecordStart(state, action);
     case actionTypes.APPLICATION_RECORD_SUCCESS: return applicationRecordSuccess(state, action);
     case actionTypes.APPLICATION_RECORD_ERROR: return applicationRecordError(state, action);
+    case actionTypes.SERVER_RECORD_START: return serverRecordStart(state, action);
+    case actionTypes.SERVER_RECORD_SUCCESS: return serverRecordSuccess(state, action);
+    case actionTypes.SERVER_RECORD_ERROR: return serverRecordError(state, action);
     default: return state;
   }
 };

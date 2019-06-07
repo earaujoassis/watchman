@@ -24,7 +24,7 @@ export const projectRecordError = (error) => {
 export const fetchProjects = (id) => {
   return dispatch => {
     dispatch(projectRecordStart());
-    fetch.get(`user/${id}/repositories`)
+    fetch.get(`users/${id}/repositories`)
       .then(response => {
         dispatch(projectRecordSuccess(response.data));
       })

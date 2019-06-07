@@ -1,5 +1,7 @@
 class User < Hanami::Entity
   MASTER = 'master'
+  CLIENT_KEY_LENGTH = 16
+  CLIENT_SECRET_LENGTH = 32
 
   def serialize
     {
