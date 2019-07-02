@@ -38,39 +38,48 @@ $ rake foreman
 
 The current implementation doesn't worry about HTTPS and any other measure to secure the communication
 between GitHub and your server. It's not a serious problem because no sensitive data is transmitted
-if you're working with public repositories; but you should avoid this if you plan to use it with a private
-repository. Ideally, Agents shouldn't be allowed to write in your repository.
+if you're working with public repositories; but you should avoid this if you plan to use it with
+a private repository. Ideally, Agents shouldn't be allowed to write in your repository.
 
-## Watchman Expiry
+## Agents
 
-### Setup
+Agents are running services inside each deployable server. They listen to the Watchman-Backdoor
+server in order to receive instructions for deployment, for instance.
 
-```sh
-$ bundle install
-```
+### Installing & Running
 
-### Usage
-
-You may use the `watchman-expiry` CLI tool to retrieve expiry information for domain names and SSL certificates,
-provided the guide below. For more options, please run `bin/watchman-expiry -h`.
-
-##### 1. Retrieve expiration date for a given domain:
+This is a Python `pip` package, so you're able to `pip install` it in your work environment. Basically,
+it will make available an `agent` binary, which should be helpful to setup new projects and deploy
+them in that running space (a server).
 
 ```sh
-$ bin/watchman-expiry domain -u earaujoassis.com
+$ pip install --user https://github.com/earaujoassis/wathcman/archive/0.1.2.zip
 ```
 
-or
+If you need any help, please run `agent --help`.
+
+### Developing agents
+
+In order to create a sandbox (virtual environment) and install it for development or testing, you may
+run the following commands:
 
 ```sh
-$ bin/watchman-expiry domain -u https://earaujoassis.com
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install .
+$ agent --help
 ```
 
-##### 2. Retrieve expiration date for a SSL certificate, for a given domain:
+The `agent` binary will be available in the current shell session.
 
-```sh
-$ bin/watchman-expiry certificate -u https://earaujoassis.com
-```
+## Watchman Expiry (deprecated)
+
+You may use the `watchman-expiry` CLI tool to retrieve expiry information for domain names and SSL
+certificates, provided the guide below. First, you need to install dependencies through `bundle install`.
+Then, you may run `bin/watchman-expiry domain -u earaujoassis.com` or
+`bin/watchman-expiry domain -u https://earaujoassis.com` to retrieve expiration date for a given domain;
+and `bin/watchman-expiry certificate -u https://earaujoassis.com` to retrieve expiration date for a
+SSL certificate, for a given domain. For more options, please run `bin/watchman-expiry -h`.
 
 ## Issues
 

@@ -20,7 +20,7 @@ module Api
           end
 
           repository = UserRepository.new
-          repository.update_master_user(params[:id], params[:user])
+          repository.update_user(params[:id], params[:user])
           status 201, { user: repository.master_user.serialize }.to_json
         end
       end

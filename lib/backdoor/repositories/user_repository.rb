@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class UserRepository < Hanami::Repository
   associations do
     has_many :applications
@@ -11,13 +13,28 @@ class UserRepository < Hanami::Repository
     self.create(data.clone.merge({ category: User::MASTER }))
   end
 
-  def update_master_user(uuid, data)
+  def find(uuid)
+    users.where(uuid: uuid).first
+  end
+
+  def update_user(uuid, data)
     user = self.find(uuid)
     self.update(user.id, data)
   end
 
-  def find(uuid)
-    users.where(uuid: uuid).first
+  def generate_credentials(uuid)
+    user = self.find(uuid)
+    data = {
+      client_key: SecureRandom.hex(User::CLIENT_KEY_LENGTH),
+      client_secret: SecureRandom.hex(User::CLIENT_SECRET_LENGTH)
+    }
+    self.update(user.id, data)
+  end
+
+  def authentic_client?(client_key, client_secret)
+    user = users.where(client_key: client_key).first
+    return false if user.nil?
+    return user.client_secret == client_secret
   end
 
   def find_with_applications(uuid)

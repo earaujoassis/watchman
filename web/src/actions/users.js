@@ -24,7 +24,7 @@ export const userRecordError = (error) => {
 export const fetchUser = () => {
   return dispatch => {
     dispatch(userRecordStart());
-    fetch.get('user/')
+    fetch.get('users/')
       .then(response => {
         dispatch(userRecordSuccess(response.data));
       })
@@ -37,7 +37,7 @@ export const fetchUser = () => {
 export const createUser = (data) => {
   return dispatch => {
     dispatch(userRecordStart());
-    fetch.post('user/', data)
+    fetch.post('users/', data)
       .then(response => {
         dispatch(userRecordSuccess(response.data));
       })
@@ -50,7 +50,7 @@ export const createUser = (data) => {
 export const updateUser = (id, data) => {
   return dispatch => {
     dispatch(userRecordStart());
-    fetch.patch(`user/${id}`, data)
+    fetch.patch(`users/${id}`, data)
       .then(response => {
         dispatch(userRecordSuccess(response.data));
       })
