@@ -9,6 +9,10 @@
   </head>
   <body>
     <%= yield %>
+    <% if Hanami.env?(:production) %>
+    <%= javascript 'app.js' %>
+    <% else %>
     <%= javascript 'http://localhost:3100/public/assets/app.js' %>
+    <% end %>
   </body>
 </html>

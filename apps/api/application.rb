@@ -229,9 +229,6 @@ module Api
     # PRODUCTION
     #
     configure :production do
-      # scheme 'https'
-      # host   'example.org'
-      # port   443
     end
   end
 end
