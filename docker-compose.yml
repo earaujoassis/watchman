@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  watchman-postgres:
+    image: 'postgres:11.3'
+    container_name: watchman-postgres
+    hostname: watchman-postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: watchman
+      POSTGRES_PASSWORD: 8GWbz2JF4FMe1Q8X
+      POSTGRES_DB: backdoor_production
+
+  watchman:
+    build:
+      context: .
+    container_name: watchman
+    image: watchman
+    depends_on:
+      - watchman-postgres
+    links:
+      - watchman-postgres
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      WEB_SESSIONS_SECRET: xRaQLWtL2JUcr8hjgglQOVJ6hRZhIZ6MitXhORpH4ToN7E5OSsVWugEkLdCLikfJ
+      API_SESSIONS_SECRET: MqHTzC0tnbp4mdEFzO39Z1KZfBoDojxWvi3NTBrYMgRCCCkyiB8oMTzBqBrpYOz1
+      DATABASE_URL: postgresql://watchman:8GWbz2JF4FMe1Q8X@watchman-postgres/backdoor_production
