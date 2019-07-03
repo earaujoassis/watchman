@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './web/src/index.js',
   output: {
-    path: path.resolve(__dirname, './public/assets/'),
+    path: path.resolve(__dirname, './apps/web/assets/'),
     publicPath: '/public/assets/',
     filename: 'app.js'
   },

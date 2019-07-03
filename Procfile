@@ -1,2 +1,2 @@
-web: HANAMI_PORT=$PORT bundle exec hanami server
+web: env HANAMI_PORT=$PORT bundle exec hanami server
 webpacker: yarn start
