@@ -41,7 +41,10 @@ module Api
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
 
-          status 201, { server: server_repository.find(params[:server][:hostname]).serialize }.to_json
+          status 201, {
+            version: Backdoor::VERSION,
+            server: server_repository.find(params[:server][:hostname]).serialize
+          }.to_json
         end
       end
     end
