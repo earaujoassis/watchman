@@ -7,7 +7,7 @@ from agents.cli import AgentCLI
 
 
 name = "agents"
-version = "0.1.2"
+version = "0.1.4"
 
 
 def main():
