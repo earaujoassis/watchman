@@ -16,18 +16,10 @@ parser = argparse.ArgumentParser(description='Agent CLI tool and running instace
 subparsers = parser.add_subparsers(dest='parent')
 init_command = subparsers.add_parser(
     'init',
-    help='create initial configuration files')
-#init_command.add_argument(
-#    '--force',
-#    action='store_true',
-#    default=False,
-#    help='forcefully overrides configuration files', dest='argument')
-start_command = subparsers.add_parser(
-    'start',
-    help='start a running process (daemon)')
+    help='create configuration file for the current user')
 notify_command = subparsers.add_parser(
     'notify',
-    help='notify a master-server (Watcman-Backdoor) about this running agent')
+    help='notify a master-server (Watcman-Backdoor) about this running agent and get actions to perform')
 
 
 class AgentCLI(object):
