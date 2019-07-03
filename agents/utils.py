@@ -68,8 +68,9 @@ def home_dir():
 
 def get_ip_address_for_interface(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    st = struct.Struct('256s')
     return socket.inet_ntoa(fcntl.ioctl(
         s.fileno(),
         0x8915,  # SIOCGIFADDR
-        struct.pack(b'256s', ifname[:15])
+        st.pack(ifname[:15].encode('utf-8'))
     )[20:24])
