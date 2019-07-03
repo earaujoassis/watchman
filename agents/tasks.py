@@ -11,6 +11,7 @@ import socket
 from mako.template import Template
 from agents.utils import run, get_agent_filepath
 from agents.utils import get_ip_address_for_interface
+from agents import version
 
 
 def init():
@@ -57,6 +58,11 @@ def notify():
                 },
             })
         if response.status_code >= 200 and response.status_code < 300:
+            response_data = response.json()
+            if response_data['version'] > version:
+                sys.stdout.write('> Version mismatch; updating agent\n')
+                run('pip3 install --user https://github.com/earaujoassis/wathcman/archive/{0}.zip'.format(response_data['version']))
+                sys.stdout.write('> Agent updated\n')
             sys.stdout.write('> Successfully notified\n')
             sys.exit(0)
         else:
