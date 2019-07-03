@@ -5,6 +5,8 @@ import sys
 import subprocess
 import shlex
 import socket
+import fcntl
+import struct
 
 
 DEPLOYMENT_TYPE_STATIC     = 0
