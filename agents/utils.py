@@ -4,6 +4,7 @@ import os
 import sys
 import subprocess
 import shlex
+import socket
 
 
 DEPLOYMENT_TYPE_STATIC     = 0
