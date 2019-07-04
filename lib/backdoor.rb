@@ -3,4 +3,7 @@ module Backdoor
 
   module Services
   end
+
+  module Ws
+  end
 end
