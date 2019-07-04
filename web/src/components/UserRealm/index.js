@@ -7,9 +7,10 @@ import { SpinningSquare } from '../UI';
 
 import './style.css';
 
-const root = ({ children, loading, user, fetchUser, createUser }) => {
+const root = ({ children, loading, user, fetchUser, createUser, subscribeUser }) => {
   useEffect(() => {
     fetchUser();
+    subscribeUser();
   }, []);
 
   if (loading && !user) {
@@ -78,7 +79,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: () => dispatch(actions.fetchUser()),
-    createUser: (data) => dispatch(actions.createUser(data))
+    createUser: (data) => dispatch(actions.createUser(data)),
+    subscribeUser: () => dispatch(actions.subscribeUser())
   };
 };
 

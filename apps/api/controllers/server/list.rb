@@ -8,8 +8,8 @@ module Api
           self.format = :json
 
           repository = ServerRepository.new
-          servers = repository.all
-          self.body = { servers: servers.map(&:serialize) }.to_json
+          servers = repository.all_serialized
+          self.body = { servers: servers }.to_json
         end
       end
     end
