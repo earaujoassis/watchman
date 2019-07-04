@@ -32,7 +32,7 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
-RUN bundle install
+RUN bundle install --verbose
 RUN yarn install --network-timeout 1000000 --verbose && yarn build
 
 EXPOSE 3000
