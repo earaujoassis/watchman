@@ -78,6 +78,10 @@ const serverRecordError = (state, action) => {
   return Object.assign({}, state, { loading: false, success: false, error: action.error });
 };
 
+const receivedBroadcastMessage = (state, action) => {
+  return Object.assign({}, state, action.data);
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.USER_RECORD_START: return userRecordStart(state, action);
@@ -92,6 +96,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SERVER_RECORD_START: return serverRecordStart(state, action);
     case actionTypes.SERVER_RECORD_SUCCESS: return serverRecordSuccess(state, action);
     case actionTypes.SERVER_RECORD_ERROR: return serverRecordError(state, action);
+    case actionTypes.RECEIVED_CHANNEL_BROADCAST_MESSAGE: return receivedBroadcastMessage(state, action);
     default: return state;
   }
 };

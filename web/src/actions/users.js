@@ -59,3 +59,24 @@ export const updateUser = (id, data) => {
       });
   };
 };
+
+export const subscribeUser = () => {
+  return dispatch => dispatch({
+    type: actionTypes.CABLE_SUBSCRIBE_TO_USER_CHANNEL,
+    event: 'message',
+    handle: data => {
+      return dispatch({
+        type: actionTypes.RECEIVED_CHANNEL_BROADCAST_MESSAGE,
+        data: data
+      });
+    }
+  });
+};
+
+export const unsubscribeUser = () => {
+  return {
+    type: actionTypes.CABLE_UNSUBSCRIBE_TO_USER_CHANNEL,
+    event: 'message',
+    unsubscribe: true
+  };
+};
