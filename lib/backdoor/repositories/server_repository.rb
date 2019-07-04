@@ -7,4 +7,8 @@ class ServerRepository < Hanami::Repository
     server = self.find(hostname)
     self.update(server.id, data)
   end
+
+  def all_serialized
+    self.all.map(&:serialize)
+  end
 end

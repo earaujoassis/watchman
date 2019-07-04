@@ -4,9 +4,12 @@ gem 'bundler'
 gem 'rake'
 gem 'hanami'
 gem 'hanami-model'
-gem 'foreman'
-
 gem 'pg'
+gem 'faye-websocket'
+gem 'permessage_deflate'
+gem 'eventmachine'
+gem 'foreman'
+gem 'puma'
 gem 'octokit', '~> 4.0'
 
 # Watchman
@@ -31,5 +34,4 @@ group :test do
 end
 
 group :production do
-  gem 'puma'
 end

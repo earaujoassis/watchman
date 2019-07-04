@@ -1,4 +1,4 @@
-require "base64"
+require 'base64'
 
 module Api
   module Controllers
@@ -18,12 +18,18 @@ module Api
           Base64.decode64(encoded_text).split(':', 2)
         end
 
-        def call(params)
-          self.format = :json
+        def authentic_client?
+          return true unless Hanami.env?(:production)
 
           client_key, client_secret = authorization_bearer
           user_repository = UserRepository.new
-          unless user_repository.authentic_client?(client_key, client_secret)
+          user_repository.authentic_client?(client_key, client_secret)
+        end
+
+        def call(params)
+          self.format = :json
+
+          unless authentic_client?
             status 401, { error: "Invalid client credentials" }.to_json
             return
           end
@@ -40,6 +46,8 @@ module Api
           else
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
+
+          Backdoor::Ws::Connection.broadcast({ servers: server_repository.all_serialized }.to_json)
 
           status 201, {
             version: Backdoor::VERSION,
