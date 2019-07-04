@@ -1,5 +1,5 @@
 const socketMiddleware = () => {
-  const ws = new WebSocket(`ws://${window.document.location.host}/`);
+  const ws = new WebSocket(`${window.document.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.document.location.host}/`);
 
   return ({ dispatch }) => next => (action) => {
     // Skip this middleware if action is a function (this means it's not a WebSocket message)

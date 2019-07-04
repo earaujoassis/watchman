@@ -237,7 +237,7 @@ module Web
         font-src *;
         object-src 'none';
         plugin-types application/pdf;
-        child-src 'self';
+        worker-src 'self';
         frame-src 'self';
         media-src 'self'
       }
