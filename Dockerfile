@@ -33,7 +33,7 @@ WORKDIR /app
 COPY . /app
 
 RUN bundle install
-RUN yarn install && yarn build
+RUN yarn install --network-timeout 1000000 --verbose && yarn build
 
 EXPOSE 3000
 
