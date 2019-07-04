@@ -20,6 +20,7 @@ module Backdoor
 
       def initialize(app)
         @app = app
+        @logger = Hanami::Logger.new('backdoor')
       end
 
       def call(env)
@@ -27,19 +28,19 @@ module Backdoor
           ws = Faye::WebSocket.new(env, nil, { extensions: [ PermessageDeflate ] })
 
           ws.on :open do |event|
-            p [:open, ws.object_id]
             @@clients << ws
             ws.send("Connected")
+            @logger.info("WebSocket connection open for object ID #{ws.object_id}")
           end
 
           ws.on :message do |event|
-            p [:message, event.data]
+            @logger.info("WebSocket connection received a message: #{event.data}")
           end
 
           ws.on :close do |event|
-            p [:close, ws.object_id, event.code, event.reason]
             @@clients.delete(ws)
             ws = nil
+            @logger.info("WebSocket connection closed for object ID #{ws.object_id}; code=#{event.code} reason=#{event.reason}")
           end
 
           ws.rack_response
