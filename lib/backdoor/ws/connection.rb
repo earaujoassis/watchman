@@ -1,14 +1,15 @@
+require 'concurrent'
+
 # Module used for WebSocket communication
 #
 # So far, no specific protocol is defined. Missing requirements:
 # - Implement the Action Cable protocol over WebSocket
 # - Have specific protocol/channels for each communication channel
-# - Faye's ping solution is not currently working
 #
 module Backdoor
   module Ws
     class Connection
-      KEEPALIVE_TIME = 15
+      KEEPALIVE_TIME = 10 # seconds
 
       @@clients = []
 
@@ -20,6 +21,7 @@ module Backdoor
 
       def initialize(app)
         @app = app
+        @beat = nil
         @logger = Hanami::Logger.new('backdoor')
       end
 
@@ -29,12 +31,18 @@ module Backdoor
 
           ws.on :open do |event|
             @@clients << ws
-            ws.send("Connected")
+            ws.send(Backdoor::Ws::Messages::CONNECTED_MESSAGE)
+            if @beat.nil?
+              @beat = Concurrent::TimerTask.new(execution_interval: KEEPALIVE_TIME) do
+                Connection.broadcast(Backdoor::Ws::Messages::SYNC_MESSAGE)
+              end
+              @beat.execute
+            end
             @logger.info("WebSocket connection open for object ID #{ws.object_id}")
           end
 
           ws.on :message do |event|
-            @logger.info("WebSocket connection received a message: #{event.data}")
+            @logger.info("WebSocket connection received a message: #{event.data}; from=#{ws.object_id}")
           end
 
           ws.on :close do |event|

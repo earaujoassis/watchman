@@ -37,6 +37,10 @@ const socketMiddleware = () => {
         processedData = {};
       }
 
+      if (processedData.type === 'control') {
+        return;
+      }
+
       handleEvent(processedData);
     });
   };
