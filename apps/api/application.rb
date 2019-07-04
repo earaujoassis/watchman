@@ -175,11 +175,11 @@ module Api
         frame-ancestors 'self';
         base-uri 'self';
         default-src 'none';
-        script-src 'self';
-        connect-src 'self';
+        script-src *;
+        connect-src *;
         img-src 'self' https: data:;
         style-src 'self' 'unsafe-inline' https:;
-        font-src 'self';
+        font-src *;
         object-src 'none';
         plugin-types application/pdf;
         child-src 'self';
