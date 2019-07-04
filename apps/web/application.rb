@@ -236,7 +236,6 @@ module Web
         style-src 'self' 'unsafe-inline' https:;
         font-src *;
         object-src 'none';
-        plugin-types application/pdf;
         worker-src 'self';
         frame-src 'self';
         media-src 'self'
