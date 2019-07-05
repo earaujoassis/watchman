@@ -49,12 +49,13 @@ def notify():
         response = requests.put('{0}/api/servers/notify'.format(
             agent_data['watchman_backdoor']),
             headers={
-                'Authorization': 'Bearer {0}'.format(authorization.decode('utf-8'))
+                'Authorization': 'Bearer {0}'.format(authorization.decode('utf-8')),
             },
             json={
                 'server': {
                     'hostname': socket.gethostname(),
                     'ip': get_ip_address_for_interface('eth0'),
+                    'latest_version': version,
                 },
             })
         if response.status_code >= 200 and response.status_code < 300:
