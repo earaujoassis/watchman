@@ -1,5 +1,5 @@
-require 'uri'
-require 'net/http'
+require "uri"
+require "net/http"
 
 module Watchman
   module Health
@@ -7,9 +7,9 @@ module Watchman
       def request(uri)
         uri = URI.parse(uri)
         request = Net::HTTP.new(uri.host, uri.port)
-        request.use_ssl = true if uri.scheme == 'https'
+        request.use_ssl = true if uri.scheme == "https"
         start_time = Time.now
-        response = request.head('/')
+        response = request.head("/")
         elapsed_time = Time.now - start_time
         status_code = response.code.to_i
         {
@@ -23,7 +23,7 @@ module Watchman
         response = self.request(uri)
         status_code = response[:status_code]
         while status_code == 301 || status_code == 302
-          location = response[:response]['location']
+          location = response[:response]["location"]
           response = self.request(location)
           status_code = response[:status_code]
         end

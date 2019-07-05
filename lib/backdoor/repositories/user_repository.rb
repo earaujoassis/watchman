@@ -1,4 +1,4 @@
-require 'securerandom'
+require "securerandom"
 
 class UserRepository < Hanami::Repository
   associations do

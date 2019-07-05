@@ -1,5 +1,5 @@
-require 'uri'
-require 'whois'
+require "uri"
+require "whois"
 
 module Watchman
   module WHOIS

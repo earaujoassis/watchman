@@ -13,9 +13,9 @@ module Api
 
           content = "client_key,client_secret\n#{user.client_key},#{user.client_secret}\n"
           self.headers.merge!({
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="credentials.csv"',
-            'Content-Length' => content.bytesize.to_s
+            "Content-Type" => "text/csv",
+            "Content-Disposition" => 'attachment; filename="credentials.csv"',
+            "Content-Length" => content.bytesize.to_s
           })
           self.body = content
         end
