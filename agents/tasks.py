@@ -11,7 +11,7 @@ import socket
 from mako.template import Template
 from agents.utils import run, get_agent_filepath
 from agents.utils import get_ip_address_for_interface
-from agents import version
+from agents.metadata import version
 
 
 GITHUB_STRING = 'https://github.com/earaujoassis/wathcman/archive/{0}.zip'
@@ -81,6 +81,8 @@ def notify():
                 install_str = GITHUB_STRING.format(response_data['version'])
                 run('pip3 install --user {0}'.format(install_str))
                 sys.stdout.write('> Agent updated\n')
+            else:
+                sys.stdout.write('> No update available\n')
             sys.stdout.write('> Successfully notified\n')
             sys.exit(0)
         else:
