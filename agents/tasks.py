@@ -14,7 +14,7 @@ from agents.utils import get_ip_address_for_interface
 from agents.metadata import version
 
 
-GITHUB_STRING = 'https://github.com/earaujoassis/wathcman/archive/{0}.zip'
+GITHUB_STRING = 'https://github.com/earaujoassis/watchman/archive/v{0}.zip'
 
 
 def init():
