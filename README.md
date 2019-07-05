@@ -53,7 +53,7 @@ it will make available an `agent` binary, which should be helpful to setup new p
 them in that running space (a server).
 
 ```sh
-$ pip install --user https://github.com/earaujoassis/watchman/archive/v0.1.7.zip
+$ pip install --user https://github.com/earaujoassis/watchman/archive/v0.1.8.zip
 ```
 
 If you need any help, please run `agent --help`.
