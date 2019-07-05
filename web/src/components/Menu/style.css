@@ -1,6 +1,9 @@
 .menu-root {
-  position: relative;
-  z-index: 100;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   width: 80px;
@@ -12,7 +15,6 @@
 }
 
 .menu-list {
-  position: fixed;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -34,4 +36,8 @@
   color: #FFF;
   text-decoration: none;
   font-size: 1.5rem;
+}
+
+.menu-list a:hover {
+  text-decoration: none;
 }

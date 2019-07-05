@@ -13,7 +13,7 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
     subscribeUser();
   }, []);
 
-  if (loading && !user) {
+  if (loading.includes('server') && !user) {
     return <div className="galaxy-center"><SpinningSquare /></div>;
   }
 

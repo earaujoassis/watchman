@@ -1,6 +1,7 @@
 class Server < Hanami::Entity
   def serialize
     {
+      id: self.uuid,
       hostname: self.hostname,
       ip: self.ip,
       latest_version: self.latest_version,

@@ -16,7 +16,7 @@ const projects = ({ fetchProjects, createApplication, loading, user, projects = 
   return (
     <div className="projects-root">
       <h2>Projects</h2>
-      {loading ? <SpinningSquare /> : (
+      {loading.includes('project') ? <SpinningSquare /> : (
         <ul className="projects-list">
           {projects.map((project, i) => (
             <li key={i}>
