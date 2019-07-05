@@ -9,11 +9,6 @@ import fcntl
 import struct
 
 
-DEPLOYMENT_TYPE_STATIC     = 0
-DEPLOYMENT_TYPE_CONTAINERS = 1
-DEPLOYMENT_TYPE_COMPOSE    = 2
-
-
 class ConsoleColors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -42,14 +37,17 @@ def call(c, shell=True):
 
 
 def run(c):
-    process = subprocess.Popen(shlex.split(c), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    process = subprocess.Popen(
+        shlex.split(c),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT)
     stdout, stderr = process.communicate()
     retcode = process.poll()
     return {"retcode": retcode, "stdout": stdout, "stderr": stderr}
 
 
 def assert_step(r):
-    if r is not 0:
+    if r != 0:
         sys.stdout.write('> Something went wrong, aborting...\n')
         sys.exit(1)
 

@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import sys
-import os
-import re
 
 try:
     import tasks
     import utils
-except ImportError as e:
+except ImportError:
     from agents import tasks,  utils
 
 
-parser = argparse.ArgumentParser(description='Agent CLI tool and running instace')
+parser = argparse.ArgumentParser(
+    description='Agent CLI tool and running instace')
 subparsers = parser.add_subparsers(dest='parent')
 init_command = subparsers.add_parser(
     'init',
     help='create configuration file for the current user')
 notify_command = subparsers.add_parser(
     'notify',
-    help='notify a master-server (Watcman-Backdoor) about this running agent and get actions to perform')
+    help='notify master-server and obtain actions to perform')
 
 
 class AgentCLI(object):
