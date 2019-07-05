@@ -1,4 +1,4 @@
-require 'concurrent'
+require "concurrent"
 
 # Module used for WebSocket communication
 #
@@ -22,12 +22,12 @@ module Backdoor
       def initialize(app)
         @app = app
         @beat = nil
-        @logger = Hanami::Logger.new('backdoor')
+        @logger = Hanami::Logger.new("backdoor")
       end
 
       def call(env)
         if Faye::WebSocket.websocket?(env)
-          ws = Faye::WebSocket.new(env, nil, { extensions: [ PermessageDeflate ] })
+          ws = Faye::WebSocket.new(env, nil, { extensions: [PermessageDeflate] })
 
           ws.on :open do |event|
             @@clients << ws

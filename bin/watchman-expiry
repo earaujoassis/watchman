@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
-require 'optparse/uri'
-require_relative '../lib/watchman'
+require "optparse"
+require "optparse/uri"
+require_relative "../lib/watchman"
 
 HELP_SUBTEXT = <<HELP
 Subcommands:
@@ -26,24 +26,24 @@ class Parser
     end
 
     subcommands = {
-      'domain' => OptionParser.new do |opts|
+      "domain" => OptionParser.new do |opts|
         opts.banner = "Usage: domain [uri]"
         opts.on_tail("-h", "--help", "Prints this help") do
           puts opts
           exit
         end
-        opts.on('-u', '--uri URI', URI, "Mandatory URI") do |uri|
+        opts.on("-u", "--uri URI", URI, "Mandatory URI") do |uri|
           options[:uri] = uri
         end
       end,
 
-      'certificate' => OptionParser.new do |opts|
+      "certificate" => OptionParser.new do |opts|
         opts.banner = "Usage: certificate [uri]"
         opts.on_tail("-h", "--help", "Prints this help") do
           puts opts
           exit
         end
-        opts.on('-u', '--uri URI', URI, "Mandatory URI") do |uri|
+        opts.on("-u", "--uri URI", URI, "Mandatory URI") do |uri|
           options[:uri] = uri
         end
       end
@@ -67,7 +67,7 @@ class Parser
     end
 
     if options[:uri].scheme.nil?
-      options[:uri] = URI.parse("http://#{options[:uri].to_s}")
+      options[:uri] = URI.parse("http://#{options[:uri]}")
     end
 
     return options
@@ -84,12 +84,12 @@ class WatchmanExpiry
         puts "Expiration date for `#{uri.host}` (domain)"
         puts "#{data[:expires_on].inspect}"
       when :certificate
-        if uri.scheme != 'https'
-          puts "URI scheme must be `https`; URI given: `#{uri.to_s}`"
+        if uri.scheme != "https"
+          puts "URI scheme must be `https`; URI given: `#{uri}`"
           exit
         end
         data = Watchman::Certificate.verify_uri(uri.to_s)
-        puts "Expiration date for `#{uri.to_s}` (certificate)"
+        puts "Expiration date for `#{uri}` (certificate)"
         puts "#{data[:expire_at].inspect}"
       end
     rescue

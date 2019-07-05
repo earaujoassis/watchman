@@ -1,4 +1,4 @@
-require 'octokit'
+require "octokit"
 
 class Backdoor::Services::GitHub
   def initialize(access_token)
@@ -6,6 +6,6 @@ class Backdoor::Services::GitHub
   end
 
   def repos
-    @client.repos({}, query: {type: 'owner', sort: 'asc'})
+    @client.repos({}, query: {type: "owner", sort: "asc"})
   end
 end

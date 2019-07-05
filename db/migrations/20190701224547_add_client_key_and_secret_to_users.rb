@@ -1,4 +1,4 @@
-require 'securerandom'
+require "securerandom"
 
 Hanami::Model.migration do
   change do

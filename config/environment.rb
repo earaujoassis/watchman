@@ -1,17 +1,17 @@
-require 'bundler/setup'
-require 'hanami/setup'
-require 'hanami/model'
-require 'hanami/model/sql'
-require 'faye/websocket'
-require 'permessage_deflate'
-require 'json'
-require_relative '../lib/backdoor'
-require_relative '../apps/web/application'
-require_relative '../apps/api/application'
+require "bundler/setup"
+require "hanami/setup"
+require "hanami/model"
+require "hanami/model/sql"
+require "faye/websocket"
+require "permessage_deflate"
+require "json"
+require_relative "../lib/backdoor"
+require_relative "../apps/web/application"
+require_relative "../apps/api/application"
 
 Hanami.configure do
-  mount Api::Application, at: '/api'
-  mount Web::Application, at: '/'
+  mount Api::Application, at: "/api"
+  mount Web::Application, at: "/"
 
   model do
     ##
@@ -22,17 +22,17 @@ Hanami.configure do
     #  * SQL adapter
     #    adapter :sql, 'postgresql://localhost/backdoor_development'
     #
-    adapter :sql, ENV.fetch('DATABASE_URL')
+    adapter :sql, ENV.fetch("DATABASE_URL")
 
     ##
     # Migrations
     #
-    migrations 'db/migrations'
-    schema     'db/schema.sql'
+    migrations "db/migrations"
+    schema     "db/schema.sql"
   end
 
   mailer do
-    root 'lib/backdoor/mailers'
+    root "lib/backdoor/mailers"
 
     # See http://hanamirb.org/guides/mailers/delivery
     delivery :test

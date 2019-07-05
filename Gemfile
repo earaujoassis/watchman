@@ -1,37 +1,39 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'bundler'
-gem 'rake'
-gem 'hanami'
-gem 'hanami-model'
-gem 'pg'
-gem 'concurrent-ruby', require: 'concurrent'
-gem 'concurrent-ruby-ext'
-gem 'faye-websocket'
-gem 'permessage_deflate'
-gem 'foreman'
-gem 'puma'
-gem 'octokit', '~> 4.0'
+gem "bundler"
+gem "concurrent-ruby", require: "concurrent"
+gem "concurrent-ruby-ext"
+gem "faye-websocket"
+gem "foreman"
+gem "hanami"
+gem "hanami-model"
+gem "octokit", "~> 4.0"
+gem "permessage_deflate"
+gem "pg"
+gem "puma"
+gem "rake"
 
 # Watchman
-gem 'whois'
+gem "whois"
 
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/applications/code-reloading
-  gem 'shotgun', platforms: :ruby
-  gem 'hanami-webconsole'
+  gem "hanami-webconsole"
+  gem "rubocop", require: false
+  gem "rubocop-github", require: false
+  gem "shotgun", platforms: :ruby
 end
 
 group :test, :development do
-  gem 'dotenv', '~> 2.4'
+  gem "dotenv", "~> 2.4"
 end
 
 group :test do
-  gem 'minitest'
-  gem 'capybara'
-  gem 'rspec'
-  gem 'coveralls', require: false
+  gem "capybara"
+  gem "coveralls", require: false
+  gem "minitest"
+  gem "rspec"
 end
 
 group :production do
