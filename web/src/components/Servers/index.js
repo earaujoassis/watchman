@@ -48,7 +48,7 @@ const servers = ({ fetchServers, loading, servers = [] }) => {
                   <span className="server-time-lapse">{diffDisplay(server.updated_at)}min</span>
                 </span>
                 <h3 className="servers-title">{server.hostname}</h3>
-                <p className="servers-description">{server.ip}</p>
+                <p className="servers-description">{server.ip} <span className="servers-spacer">&mdash;</span> v{server.latest_version || '?'}</p>
                 <ul className="servers-actions">
                   <li>
                     <button className="anchor"

@@ -53,7 +53,7 @@ it will make available an `agent` binary, which should be helpful to setup new p
 them in that running space (a server).
 
 ```sh
-$ pip install --user https://github.com/earaujoassis/wathcman/archive/0.1.5.zip
+$ pip install --user https://github.com/earaujoassis/wathcman/archive/0.1.6.zip
 ```
 
 If you need any help, please run `agent --help`.

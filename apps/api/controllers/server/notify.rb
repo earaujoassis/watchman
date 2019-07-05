@@ -1,5 +1,3 @@
-require 'base64'
-
 module Api
   module Controllers
     module Server
@@ -10,26 +8,15 @@ module Api
           required(:server).schema do
             required(:hostname).filled(:str?)
             required(:ip).filled(:str?)
+            required(:latest_version).filled(:str?)
           end
-        end
-
-        def authorization_bearer
-          encoded_text = request.env['HTTP_AUTHORIZATION'].sub('Bearer ', '')
-          Base64.decode64(encoded_text).split(':', 2)
-        end
-
-        def authentic_client?
-          return true unless Hanami.env?(:production)
-
-          client_key, client_secret = authorization_bearer
-          user_repository = UserRepository.new
-          user_repository.authentic_client?(client_key, client_secret)
         end
 
         def call(params)
           self.format = :json
 
-          unless authentic_client?
+          authentication = Backdoor::Services::Authentication.new(request.env)
+          unless authentication.authentic_client?
             status 401, { error: "Invalid client credentials" }.to_json
             return
           end
