@@ -175,10 +175,10 @@ module Api
         frame-ancestors 'self';
         base-uri 'self';
         default-src 'none';
-        script-src *;
+        script-src * 'unsafe-inline';
         connect-src *;
         img-src 'self' https: data:;
-        style-src 'self' 'unsafe-inline' https:;
+        style-src *;
         font-src *;
         object-src 'none';
         worker-src 'self';

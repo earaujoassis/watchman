@@ -18,8 +18,7 @@ const diffAboveThreshold = (serverUpdate) => {
 };
 
 const diffDisplay = (serverUpdate) => {
-  const then = moment.utc(serverUpdate, 'YYYY-MM-DD HH:mm:ss UTC');
-  return moment().diff(then, 'minutes');
+  return moment.utc(serverUpdate, 'YYYY-MM-DD HH:mm:ss UTC').startOf('minute').fromNow();
 };
 
 const servers = ({ fetchServers, loading, servers = [] }) => {
@@ -34,34 +33,42 @@ const servers = ({ fetchServers, loading, servers = [] }) => {
   }, 1000);
 
   return (
-    <div className="servers-root">
-      <h2>Servers</h2>
-      {loading ? <SpinningSquare /> : (
-        <ul className="servers-list">
-          {servers.map((server, i) => (
-            <li key={i}>
-              <div className="servers-box">
-                <span className="server-status-box"
-                  title={diffAboveThreshold(server.updated_at) ? 'Inactive' : 'Active'}>
-                  <span
-                    className={`server-status ${diffAboveThreshold(server.updated_at) ? 'inactive' : 'active'}`}></span>
-                  <span className="server-time-lapse">{diffDisplay(server.updated_at)}min</span>
-                </span>
-                <h3 className="servers-title">{server.hostname}</h3>
-                <p className="servers-description">{server.ip} <span className="servers-spacer">&mdash;</span> v{server.latest_version || '?'}</p>
-                <ul className="servers-actions">
-                  <li>
-                    <button className="anchor"
-                      onClick={e => { e.preventDefault(); }}>
-                      Re-deploy all projects
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="layout-root__siblings">
+      <div className="servers-root">
+        <h2>Servers</h2>
+        {loading.includes('server') ? <SpinningSquare /> : (
+          <ul className="servers-list">
+            {servers.map((server, i) => (
+              <li key={i}>
+                <div className="servers-box">
+                  <span className="server-status-box"
+                    title={diffAboveThreshold(server.updated_at) ? 'Inactive' : 'Active'}>
+                    <span
+                      className={`server-status ${diffAboveThreshold(server.updated_at) ? 'inactive' : 'active'}`}></span>
+                    <span className="server-time-lapse" title={server.updated_at}>
+                      {diffDisplay(server.updated_at)}
+                    </span>
+                  </span>
+                  <h3 className="servers-title">{server.hostname}</h3>
+                  <p className="servers-description">
+                    <span>{server.ip}</span>
+                    <span className="servers-spacer">&mdash;</span>
+                    <span>v{server.latest_version || '?'}</span>
+                  </p>
+                  <ul className="servers-actions">
+                    <li>
+                      <button className="anchor"
+                        onClick={e => { e.preventDefault(); }}>
+                        Re-deploy all projects
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

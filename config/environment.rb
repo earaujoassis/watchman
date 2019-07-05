@@ -39,12 +39,12 @@ Hanami.configure do
   end
 
   environment :test do
-    logger level: :error
+    logger level: :error, filter: []
   end
 
   environment :development do
     # See: http://hanamirb.org/guides/projects/logging
-    logger level: :debug
+    logger level: :debug, filter: []
   end
 
   environment :production do
