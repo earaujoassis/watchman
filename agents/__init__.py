@@ -4,10 +4,7 @@
 import sys
 
 from agents.cli import AgentCLI
-
-
-name = "agents"
-version = "0.1.6"
+from agents.metadata import version, name  # noqa: F401
 
 
 def main():

@@ -67,8 +67,12 @@ def home_dir():
 def get_ip_address_for_interface(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     st = struct.Struct('256s')
-    return socket.inet_ntoa(fcntl.ioctl(
-        s.fileno(),
-        0x8915,  # SIOCGIFADDR
-        st.pack(ifname[:15].encode('utf-8'))
-    )[20:24])
+    try:
+        address = socket.inet_ntoa(fcntl.ioctl(
+            s.fileno(),
+            0x8915,  # SIOCGIFADDR
+            st.pack(ifname[:15].encode('utf-8'))
+        )[20:24])
+    except OSError:
+        address = 'unavailable'
+    return address
