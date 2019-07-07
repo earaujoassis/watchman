@@ -2,11 +2,7 @@
 
 import argparse
 
-try:
-    import tasks
-    import utils
-except ImportError:
-    from agents import tasks,  utils
+from agents import tasks,  utils
 
 
 parser = argparse.ArgumentParser(
@@ -18,6 +14,11 @@ init_command = subparsers.add_parser(
 notify_command = subparsers.add_parser(
     'notify',
     help='notify master-server and obtain actions to perform')
+report_command = subparsers.add_parser(
+    'report',
+    help='send a report to the master-server')
+report_command.add_argument('subject', action='store')
+report_command.add_argument('command', action='store', nargs=argparse.REMAINDER)
 
 
 class AgentCLI(object):

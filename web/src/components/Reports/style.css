@@ -1,0 +1,139 @@
+.reports-root {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+}
+
+.reports-header {
+  border-bottom: 2px #f1f1f1 solid;
+}
+
+.reports-body {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.reporters-menu {
+  flex: 0 0 22%;
+  border-right: 2px #f1f1f1 solid;
+}
+
+.reporters-menu .servers-list {
+  margin: 0;
+}
+
+.reporters-menu .servers-box {
+  border-top: 0;
+  border-bottom: 2px #f1f1f1 solid;
+}
+
+.reporters-menu .anchor {
+  font-size: 0.9rem;
+}
+
+.reports-list-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.reports-list {
+  list-style: none;
+  margin: 0 0 0 12px;
+  padding: 0;
+}
+
+.report-entry {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin: 0.75rem 0;
+  border-radius: 2px;
+  border: 1px solid #f1f1f1;
+  font-size: 16px;
+  background: linear-gradient(to right,#5CDB95 0,#5CDB95 10px,#fff 10px,#fff 100%) no-repeat;
+  padding: 10px 24px;
+  font-weight: 200;
+}
+
+.report-entry .half {
+  padding: 12px 0.3em;
+  flex: 0 0 46%;
+  white-space: nowrap;
+}
+
+.report-entry .quarter {
+  padding: 12px 0.3em;
+  flex: 0 0 22%;
+  white-space: nowrap;
+}
+
+.report-entry .divisor {
+  margin-right: 2%;
+  border-right: 1px solid #eaeaea;
+}
+
+.report-entry .far {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.reports-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 0 0 12px;
+}
+
+.report-entry-view {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin: 0.75rem 0;
+  border-radius: 2px;
+  border: 1px solid #f1f1f1;
+  font-size: 16px;
+  background: linear-gradient(to right,#5CDB95 0,#5CDB95 10px,#fff 10px,#fff 100%) no-repeat;
+  padding: 10px 24px;
+  font-weight: 200;
+}
+
+.report-entry-view .report-title {
+  margin: 0.75em 0 0.5em;
+  font-weight: normal;
+}
+
+.report-entry-view p {
+  margin: 0.5em 0;
+}
+
+.report-entry-view .report-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.report-entry-view .report-actions {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.report-body {
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.report-body pre {
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  counter-reset: line-numbering;
+}
+
+.report-entry-view.body_unavailable,
+.report-entry.body_unavailable {
+  background: linear-gradient(to right,#FF331F 0,#FF331F 10px,#fff 10px,#fff 100%) no-repeat;
+}

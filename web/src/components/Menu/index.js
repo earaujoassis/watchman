@@ -19,6 +19,9 @@ const menu = () => {
         <li>
           <Link to="/servers" title="Servers"><i className="fas fa-server"></i></Link>
         </li>
+        <li>
+          <Link to="/reports" title="Reports"><i className="fas fa-file-medical-alt"></i></Link>
+        </li>
       </ul>
     </div>
   );

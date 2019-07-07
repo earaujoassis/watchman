@@ -16,7 +16,7 @@ const applications = ({ fetchApplications, loading, user, applications = [] }) =
   return (
     <div className="applications-root">
       <h2>Applications</h2>
-      {loading ? <SpinningSquare /> : (
+      {loading.includes('application') ? <SpinningSquare /> : (
         <ul className="applications-list">
           {applications.map((application, i) => (
             <li key={i}>

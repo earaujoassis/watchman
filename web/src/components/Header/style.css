@@ -4,10 +4,11 @@
   align-items: center;
   text-align: center;
   padding: 22px 28px;
-  min-height: 200px;
-  background: #240090 url('/assets/971.jpg') no-repeat;
+  min-height: 100px;
+  background-color: #240090;
   background-size: 100% auto;
   background-position: center;
+  background-repeat: no-repeat;
   color: #FFF;
 }
 
