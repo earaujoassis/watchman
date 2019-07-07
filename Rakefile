@@ -32,7 +32,6 @@ end
 
 task :foreman_web do
   sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
-  sh %{#{FileUtils::RUBY} -S bundle exec hanami assets precompile}
   sh "foreman start -p 3000 -e /dev/null web"
 end
 
