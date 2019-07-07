@@ -1,14 +1,24 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Header from '@components/Header';
 import Menu from '@components/Menu';
 import Footer from '@components/Footer';
-import Terminal from '@components/Terminal';
 import UserRealm from '@components/UserRealm';
+import Terminal from '@components/Terminal';
 
 import './style.css';
 
-const layout = ({ children }) => {
+const withTerminal = (path) => {
+  return [
+    '/configuration',
+    '/projects',
+    '/applications',
+    '/servers'
+  ].includes(path);
+};
+
+const layout = ({ children, location }) => {
   return (
     <UserRealm>
       <div role="main" className="layout-root">
@@ -20,7 +30,7 @@ const layout = ({ children }) => {
               {children}
               <Footer />
             </div>
-            <Terminal />
+            {withTerminal(location.pathname) ? <Terminal /> : null}
           </div>
         </div>
       </div>
@@ -28,4 +38,4 @@ const layout = ({ children }) => {
   );
 };
 
-export default layout;
+export default withRouter(layout);

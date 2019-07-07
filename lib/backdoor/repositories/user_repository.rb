@@ -38,10 +38,10 @@ class UserRepository < Hanami::Repository
   end
 
   def find_with_applications(uuid)
-    aggregate(:applications).where(uuid: uuid).as(User).one
+    aggregate(:applications).where(uuid: uuid).map_to(User).one
   end
 
-  def add_project(user, data)
+  def add_application(user, data)
     assoc(:applications, user).add(data)
   end
 end

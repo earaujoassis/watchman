@@ -6,6 +6,7 @@ import Configuration from './components/Configuration';
 import Projects from './components/Projects';
 import Applications from './components/Applications';
 import Servers from './components/Servers';
+import Reports from './components/Reports';
 
 import './app.css';
 
@@ -16,6 +17,8 @@ const app = props => {
       <Route path="/projects" exact component={Projects} />
       <Route path="/applications" exact component={Applications} />
       <Route path="/servers" exact component={Servers} />
+      <Route path="/reports" exact component={Reports} />
+      <Route path="/reports/:report_id/from/:server_id" exact component={Reports} />
     </Switch>
   );
 

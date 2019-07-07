@@ -2,8 +2,8 @@ import React from 'react';
 
 import './style.css';
 
-const SpinningSquare = () => (
-  <div className="UISpinningSquare-wrapper">
+const SpinningSquare = ({ style }) => (
+  <div style={style || {}} className="UISpinningSquare-wrapper">
     <p>Loading</p>
     <div className="UISpinningSquare" />
   </div>

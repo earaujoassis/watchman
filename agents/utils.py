@@ -7,6 +7,7 @@ import shlex
 import socket
 import fcntl
 import struct
+import base64
 
 
 class ConsoleColors:
@@ -76,3 +77,9 @@ def get_ip_address_for_interface(ifname):
     except OSError:
         address = 'unavailable'
     return address
+
+
+def authorization_bearer(client_key, client_secret):
+    authorization_clear = '{0}:{1}'.format(
+        client_key, client_secret).encode('utf-8')
+    return base64.b64encode(bytearray(authorization_clear)).decode('utf-8')

@@ -10,8 +10,12 @@ module Api
           repository = UserRepository.new
           user = repository.find(params[:id])
           github_service =  Backdoor::Services::GitHub.new user.github_token
-          repos = github_service.repos
-          self.body = { user: { repos: repos.map(&:to_hash) } }.to_json
+          begin
+            repos = github_service.repos
+            self.body = { user: { repos: repos.map(&:to_hash) } }.to_json
+          rescue Backdoor::Services::GitHub::Error => e
+            status 500, { error: e.to_s }.to_json
+          end
         end
       end
     end

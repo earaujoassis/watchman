@@ -40,7 +40,7 @@ input {
   padding: 8px 10px;
   border: 1px solid #240090;
   border-radius: 4px;
-  min-width: 75%;
+  min-width: 560px;
   outline: none;
   transition: all 0.4s ease;
 }
@@ -79,18 +79,33 @@ input:focus {
   font-weight: normal;
 }
 
+a {
+  font-weight: inherit;
+  font-size: inherit;
+  color: #0366d6;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .anchor {
   padding: 0;
   border: 0;
   margin: 0;
   display: inline-block;
   font-weight: inherit;
+  font-size: inherit;
   color: #0366d6;
   background: transparent;
   cursor: pointer;
 }
 
+a:hover,
 .anchor:hover,
 .anchor:active {
   text-decoration: underline;
+}
+
+*:focus {
+  outline: none;
 }
