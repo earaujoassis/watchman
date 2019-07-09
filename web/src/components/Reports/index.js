@@ -24,6 +24,8 @@ const reports = (props) => {
   let [currentServer, setServer] = useState(null);
   let [currentTopic, setTopic] = useState(null);
 
+  let innerView;
+
   useEffect(() => {
     fetchServers();
 
@@ -31,6 +33,22 @@ const reports = (props) => {
       history.replace('/reports');
     }
   }, []);
+
+  if (currentServer && currentTopic) {
+    innerView = <View
+      server={currentServer}
+      topic={currentTopic}
+      report={report}
+      fetchReport={fetchReport} />;
+  } else if (currentServer) {
+    innerView = <Entries
+      server={currentServer}
+      reportsTopics={reportsTopics}
+      loading={loading}
+      onSetTopic={setTopic} />;
+  } else {
+    innerView = null;
+  }
 
   return (
     <div className="reports-root">
@@ -51,6 +69,7 @@ const reports = (props) => {
                           e.preventDefault();
                           setServer(server);
                           setTopic(null);
+                          history.replace('/reports');
                           fetchReports(server.id);
                         }}>
                         {server.hostname}
@@ -67,9 +86,7 @@ const reports = (props) => {
             </ul>
           )}
         </aside>
-        {currentServer && currentTopic
-          ? <View server={currentServer} topic={currentTopic} report={report} fetchReport={fetchReport} />
-          : <Entries server={currentServer} reportsTopics={reportsTopics} loading={loading} onSetTopic={setTopic} />}
+        {innerView}
       </div>
     </div>
   );
