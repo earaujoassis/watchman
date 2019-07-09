@@ -1,6 +1,6 @@
 # Watchman
 
-> Watchman helps keep track of GitHub projects; a tiny continuous deployment service
+> Watchman helps to keep track of GitHub projects; a tiny continuous deployment service
 
 Watchman is a tiny continuous deployment service and a set of tools to keep track of projects,
 deployments and servers. A previous project, Backdoor (a GitHub integration server), was merged
