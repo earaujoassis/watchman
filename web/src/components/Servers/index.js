@@ -55,14 +55,6 @@ const servers = ({ fetchServers, loading, servers = [] }) => {
                     <span className="servers-spacer">&mdash;</span>
                     <span>v{server.latest_version || '?'}</span>
                   </p>
-                  <ul className="servers-actions">
-                    <li>
-                      <button className="anchor"
-                        onClick={e => { e.preventDefault(); }}>
-                        Re-deploy all projects
-                      </button>
-                    </li>
-                  </ul>
                 </div>
               </li>
             ))}
