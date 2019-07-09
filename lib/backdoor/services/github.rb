@@ -10,8 +10,8 @@ class Backdoor::Services::GitHub
   def repos
     @client.repos({}, query: {type: "owner", sort: "asc"})
   rescue Octokit::Unauthorized
-    raise Error, 'unauthorized_access'
+    raise Error, "unauthorized_access"
   rescue StandardError
-    raise Error, 'internal'
+    raise Error, "internal"
   end
 end

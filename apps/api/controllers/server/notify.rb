@@ -30,6 +30,7 @@ module Api
 
           status 201, {
             version: Backdoor::VERSION,
+            available_tag: Backdoor::Services::PublicGitHub.new("earaujoassis/watchman").latest_tag,
             server: server_repository.find(params[:server][:hostname]).serialize
           }.to_json
         end

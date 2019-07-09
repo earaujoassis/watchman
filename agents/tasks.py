@@ -7,7 +7,6 @@ import tempfile
 import subprocess
 import requests
 import json
-import base64
 import socket
 
 from mako.template import Template
@@ -78,7 +77,9 @@ def notify():
                 },
             })
         if response.status_code >= 200 and response.status_code < 300:
+            sys.stdout.write('> Successfully notified\n')
             response_data = response.json()
+            # 1. Update the agent binary if a new version is available
             if response_data['version'] > version:
                 sys.stdout.write('> Version mismatch; updating agent\n')
                 install_str = GITHUB_STRING.format(response_data['version'])
@@ -86,7 +87,36 @@ def notify():
                 sys.stdout.write('> Agent updated\n')
             else:
                 sys.stdout.write('> No update available\n')
-            sys.stdout.write('> Successfully notified\n')
+            # 2. Update the master server if:
+            #  2.a a new tag/version is available (from GitHub releases/tags);
+            #  2.b the master location is available
+            available_version = response_data['available_tag']
+            current_version = 'v{0}'.format(response_data['version'])
+            is_master_container = agent_data.get('master', None) is not None
+            is_there_a_mismatch = current_version != available_version
+            if is_there_a_mismatch and is_master_container:
+                sys.stdout.write(
+                    '> A new master server version is available; updating\n')
+                master_location = agent_data['master'].get(
+                    'location', '/should/not/be/a/valid/path')
+                master_location_exists = os.path.exists(master_location)
+                if not master_location_exists:
+                    sys.stdout.write(
+                        '> The master location is unreachable; exiting\n')
+                    sys.exit(1)
+                os.chdir(master_location)
+                if os.path.exists('./lock-deployment'):
+                    sys.stdout.write('> Deployment locked; skipping\n')
+                    sys.exit(0)
+                run('touch ./lock-deployment')
+                run('git fetch --all')
+                run('git checkout tags/{0} -b master'.format(
+                    available_version))
+                run('bin/redeploy.sh')
+                run('rm -f ./lock-deployment')
+                sys.stdout.write('> Successfully deployed\n')
+            else:
+                sys.stdout.write('> No new tag available; skipping\n')
             sys.exit(0)
         else:
             sys.stdout.write('> Oops! Notification failed\n')
@@ -103,6 +133,7 @@ def report(subject, command):
             agent_data['client_secret']
         )
 
+        # 1. Create a new report and receive an ID to upload file
         response = requests.post('{0}/api/servers/report'.format(
             agent_data['watchman_backdoor']),
             headers={
@@ -126,6 +157,7 @@ def report(subject, command):
             sys.stdout.write('> Error: {0}\n'.format(response.content))
             sys.exit(1)
 
+        # 2. Upload the file with the report data
         report_id = response_data['report']['id']
         message_body = subprocess.Popen(
             command, stdout=subprocess.PIPE).stdout.read().decode('utf-8')

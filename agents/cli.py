@@ -18,7 +18,10 @@ report_command = subparsers.add_parser(
     'report',
     help='send a report to the master-server')
 report_command.add_argument('subject', action='store')
-report_command.add_argument('command', action='store', nargs=argparse.REMAINDER)
+report_command.add_argument(
+    'command',
+    action='store',
+    nargs=argparse.REMAINDER)
 
 
 class AgentCLI(object):
