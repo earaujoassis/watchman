@@ -13,8 +13,8 @@ post "/users/:id/applications", to: "user#app_create"
 get "/users/:id/applications", to: "user#app_list"
 
 put "/servers/notify", to: "server#notify"
-post '/servers/report', to: 'server#report_create'
-put '/servers/report/:id', to: 'server#report_update'
+post "/servers/report", to: "server#report_create"
+put "/servers/report/:id", to: "server#report_update"
 get "/servers", to: "server#list"
-get '/servers/:id/reports', to: 'server#report_list'
-get '/servers/:server_id/reports/:report_id', to: 'server#report_view'
+get "/servers/:id/reports", to: "server#report_list"
+get "/servers/:server_id/reports/:report_id", to: "server#report_view"
