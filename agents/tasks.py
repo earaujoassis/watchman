@@ -14,10 +14,7 @@ from mako.template import Template
 from agents.utils import run, get_agent_filepath
 from agents.utils import get_ip_address_for_interface
 from agents.utils import authorization_bearer
-from agents.metadata import version
-
-
-GITHUB_STRING = 'https://github.com/earaujoassis/watchman/archive/v{0}.zip'
+from agents.metadata import VERSION, GITHUB_STRING
 
 
 def init():
@@ -74,14 +71,14 @@ def notify():
                 'server': {
                     'hostname': socket.gethostname(),
                     'ip': get_ip_address_for_interface('eth0'),
-                    'latest_version': version,
+                    'latest_version': VERSION,
                 },
             })
         if response.status_code >= 200 and response.status_code < 300:
             sys.stdout.write('> Successfully notified\n')
             remote_data = response.json()
             # 1. Update the agent binary if a new version is available
-            if parse_version(remote_data['version']) > parse_version(version):
+            if parse_version(remote_data['version']) > parse_version(VERSION):
                 sys.stdout.write('> Version mismatch; updating agent\n')
                 install_str = GITHUB_STRING.format(remote_data['version'])
                 run('pip3 install --user {0}'.format(install_str))
@@ -143,7 +140,7 @@ def report(subject, command):
                 'server': {
                     'hostname': socket.gethostname(),
                     'ip': get_ip_address_for_interface('eth0'),
-                    'latest_version': version,
+                    'latest_version': VERSION,
                 },
                 'report': {
                     'subject': subject,
