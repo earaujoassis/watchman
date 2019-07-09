@@ -110,8 +110,7 @@ def notify():
                     sys.exit(0)
                 run('touch ./lock-deployment')
                 run('git fetch --all')
-                run('git checkout tags/{0} -b master'.format(
-                    available_version))
+                run('git checkout tags/{0}'.format(available_version))
                 run('bin/redeploy.sh')
                 run('rm -f ./lock-deployment')
                 sys.stdout.write('> Successfully deployed\n')
