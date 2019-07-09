@@ -1,7 +1,7 @@
 {
   "name": "watchman",
   "version": "0.1.10",
-  "description": "Watchman helps keep track of GitHub projects; a tiny continuous deployment service",
+  "description": "Watchman helps to keep track of GitHub projects; a tiny continuous deployment service",
   "main": "none",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

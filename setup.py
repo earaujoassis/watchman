@@ -9,7 +9,7 @@ setuptools.setup(
     license="MIT",
     author="Ewerton Carlos Assis",
     author_email="earaujoassis@gmail.com",
-    description="Watchman helps keep track of GitHub projects; a tiny continuous deployment service",
+    description="Watchman helps to keep track of GitHub projects; a tiny continuous deployment service",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/earaujoassis/watchman",
