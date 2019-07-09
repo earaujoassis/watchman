@@ -9,6 +9,7 @@ import requests
 import json
 import socket
 
+from pkg_resources import parse_version
 from mako.template import Template
 from agents.utils import run, get_agent_filepath
 from agents.utils import get_ip_address_for_interface
@@ -78,11 +79,11 @@ def notify():
             })
         if response.status_code >= 200 and response.status_code < 300:
             sys.stdout.write('> Successfully notified\n')
-            response_data = response.json()
+            remote_data = response.json()
             # 1. Update the agent binary if a new version is available
-            if response_data['version'] > version:
+            if parse_version(remote_data['version']) > parse_version(version):
                 sys.stdout.write('> Version mismatch; updating agent\n')
-                install_str = GITHUB_STRING.format(response_data['version'])
+                install_str = GITHUB_STRING.format(remote_data['version'])
                 run('pip3 install --user {0}'.format(install_str))
                 sys.stdout.write('> Agent updated\n')
             else:
@@ -90,8 +91,8 @@ def notify():
             # 2. Update the master server if:
             #  2.a a new tag/version is available (from GitHub releases/tags);
             #  2.b the master location is available
-            available_version = response_data['available_tag']
-            current_version = 'v{0}'.format(response_data['version'])
+            available_version = remote_data['available_tag']
+            current_version = 'v{0}'.format(remote_data['version'])
             is_master_container = agent_data.get('master', None) is not None
             is_there_a_mismatch = current_version != available_version
             if is_there_a_mismatch and is_master_container:
@@ -150,14 +151,14 @@ def report(subject, command):
             })
 
         if response.status_code >= 200 and response.status_code < 300:
-            response_data = response.json()
+            remote_data = response.json()
         else:
             sys.stdout.write('> Oops! Report failed\n')
             sys.stdout.write('> Error: {0}\n'.format(response.content))
             sys.exit(1)
 
         # 2. Upload the file with the report data
-        report_id = response_data['report']['id']
+        report_id = remote_data['report']['id']
         message_body = subprocess.Popen(
             command, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
         tmpfile = tempfile.NamedTemporaryFile("w")
