@@ -1,5 +1,16 @@
+/* global Watchman */
+
+const CHECKER_INTERVAL = 300000; // 5 min
+const generateChecker = (refreshChecker = null) => {
+  if (refreshChecker) clearInterval(refreshChecker);
+  return setInterval(() => {
+    window.location.reload(true);
+  }, CHECKER_INTERVAL);
+};
+
 const socketMiddleware = () => {
   const ws = new WebSocket(`${window.document.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.document.location.host}/`);
+  let refreshChecker = generateChecker();
 
   return ({ dispatch }) => next => (action) => {
     // Skip this middleware if action is a function (this means it's not a WebSocket message)
@@ -38,6 +49,10 @@ const socketMiddleware = () => {
       }
 
       if (processedData.type === 'control') {
+        refreshChecker = generateChecker(refreshChecker);
+        if (processedData.version !== Watchman.version) {
+          window.location.reload(true);
+        }
         return;
       }
 

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* global Watchman */
 import React from 'react';
 
 import './style.css';
