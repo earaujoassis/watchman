@@ -23,8 +23,8 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
       {
         user == null || user.error ? (
           <div>
-            <div className="userRealm-creation-overlay"></div>
-            <div className="userRealm-creation-box">
+            <div className="userRealm-creation-overlay global-modal-overlay"></div>
+            <div className="userRealm-creation-box global-modal-box">
               <h2>Master user creation</h2>
               <p>In order to you this application, you must create a master user with your e-mail and GitHub
               Token with the following access scopes:</p>

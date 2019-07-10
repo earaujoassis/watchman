@@ -233,7 +233,7 @@ module Web
         script-src * 'unsafe-inline';
         connect-src *;
         img-src 'self' https: data:;
-        style-src *;
+        style-src * 'unsafe-inline';
         font-src *;
         object-src 'none';
         worker-src 'self';
