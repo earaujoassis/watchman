@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 import App from './app';
 import reducers from './stores/reducers';
-import wsMiddleware from './utils/wsMiddleware';
+import wsMiddleware from './utils/ws-middleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

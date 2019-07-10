@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [*.{js,jsx,rb}]
 indent_size = 2
 
-[*.py]
+[*.{py,sh}]
 indent_size = 4
 
 [{Makefile,*.sql}]

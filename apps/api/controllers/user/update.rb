@@ -14,10 +14,7 @@ module Api
         def call(params)
           self.format = :json
 
-          unless params.errors.empty?
-            status 400, { error: params.errors }.to_json
-            return
-          end
+          halt 400, { error: params.errors }.to_json unless params.errors.empty?
 
           repository = UserRepository.new
           repository.update_user(params[:id], params[:user])

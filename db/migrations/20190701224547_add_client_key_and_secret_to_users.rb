@@ -1,5 +1,3 @@
-require "securerandom"
-
 Hanami::Model.migration do
   change do
     alter_table :users do

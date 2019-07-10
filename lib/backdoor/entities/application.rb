@@ -3,7 +3,8 @@ class Application < Hanami::Entity
     {
       id: self.uuid,
       full_name: self.full_name,
-      description: self.description
+      description: self.description,
+      actions: self.actions&.map(&:serialize_for_web)
     }
   end
 end

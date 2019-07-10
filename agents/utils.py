@@ -8,6 +8,7 @@ import socket
 import fcntl
 import struct
 import base64
+import json
 
 
 class ConsoleColors:
@@ -53,12 +54,23 @@ def assert_step(r):
         sys.exit(1)
 
 
-def get_agent_filepath(die=False):
+def get_agent_file_path(die=False):
     agent_options_filepath = os.path.join(home_dir(), '.watchman-agent.json')
     if not os.path.isfile(agent_options_filepath) and die:
-        sys.stdout.write('> Missing watchman-agent.json file; skipping\n')
+        sys.stdout.write('> Missing watchman-agent.json file; exiting\n')
         sys.exit(1)
     return agent_options_filepath
+
+
+def safely_load_agent_file():
+    agent_filepath = get_agent_file_path(die=False)
+    agent_file = open(agent_filepath, 'r')
+    try:
+        agent_data = json.load(agent_file)
+        return agent_data
+    except:
+        sys.stdout.write('> Could not load agent file; exiting\n')
+        sys.exit(1)
 
 
 def home_dir():

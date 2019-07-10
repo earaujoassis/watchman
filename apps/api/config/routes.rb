@@ -18,3 +18,6 @@ put "/servers/report/:id", to: "server#report_update"
 get "/servers", to: "server#list"
 get "/servers/:id/reports", to: "server#report_list"
 get "/servers/:server_id/reports/:report_id", to: "server#report_view"
+
+get "/applications/:id/view/configuration_file", to: "applications#view"
+put "/applications/:application_id/actions/:action_id/executor", to: "applications#actions"
