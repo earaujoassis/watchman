@@ -6,6 +6,15 @@ import { SpinningSquare } from '../UI';
 
 import './style.css';
 
+const classNameForStatus = (status) => {
+  switch (status) {
+    case 'created': return 'app-warning';
+    case 'running': return 'app-warning';
+    case 'finished': return 'app-normal';
+    case 'failed': return 'app-error';
+  }
+};
+
 const applications = ({ fetchApplications, loading, user, applications = [] }) => {
   useEffect(() => {
     if (user) {
@@ -24,10 +33,12 @@ const applications = ({ fetchApplications, loading, user, applications = [] }) =
                 <h2 className="application-name">{application.full_name}</h2>
                 <p className="application-description">{application.description}</p>
                 <div className="application-deploys-box">
-                  <span className="app-square app-normal"></span>
-                  <span className="app-square app-normal"></span>
-                  <span className="app-square app-normal"></span>
-                  <span className="app-square app-normal"></span>
+                  {application.actions.map((action, i) => (
+                    <span
+                      key={i}
+                      className={`app-square ${classNameForStatus(action.current_status)}`}
+                      title={`${action.description} - ${action.current_status}`} />
+                  ))}
                 </div>
               </div>
             </li>

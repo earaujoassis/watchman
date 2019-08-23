@@ -1,5 +1,4 @@
 .projects-root {
-  position: relative;
   flex: 1;
   padding: 20px;
 }
@@ -50,4 +49,9 @@
 
 .project-box .anchor {
   font-size: 0.8rem;
+}
+
+.project-box .servers-select {
+  text-align: left;
+  margin-bottom: 20px;
 }

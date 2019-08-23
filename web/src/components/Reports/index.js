@@ -21,8 +21,8 @@ const reports = (props) => {
     report,
     loading } = props;
 
-  let [currentServer, setServer] = useState(null);
-  let [currentTopic, setTopic] = useState(null);
+  const [currentServer, setServer] = useState(null);
+  const [currentTopic, setTopic] = useState(null);
 
   let innerView;
 
