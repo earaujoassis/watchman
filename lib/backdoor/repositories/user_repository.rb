@@ -42,6 +42,7 @@ class UserRepository < Hanami::Repository
   end
 
   def add_application(user, data)
+    data[:configuration_file] = Sequel.blob(data[:configuration_file][:tempfile].read)
     assoc(:applications, user).add(data)
   end
 end

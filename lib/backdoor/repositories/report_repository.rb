@@ -12,6 +12,7 @@ class ReportRepository < Hanami::Repository
     self.update(report.id, { body: Sequel.blob(body_file.read) })
   end
 
+  # FIXME belongs_to associations are not properly working
   def find_with_server(uuid)
     aggregate(:server).where(uuid: uuid).map_to(Report).one
   end

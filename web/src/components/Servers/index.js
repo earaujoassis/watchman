@@ -26,7 +26,7 @@ const servers = ({ fetchServers, loading, servers = [] }) => {
     fetchServers();
   }, []);
 
-  let [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
   useInterval(() => {
     setSeconds(seconds + 1 > 960 ? 0 : seconds + 1);
