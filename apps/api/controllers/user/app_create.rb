@@ -23,7 +23,7 @@ module Api
 
           repository = UserRepository.new
           user = repository.find(params[:id])
-          halt 404, { error: 'unknown user' } if user.nil?
+          halt 404, { error: "unknown user" } if user.nil?
           server = ServerRepository.new.find_by_id(params[:application][:server_id])
           params[:application][:server_id] = server.id
           begin
@@ -33,7 +33,7 @@ module Api
           rescue Sequel::UniqueConstraintViolation
             halt 409, {
               error: {
-                application: 'already exists'
+                application: "already exists"
               }
             }.to_json
           end

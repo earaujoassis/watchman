@@ -14,14 +14,14 @@ RSpec.describe Api::Controllers::User::Credentials, type: :action do
 
   it "should return a CSV file with the credentials" do
     user = UserRepository.new.create_master_user({
-      email: 'john.doe@example.com',
-      github_token: 'testingtoken'
+      email: "john.doe@example.com",
+      github_token: "testingtoken"
     })
     response = action.call(Hash[id: user.uuid])
     status_code = response[0]
     expect(status_code).to eq 200
     header = response[1]
-    expect(header['Content-Type']).to eq 'text/csv'
-    expect(header['Content-Disposition']).to eq 'attachment; filename="credentials.csv"'
+    expect(header["Content-Type"]).to eq "text/csv"
+    expect(header["Content-Disposition"]).to eq 'attachment; filename="credentials.csv"'
   end
 end

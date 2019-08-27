@@ -1,6 +1,6 @@
 RSpec.describe Api::Controllers::User::Create, type: :action do
   let(:action) { described_class.new }
-  let(:params) { Hash[user: { email: 'john.doe@example.com', github_token: 'testingtoken' }] }
+  let(:params) { Hash[user: { email: "john.doe@example.com", github_token: "testingtoken" }] }
 
   before(:each) do
     UserRepository.new.clear
@@ -17,7 +17,7 @@ RSpec.describe Api::Controllers::User::Create, type: :action do
     status_code = response[0]
     expect(status_code).to eq 201
     body = JSON.parse(response[2].first)
-    expect(body['user']['email']).to eq 'john.doe@example.com'
-    expect(body['user']['github_token']).to eq 'testingtoken'
+    expect(body["user"]["email"]).to eq "john.doe@example.com"
+    expect(body["user"]["github_token"]).to eq "testingtoken"
   end
 end
