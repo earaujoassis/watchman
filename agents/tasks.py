@@ -9,7 +9,7 @@ import socket
 
 from pkg_resources import parse_version
 from mako.template import Template
-from agents.utils import run, safely_load_agent_file, get_agent_file_path
+from agents.utils import safely_load_agent_file, get_agent_file_path
 from agents.utils import get_ip_address_for_interface
 from agents.utils import authorization_bearer
 from agents.metadata import VERSION
@@ -118,7 +118,7 @@ def report(subject, command):
     authorization = authorization_bearer(
         agent_data['client_key'],
         agent_data['client_secret'])
-    headers = { 'Authorization': 'Bearer {0}'.format(authorization) }
+    headers = {'Authorization': 'Bearer {0}'.format(authorization)}
 
     # 1. Create a new report and receive an ID to upload file
     response = requests.post('{0}/api/servers/report'.format(
