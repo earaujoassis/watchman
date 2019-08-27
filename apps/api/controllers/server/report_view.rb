@@ -6,7 +6,11 @@ module Api
 
         def call(params)
           repository = ServerRepository.new
-          reports = repository.find_with_reports(params[:server_id]).reports
+          begin
+            reports = repository.find_with_reports(params[:server_id]).reports
+          rescue NoMethodError
+            halt 404, { error: 'unknown server' }
+          end
           report = reports.find { |e| e.uuid == params[:report_id] }
 
           if report.nil?

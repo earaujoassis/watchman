@@ -1,11 +1,10 @@
 language: ruby
-
 rvm:
-  - ruby-1.9.3
-  - ruby-2.0
-  - ruby-2.1
-  - ruby-2.2
-  - ruby-2.3
-  - jruby-19mode
-
-sudo: false
+  - ruby-2.6
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database backdoor_test;' -U postgres
+  - HANAMI_ENV=test bundle exec hanami db prepare
+script:
+  - bundle exec rspec

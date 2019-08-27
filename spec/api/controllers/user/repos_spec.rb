@@ -2,8 +2,9 @@ RSpec.describe Api::Controllers::User::Repos, type: :action do
   let(:action) { described_class.new }
   let(:params) { Hash[] }
 
-  it "is successful" do
+  it "should return Not Found when there's no user" do
     response = action.call(params)
-    expect(response[0]).to eq 200
+    status_code = response[0]
+    expect(status_code).to eq 404
   end
 end
