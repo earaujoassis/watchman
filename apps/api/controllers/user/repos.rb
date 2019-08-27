@@ -9,7 +9,7 @@ module Api
 
           repository = UserRepository.new
           user = repository.find(params[:id])
-          halt 404, { error: 'unknown user' } if user.nil?
+          halt 404, { error: "unknown user" } if user.nil?
           github_service = Backdoor::Services::GitHub.new user.github_token
           begin
             repos = github_service.repos

@@ -1,4 +1,4 @@
-require_relative '../authentication'
+require_relative "../authentication"
 
 module Api
   module Controllers
@@ -19,7 +19,7 @@ module Api
         def call(params)
           repository = ApplicationRepository.new
           action = repository.child_action(params[:application_id], params[:action_id])
-          halt 404, { error: 'unknown action' } if action.nil?
+          halt 404, { error: "unknown action" } if action.nil?
 
           action_repository = ActionRepository.new
           action_repository.executor_update(action, params[:action])
