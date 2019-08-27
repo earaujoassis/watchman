@@ -1,4 +1,4 @@
-# Watchman [![Build Status](https://travis-ci.org/earaujoassis/watchman.svg?branch=master)](https://travis-ci.org/earaujoassis/watchman)
+# Watchman [![Build Status](https://travis-ci.org/earaujoassis/watchman.svg?branch=master)](https://travis-ci.org/earaujoassis/watchman) [![codecov](https://codecov.io/gh/earaujoassis/watchman/branch/master/graph/badge.svg)](https://codecov.io/gh/earaujoassis/watchman)
 
 > Watchman helps to keep track of GitHub projects; a tiny continuous deployment service
 
