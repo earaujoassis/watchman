@@ -4,7 +4,7 @@
 import sys
 
 from agents.cli import AgentCLI
-from agents.metadata import version, name  # noqa: F401
+from agents.metadata import VERSION, NAME  # noqa: F401
 
 
 def main():

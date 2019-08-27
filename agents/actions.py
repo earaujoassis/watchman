@@ -86,7 +86,7 @@ def executor(action, agent_data):
                 response = requests.post(
                     '{0}/api/applications/{1}/view/configuration_file'.format(
                         agent_data['watchman_backdoor'],
-                        application_id)
+                        application_id))
                 if response.status_code >= 200 and response.status_code < 300:
                     configuration_file.write(response.text)
                 else:
@@ -124,7 +124,7 @@ def perform_actions(actions):
         status = Action.CREATED
         if code in [Action.ACTION_COMPLETED, Action.ACTION_ALREADY_COMPLETED]:
             status = Action.FINISHED
-        else if code != ACTION_UNAVAILABLE:
+        elif code != ACTION_UNAVAILABLE:
             status = Action.FAILED
         if report is not None:
             tmpfile = tempfile.NamedTemporaryFile("w")
