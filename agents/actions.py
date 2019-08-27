@@ -24,7 +24,7 @@ ACTION_UNAVAILABLE          = 0x0005
 WATCHMAN_DEPLOYS_FOLDER = '.watchman-deploys'
 
 
-class Action
+class Action(object):
     CREATED = 'created'
     RUNNING = 'running'
     FINISHED = 'finished'
