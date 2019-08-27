@@ -12,5 +12,6 @@ matrix:
         - bundle exec rspec
         - bundle exec rubocop
     - language: python
+      python: 3.6
       script:
         - flake8 ./agents
