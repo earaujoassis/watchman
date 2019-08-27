@@ -3,13 +3,13 @@ class Action < Hanami::Entity
     DEPLOY = :A001
   ].freeze
   ACTION_REASON = {
-    A001: 'Deploy',
+    A001: "Deploy",
   }.freeze
   STATUS_TYPES = [
-    CREATED = 'created',
-    RUNNING = 'running',
-    FINISHED = 'finished',
-    FAILED = 'failed'
+    CREATED = "created",
+    RUNNING = "running",
+    FINISHED = "finished",
+    FAILED = "failed"
   ].freeze
 
   class << self
