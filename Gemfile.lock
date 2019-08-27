@@ -18,6 +18,10 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    codecov (0.1.14)
+      json
+      simplecov
+      url
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     concurrent-ruby-ext (1.1.5)
@@ -225,6 +229,7 @@ GEM
     tins (1.20.2)
     transproc (1.0.3)
     unicode-display_width (1.6.0)
+    url (0.3.2)
     url_mount (0.2.1)
       rack
     websocket-driver (0.7.1)
@@ -240,6 +245,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   capybara
+  codecov
   concurrent-ruby
   concurrent-ruby-ext
   coveralls

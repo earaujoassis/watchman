@@ -32,6 +32,7 @@ end
 
 group :test do
   gem "capybara"
+  gem "codecov", require: false
   gem "coveralls", require: false
   gem "minitest"
   gem "rspec"
