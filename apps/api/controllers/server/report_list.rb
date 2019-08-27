@@ -6,7 +6,11 @@ module Api
 
         def call(params)
           repository = ServerRepository.new
-          reports = repository.find_with_reports(params[:id]).reports.map(&:serialize)
+          begin
+            reports = repository.find_with_reports(params[:id]).reports.map(&:serialize)
+          rescue NoMethodError
+            halt 404, { error: "unknown server" }
+          end
           self.body = { reports: reports }.to_json
         end
       end

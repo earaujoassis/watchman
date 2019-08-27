@@ -8,6 +8,8 @@ module Api
           self.format = :json
 
           repository = UserRepository.new
+          user = repository.find(params[:id])
+          halt 404, { error: "unknown user" } if user.nil?
           repository.generate_credentials(params[:id])
           user = repository.find(params[:id])
 

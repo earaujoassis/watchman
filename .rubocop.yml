@@ -2,6 +2,9 @@ inherit_gem:
   rubocop-github:
     - config/default.yml
     - config/rails.yml
+inherit_mode:
+  merge:
+    - Exclude
 AllCops:
   Exclude:
     - .vscode
