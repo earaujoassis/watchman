@@ -1,5 +1,5 @@
 module Backdoor
-  VERSION = "0.2.2".freeze
+  VERSION = "0.2.3".freeze
 
   module Services
   end
