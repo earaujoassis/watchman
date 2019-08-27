@@ -112,6 +112,10 @@ def perform_actions(actions):
     os.chdir(home_dir())
     run('mkdir -p {0}'.format(WATCHMAN_DEPLOYS_FOLDER))
     for action in actions:
+        os.chdir(home_dir())
+        if os.path.exists('./lock-action-{0}'.format(action['action_id'])):
+            continue
+        run('touch ./lock-action-{0}'.format(action['action_id']))
         update_action_url = '{0}/api/applications/{1}/actions/{2}/executor'
         update_action_url = update_action_url.format(
             agent_data['watchman_backdoor'],
@@ -149,3 +153,5 @@ def perform_actions(actions):
                         'reason': reason,
                     },
                 })
+        os.chdir(home_dir())
+        run('rm -f ./lock-action-{0}'.format(action['action_id']))
