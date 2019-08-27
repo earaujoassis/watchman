@@ -90,7 +90,7 @@ def notify():
         if is_there_a_mismatch and is_master_container:
             sys.stdout.write(
                 '> A new master server version is available; updating\n')
-            result = actions.update_master_server()
+            result = actions.update_master_server(available_version)
             if result is actions.UNREACHABLE_MASTER_LOCATION:
                 sys.stdout.write(
                     '> The master location is unreachable; skipping\n')
