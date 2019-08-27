@@ -68,7 +68,7 @@ def safely_load_agent_file():
     try:
         agent_data = json.load(agent_file)
         return agent_data
-    except:
+    except:  # noqa: E722
         sys.stdout.write('> Could not load agent file; exiting\n')
         sys.exit(1)
 

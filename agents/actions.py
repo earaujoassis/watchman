@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import os
 import tempfile
-import subprocess
 import requests
-import json
-import socket
 
 from agents.utils import run, safely_load_agent_file, home_dir
 from agents.utils import authorization_bearer
 from agents.metadata import GITHUB_STRING
 
 
-MASTER_SERVER_UPDATED       = 0x0000
-UNREACHABLE_MASTER_LOCATION = 0x0001
-UPDATE_MASTER_SERVER_LOCKED = 0x0002
-ACTION_COMPLETED            = 0x0000
-ACTION_ALREADY_COMPLETED    = 0x0003
-ACTION_FAILED               = 0x0004
-ACTION_UNAVAILABLE          = 0x0005
+MASTER_SERVER_UPDATED       = 0x0000  # noqa: E221
+UNREACHABLE_MASTER_LOCATION = 0x0001  # noqa: E221
+UPDATE_MASTER_SERVER_LOCKED = 0x0002  # noqa: E221
+ACTION_COMPLETED            = 0x0000  # noqa: E221
+ACTION_ALREADY_COMPLETED    = 0x0003  # noqa: E221
+ACTION_FAILED               = 0x0004  # noqa: E221
+ACTION_UNAVAILABLE          = 0x0005  # noqa: E221
 
 WATCHMAN_DEPLOYS_FOLDER = '.watchman-deploys'
 
@@ -58,18 +54,18 @@ def executor(action, agent_data):
     # A001 Deploy
     if action['type'] == 'A001':
         project = action['project_full_name'].split('/', 1)[1]
-        process_name = action['process_name']
+        # process_name = action['process_name']
         configuration_file_name = action['configuration_file_name'] or ''
         application_id = action['application_id']
         full_path = os.path.join(home_dir(), WATCHMAN_DEPLOYS_FOLDER, project)
         if os.path.exists(full_path):
             return (ACTION_ALREADY_COMPLETED,
-                None,
-                'The application folder already exists; skipped')
+                    None,
+                    'The application folder already exists; skipped')
         if agent_data.get('github_token', None) is None:
             return (ACTION_FAILED,
-                None,
-                'GitHub token is not available')
+                    None,
+                    'GitHub token is not available')
         os.chdir(os.path.join(home_dir(), WATCHMAN_DEPLOYS_FOLDER))
         git_url = 'https://{0}@github.com/{1}.git'.format(
             agent_data['github_token'], action['project_full_name'])
@@ -77,9 +73,9 @@ def executor(action, agent_data):
         os.chdir(full_path)
         if len(configuration_file_name) > 0:
             configuration_file_path = os.path.join(home_dir(),
-                WATCHMAN_DEPLOYS_FOLDER,
-                project,
-                configuration_file_name)
+                                                   WATCHMAN_DEPLOYS_FOLDER,
+                                                   project,
+                                                   configuration_file_name)
             if os.path.exists(configuration_file_path):
                 run('run -f {0}'.format(configuration_file_name))
             with open(configuration_file_path) as configuration_file:
@@ -91,16 +87,16 @@ def executor(action, agent_data):
                     configuration_file.write(response.text)
                 else:
                     return (ACTION_FAILED,
-                        None,
-                        'Could not download configuration file')
+                            None,
+                            'Could not download configuration file')
         result = run('docker-compose up -d --build')
         return (ACTION_COMPLETED,
-            result['stdout'],
-            'Successfully completed')
+                result['stdout'],
+                'Successfully completed')
     else:
         return (ACTION_UNAVAILABLE,
-            None,
-            'Action is not available in the server yet')
+                None,
+                'Action is not available in the server yet')
 
 
 def perform_actions(actions):
@@ -108,7 +104,7 @@ def perform_actions(actions):
     authorization = authorization_bearer(
         agent_data['client_key'],
         agent_data['client_secret'])
-    headers = { 'Authorization': 'Bearer {0}'.format(authorization) }
+    headers = {'Authorization': 'Bearer {0}'.format(authorization)}
     os.chdir(home_dir())
     run('mkdir -p {0}'.format(WATCHMAN_DEPLOYS_FOLDER))
     for action in actions:
@@ -122,8 +118,8 @@ def perform_actions(actions):
             action['application_id'],
             action['action_id'])
         requests.put(update_action_url,
-            headers=headers,
-            json={ 'action': { 'current_status': Action.RUNNING } })
+                     headers=headers,
+                     json={'action': {'current_status': Action.RUNNING}})
         code, report, reason = executor(action, agent_data)
         status = Action.CREATED
         if code in [Action.ACTION_COMPLETED, Action.ACTION_ALREADY_COMPLETED]:
@@ -135,23 +131,23 @@ def perform_actions(actions):
             tmpfile.write(report)
             tmpfile.flush()
             tmpfile.seek(0)
-            response = requests.put(update_action_url,
-                headers=headers,
-                data={
-                    'action[current_status]': status,
-                    'action[reason]': reason,
-                },
-                files={
-                    'action[report]': open(tmpfile.name),
-                })
+            requests.put(update_action_url,
+                         headers=headers,
+                         data={
+                             'action[current_status]': status,
+                             'action[reason]': reason,
+                         },
+                         files={
+                             'action[report]': open(tmpfile.name),
+                         })
         else:
-            response = requests.put(update_action_url,
-                headers=headers,
-                json={
-                    'action': {
-                        'current_status': status,
-                        'reason': reason,
-                    },
-                })
+            requests.put(update_action_url,
+                         headers=headers,
+                         json={
+                             'action': {
+                                 'current_status': status,
+                                 'reason': reason,
+                             },
+                         })
         os.chdir(home_dir())
         run('rm -f ./lock-action-{0}'.format(action['action_id']))
