@@ -36,7 +36,7 @@ def update_agent(version):
     run('pip3 install --user {0}'.format(install_str))
 
 
-def update_master_server():
+def update_master_server(available_version):
     agent_data = safely_load_agent_file()
     master_location = agent_data['master'].get(
         'location', '/should/not/be/a/valid/path')
