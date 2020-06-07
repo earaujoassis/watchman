@@ -1,7 +1,6 @@
 inherit_gem:
   rubocop-github:
     - config/default.yml
-    - config/rails.yml
 inherit_mode:
   merge:
     - Exclude
@@ -13,8 +12,6 @@ AllCops:
     - public
     - venv
     - web
-Rails:
-  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/BlockComments:
