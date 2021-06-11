@@ -1,6 +1,6 @@
 # Watchman [![Build Status](https://travis-ci.org/earaujoassis/watchman.svg?branch=master)](https://travis-ci.org/earaujoassis/watchman) [![codecov](https://codecov.io/gh/earaujoassis/watchman/branch/master/graph/badge.svg)](https://codecov.io/gh/earaujoassis/watchman)
 
-> Watchman helps to keep track of GitHub projects; a tiny continuous deployment service
+> Watchman helps to keep track of automating services; a tiny continuous deployment service
 
 Watchman is a tiny continuous deployment service and a set of tools to keep track of projects,
 deployments and servers. A previous project, Backdoor (a GitHub integration server), was merged
@@ -44,33 +44,8 @@ a private repository. Ideally, Agents shouldn't be allowed to write in your repo
 ## Agents
 
 Agents are running services inside each deployable server. They listen to the Watchman-Backdoor
-server in order to receive instructions for deployment, for instance.
-
-### Installing & Running
-
-This is a Python `pip` package, so you're able to `pip install` it in your work environment. Basically,
-it will make available an `agent` binary, which should be helpful to setup new projects and deploy
-them in that running space (a server).
-
-```sh
-$ pip install --user https://github.com/earaujoassis/watchman/archive/v0.2.4.zip
-```
-
-If you need any help, please run `agent --help`.
-
-### Developing agents
-
-In order to create a sandbox (virtual environment) and install it for development or testing, you may
-run the following commands:
-
-```sh
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ pip install .
-$ agent --help
-```
-
-The `agent` binary will be available in the current shell session.
+server in order to receive instructions for deployment, for instance. They have been migrated to
+their own project at [earaujoassis/watchman-bot](https://github.com/earaujoassis/watchman-bot).
 
 ## Watchman Expiry (deprecated)
 
