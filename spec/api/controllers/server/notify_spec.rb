@@ -28,7 +28,6 @@ RSpec.describe Api::Controllers::Server::Notify, type: :action do
     expect(body["server"]["hostname"]).to eq "testing.example.com"
     expect(body["server"]["ip"]).to eq "1.1.1.1"
     expect(body["server"]["latest_version"]).to eq "0.0.0"
-    expect(body["pending_actions"]).to be_empty
   end
 
   it "should notify and update an existing server" do
@@ -50,6 +49,5 @@ RSpec.describe Api::Controllers::Server::Notify, type: :action do
     expect(body["server"]["hostname"]).to eq "testing.example.com"
     expect(body["server"]["ip"]).to eq "2.2.2.2"
     expect(body["server"]["latest_version"]).to eq "0.1.0"
-    expect(body["pending_actions"]).to be_empty
   end
 end
