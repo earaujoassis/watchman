@@ -1,7 +1,6 @@
 class ApplicationRepository < Hanami::Repository
   associations do
     belongs_to :user
-    belongs_to :server
     has_many :actions
   end
 
@@ -12,14 +11,6 @@ class ApplicationRepository < Hanami::Repository
   # FIXME belongs_to associations are not properly working
   def find_with_user(uuid)
     aggregate(:user)
-      .where(uuid: uuid)
-      .map_to(Application)
-      .one
-  end
-
-  # FIXME belongs_to associations are not properly working
-  def find_with_server(uuid)
-    aggregate(:server)
       .where(uuid: uuid)
       .map_to(Application)
       .one
@@ -50,12 +41,10 @@ class ApplicationRepository < Hanami::Repository
       .one
   end
 
-  def pending_actions_for_server(server)
-    server_id = server.id
+  def pending_actions
     actions
       .join(applications)
       .where(current_status: Action::CREATED)
-      .where(server_id: server_id)
       .map_to(Action)
       .to_a
   end

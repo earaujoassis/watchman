@@ -1,7 +1,7 @@
-FROM ruby:2.6.3-alpine3.10
+FROM ruby:2.7.2-alpine3.11
 
 LABEL "com.quatrolabs.watchman"="quatroLABS Watchman"
-LABEL "description"="Watchman helps to keep track of GitHub projects; a tiny continuous deployment service"
+LABEL "description"="Watchman helps to keep track of automating services; a tiny continuous deployment service"
 
 RUN apk add --update --no-cache \
     binutils-gold \

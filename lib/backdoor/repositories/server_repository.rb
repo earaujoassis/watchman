@@ -1,7 +1,6 @@
 class ServerRepository < Hanami::Repository
   associations do
     has_many :reports
-    has_many :applications
   end
 
   def find(hostname)
@@ -23,10 +22,6 @@ class ServerRepository < Hanami::Repository
 
   def find_with_reports(uuid)
     aggregate(:reports).where(uuid: uuid).order { created_at.desc }.map_to(Server).one
-  end
-
-  def find_with_applications(uuid)
-    aggregate(:applications).where(uuid: uuid).map_to(Server).one
   end
 
   def add_report(server, data)
