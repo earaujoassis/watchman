@@ -24,7 +24,6 @@ module Api
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
           server = server_repository.find(params[:server][:hostname])
-          pending_actions = ApplicationRepository.new.pending_actions_for_server(server).map(&:serialize)
           latest_tag = Backdoor::Services::PublicGitHub.new("earaujoassis/watchman").latest_tag
 
           Backdoor::Ws::Connection.broadcast({
@@ -34,8 +33,7 @@ module Api
           status 201, {
             version: Backdoor::VERSION,
             available_tag: latest_tag,
-            server: server.serialize,
-            pending_actions: pending_actions
+            server: server.serialize
           }.to_json
         end
       end

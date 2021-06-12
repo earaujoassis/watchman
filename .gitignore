@@ -9,9 +9,8 @@ log
 package-lock.json
 
 # Hanami's
-/db/backdoor_development
-/db/backdoor_test
-/public/assets*
-/apps/web/assets/*.js*
-/apps/web/assets/*.css*
-/tmp
+db/backdoor_development
+db/backdoor_test
+public/assets*
+apps/web/assets/*.js*
+apps/web/assets/*.css*

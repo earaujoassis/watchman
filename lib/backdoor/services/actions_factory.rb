@@ -9,8 +9,6 @@ class Backdoor::Services::ActionsFactory
         payload: {
           type: Action::DEPLOY.to_s,
           project_full_name: application.full_name,
-          process_name: application.process_name,
-          configuration_file_name: application.configuration_file_name,
           application_id: application.uuid
         }.to_json.to_s,
         current_status: Action::CREATED

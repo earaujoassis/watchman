@@ -26,8 +26,8 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
             <div className="userRealm-creation-overlay global-modal-overlay"></div>
             <div className="userRealm-creation-box global-modal-box">
               <h2>Master user creation</h2>
-              <p>In order to you this application, you must create a master user with your e-mail and GitHub
-              Token with the following access scopes:</p>
+              <p>In order to you this application, you must create a master user with your e-mail and <a href="https://github.com/settings/tokens/new">GitHub
+              Token</a> with the following access scopes:</p>
               <ul className="userRealm-scopes-list">
                 <li>
                   <span className="monospace">repo</span> <span>(Full control of private repositories)</span>
