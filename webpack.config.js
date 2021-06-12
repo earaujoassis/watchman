@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: './web/src/index.js',
@@ -20,6 +21,9 @@ module.exports = {
       chunkFilename: '[id].css'
     })
   ],
+  optimization: {
+    minimizer: [new TerserPlugin({ extractComments: false })],
+  },
   module: {
     rules: [
       {

@@ -1,0 +1,15 @@
+/apps/web/assets/*.js*
+/apps/web/assets/*.css*
+/db/backdoor_development
+/db/backdoor_test
+/public/assets*
+
+coverage
+node_modules
+.sass-cache
+.git
+tmp
+log
+
+.DS_Store
+.env

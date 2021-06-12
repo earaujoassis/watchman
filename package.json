@@ -5,8 +5,8 @@
   "main": "none",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode=development --port=$PORT",
-    "build": "webpack --mode production",
+    "start": "webpack serve --mode development --config webpack.config.js --progress --port=$PORT",
+    "build": "webpack --config webpack.config.js --mode production",
     "lint": "eslint --config .eslintrc.json web/src"
   },
   "repository": {
@@ -47,6 +47,7 @@
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.1.3",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2"
   },
