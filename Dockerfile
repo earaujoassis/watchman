@@ -32,6 +32,7 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
+RUN gem update --system
 RUN gem install bundler:2.2.19
 RUN bundle install --verbose --jobs=5 --retry=5
 RUN yarn install --network-timeout 1000000 --verbose
