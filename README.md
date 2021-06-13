@@ -51,10 +51,10 @@ their own project at [earaujoassis/watchman-bot](https://github.com/earaujoassis
 
 You may use the `watchman-expiry` CLI tool to retrieve expiry information for domain names and SSL
 certificates, provided the guide below. First, you need to install dependencies through `bundle install`.
-Then, you may run `bin/watchman-expiry domain -u earaujoassis.com` or
-`bin/watchman-expiry domain -u https://earaujoassis.com` to retrieve expiration date for a given domain;
-and `bin/watchman-expiry certificate -u https://earaujoassis.com` to retrieve expiration date for a
-SSL certificate, for a given domain. For more options, please run `bin/watchman-expiry -h`.
+Then, you may run `scripts/watchman-expiry domain -u earaujoassis.com` or
+`scripts/watchman-expiry domain -u https://earaujoassis.com` to retrieve expiration date for a given domain;
+and `scripts/watchman-expiry certificate -u https://earaujoassis.com` to retrieve expiration date for a
+SSL certificate, for a given domain. For more options, please run `scripts/watchman-expiry -h`.
 
 ## Issues
 
