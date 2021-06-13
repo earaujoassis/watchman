@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --mode development --config webpack.config.js --progress --port=$PORT",
     "build": "webpack --config webpack.config.js --mode production",
-    "lint": "eslint --config .eslintrc.json web/src"
+    "lint": "eslint --config .eslintrc.json web"
   },
   "repository": {
     "type": "git",
