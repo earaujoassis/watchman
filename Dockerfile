@@ -32,7 +32,7 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
-RUN bundle install --verbose
+RUN bundle install --verbose --deployment --jobs=5 --retry=5
 RUN yarn install --network-timeout 1000000 --verbose
 RUN yarn build
 RUN bundle exec hanami assets precompile
