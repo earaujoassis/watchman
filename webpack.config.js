@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: './web/src/index.js',
+  entry: './web/index.js',
   output: {
     path: path.resolve(__dirname, './apps/web/assets/'),
     publicPath: '/public/assets/',
@@ -11,7 +11,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@components': path.resolve(__dirname, 'web/src/components')
+      '@components': path.resolve(__dirname, 'web/components')
     }
   },
   devtool: 'cheap-module-source-map',
