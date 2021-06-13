@@ -4,6 +4,8 @@
 # Example:
 # get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
 
+get '/health-check', to: "health_check#get"
+
 post "/users", to: "user#create"
 get "/users", to: "user#index"
 get "/users/:id/credentials", to: "user#credentials"
