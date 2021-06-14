@@ -1,7 +1,7 @@
 module Api
   module Controllers
-    module Server
-      class Notify
+    module Reports
+      class Create
         include Api::Action
         include Api::Authentication
 
@@ -11,6 +11,10 @@ module Api
             required(:ip).filled(:str?)
             required(:latest_version).filled(:str?)
           end
+
+          required(:report).schema do
+            required(:subject).filled(:str?)
+          end
         end
 
         def call(params)
@@ -19,22 +23,16 @@ module Api
           server_repository = ServerRepository.new
           server = server_repository.find(params[:server][:hostname])
           if server.nil?
-            server_repository.create(params[:server])
+            server = server_repository.create(params[:server])
           else
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
-          server = server_repository.find(params[:server][:hostname])
-          latest_tag = Backdoor::Services::PublicGitHub.new("earaujoassis/watchman").latest_tag
 
-          Backdoor::Ws::Connection.broadcast({
-            servers: server_repository.all_serialized
-          }.to_json)
+          Backdoor::Ws::Connection.broadcast({ servers: server_repository.all_serialized }.to_json)
 
-          status 201, {
-            version: Backdoor::VERSION,
-            available_tag: latest_tag,
-            server: server.serialize
-          }.to_json
+          report = server_repository.add_report(server, params[:report])
+
+          status 201, { report: { id: report.uuid } }.to_json
         end
       end
     end

@@ -1,6 +1,6 @@
 module Api
   module Controllers
-    module User
+    module Users
       class Index
         include Api::Action
 

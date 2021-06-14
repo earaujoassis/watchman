@@ -1,7 +1,7 @@
 module Api
   module Controllers
-    module User
-      class AppList
+    module Applications
+      class Index
         include Api::Action
 
         def call(params)
