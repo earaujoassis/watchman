@@ -8,7 +8,7 @@ class Backdoor::Services::GitHub
   end
 
   def repos
-    @client.repos({}, query: {type: "contributors", sort: "asc"})
+    @client.repos({}, query: {type: "all", sort: "asc"})
   rescue Octokit::Unauthorized
     raise Error, "unauthorized_access"
   rescue StandardError

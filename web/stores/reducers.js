@@ -9,7 +9,12 @@ const initialState = {
   reportView: undefined,
   error: undefined,
   loading: [],
-  success: false
+  success: false,
+  displayModal: false,
+  configurationMode: {
+    mode: 'default',
+    hasErrors: false
+  }
 };
 
 const addLoading = (state, entity) => {
@@ -28,10 +33,12 @@ const receivedBroadcastMessage = (state, action) => {
 };
 
 const userRecordStart = (state, action) => {
+  NProgress.start();
   return Object.assign({}, state, { loading: addLoading(state, 'user') });
 };
 
 const userRecordSuccess = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'user'),
     success: true,
@@ -41,6 +48,7 @@ const userRecordSuccess = (state, action) => {
 };
 
 const userRecordError = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'user'),
     success: false,
@@ -70,10 +78,12 @@ const projectRecordError = (state, action) => {
 };
 
 const applicationRecordStart = (state, action) => {
+  NProgress.start();
   return Object.assign({}, state, { loading: addLoading(state, 'application') });
 };
 
 const applicationRecordSuccess = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'application'),
     success: true,
@@ -83,6 +93,7 @@ const applicationRecordSuccess = (state, action) => {
 };
 
 const applicationRecordError = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'application'),
     success: false,
@@ -139,6 +150,18 @@ const reportRecordError = (state, action) => {
   });
 };
 
+const internalConfigurationDisplayMode = (state, action) => {
+  return Object.assign({}, state, {
+    configurationMode: Object.assign({}, state.configurationMode, action.mode)
+  });
+};
+
+const internalSetModalDisplay = (state, action) => {
+  return Object.assign({}, state, {
+    displayModal: action.displayModal
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.RECEIVED_CHANNEL_BROADCAST_MESSAGE: return receivedBroadcastMessage(state, action);
@@ -157,6 +180,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REPORT_RECORD_START: return reportRecordStart(state, action);
     case actionTypes.REPORT_RECORD_SUCCESS: return reportRecordSuccess(state, action);
     case actionTypes.REPORT_RECORD_ERROR: return reportRecordError(state, action);
+    case actionTypes.INTERNAL_CONFIGURATION_DISPLAY_MODE: return internalConfigurationDisplayMode(state, action);
+    case actionTypes.INTERNAL_DISPLAY_MODAL: return internalSetModalDisplay(state, action);
     default: return state;
   }
 };
