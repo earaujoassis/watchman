@@ -4,22 +4,29 @@
 # Example:
 # get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
 
-get '/health-check', to: "health_check#get"
+get '/health-check', to: "health_check#index"
 
-post "/users", to: "user#create"
-get "/users", to: "user#index"
-get "/users/:id/credentials", to: "user#credentials"
-patch "/users/:id", to: "user#update"
-get "/users/:id/repositories", to: "user#repos"
-post "/users/:id/applications", to: "user#app_create"
-get "/users/:id/applications", to: "user#app_list"
+namespace 'users' do
+  post "/", to: "users#create"
+  get "/", to: "users#index"
+  get "/:id/credentials", to: "credentials#create"
+  patch "/:id", to: "users#update"
+  get "/:id/repositories", to: "repositories#index"
+  post "/:id/applications", to: "applications#create"
+  get "/:id/applications", to: "applications#index"
+end
 
-put "/servers/notify", to: "server#notify"
-post "/servers/report", to: "server#report_create"
-put "/servers/report/:id", to: "server#report_update"
-get "/servers", to: "server#list"
-get "/servers/:id/reports", to: "server#report_list"
-get "/servers/:server_id/reports/:report_id", to: "server#report_view"
+namespace 'servers' do
+  get "/", to: "servers#index"
+  put "/notify", to: "servers#notify"
+  post "/report", to: "reports#create"
+  put "/report/:id", to: "reports#update"
+  get "/:id/reports", to: "reports#index"
+  get "/:server_id/reports/:report_id", to: "reports#show"
+end
 
-get "/applications/:id/view/configuration_file", to: "applications#view"
-put "/applications/:application_id/actions/:action_id/executor", to: "applications#actions"
+namespace 'applications' do
+  get "/:id/view/configuration_file", to: "applications#view"
+  post "/:application_id/actions", to: "actions#create"
+  put "/:application_id/actions/:action_id/executor", to: "actions#update"
+end

@@ -1,7 +1,7 @@
 module Api
   module Controllers
-    module Server
-      class ReportUpdate
+    module Reports
+      class Update
         include Api::Action
         include Api::Authentication
 
