@@ -15,7 +15,7 @@
   </head>
   <body>
     <%= yield %>
-    <script>(function(){window.Watchman = JSON.parse('{"version": "<%= Backdoor::VERSION %>"}');})();</script>
+    <script>(function(){window.Watchman = JSON.parse('{"version": "<%= Backdoor::VERSION %>", "commitHash": "<%= Backdoor::COMMIT_HASH %>"}');})();</script>
     <%= javascript 'nprogress.js' %>
     <% if Hanami.env?(:production) %>
     <%= javascript 'app.js' %>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../../actions';
 import { extractDataForm } from '../../utils';
@@ -20,15 +21,6 @@ const defaultConfiguration = ({ internalSetConfigurationDisplayMode, user = {} }
           <span className="input">{user.github_token}</span>
         </div>
         <div className="input-box">
-          <a href={`/api/users/${user.id}/credentials`}
-            title="It regenerates the client's key &amp; secret for security reasons"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Download credentials for agents
-          </a>
-        </div>
-        <div className="input-box">
           <button
             type="button"
             className="anchor"
@@ -36,6 +28,9 @@ const defaultConfiguration = ({ internalSetConfigurationDisplayMode, user = {} }
           >
             Update GitHub Token
           </button>
+        </div>
+        <div className="input-box">
+          <Link to="/configuration/credentials">Manage credentials</Link>
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ module Api
             }.to_json
           end
           applications = ApplicationRepository.new.from_user_with_actions(user)
-          status 201, { user: { apps: applications.map(&:serialize) } }.to_json
+          status 201, { user: { applications: applications.map(&:serialize) } }.to_json
         end
       end
     end
