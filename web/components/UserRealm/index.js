@@ -17,12 +17,11 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
     return <div className="galaxy-center"><SpinningSquare /></div>;
   }
 
-  return (
-    <div className="userRealm-root">
-      {children}
-      {
-        user == null || user.error ? (
-          <div>
+  if (user == null || user.error) {
+    return (
+      <div className="userRealm-root">
+        {children}
+        <div>
             <div className="userRealm-creation-overlay global-modal-overlay"></div>
             <div className="userRealm-creation-box global-modal-box">
               <h2>Master user creation</h2>
@@ -48,12 +47,16 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
               </ul>
               <form onSubmit={(e) => {
                 e.preventDefault();
-                const data = { user: extractDataForm(e.target, ['email', 'github_token']) };
+                const data = { user: extractDataForm(e.target, ['email', 'github_token', 'passphrase']) };
                 createUser(data);
               }}>
                 <div className="input-box">
                   <label htmlFor="user_email">E-mail</label>
                   <input type="email" id="user_email" name="email" />
+                </div>
+                <div className="input-box">
+                  <label htmlFor="user_passphrase">Password</label>
+                  <input type="password" id="user_passphrase" name="passphrase" />
                 </div>
                 <div className="input-box">
                   <label htmlFor="user_github_token">GitHub Token</label>
@@ -63,8 +66,13 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
               </form>
             </div>
           </div>
-        ) : null
-      }
+      </div>
+    );
+  }
+
+  return (
+    <div className="userRealm-root">
+      {children}
     </div>
   );
 };

@@ -1,6 +1,10 @@
 import * as actionTypes from './types';
 import fetch from './fetch';
 
+import {
+  internalSetModalDisplay
+} from './internal';
+
 export const applicationRecordStart = () => {
   return {
     type: actionTypes.APPLICATION_RECORD_START
@@ -40,6 +44,7 @@ export const createApplication = (id, data) => {
     fetch.post(`users/${id}/applications`, data)
       .then(response => {
         dispatch(applicationRecordSuccess(response.data));
+        dispatch(internalSetModalDisplay(false));
       })
       .catch(error => {
         dispatch(applicationRecordError(error));
