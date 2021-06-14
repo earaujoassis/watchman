@@ -14,3 +14,4 @@ db/backdoor_test
 public/assets*
 apps/web/assets/*.js*
 apps/web/assets/*.css*
+!apps/web/assets/vendor/*.*
