@@ -2,8 +2,8 @@ require_relative "../authentication"
 
 module Api
   module Controllers
-    module Applications
-      class Actions
+    module Actions
+      class Update
         include Api::Action
         include Api::Authentication
         MEGABYTE = 1024 ** 2

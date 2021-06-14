@@ -1,7 +1,7 @@
 module Api
   module Controllers
-    module User
-      class AppCreate
+    module Applications
+      class Create
         include Api::Action
         MEGABYTE = 1024 ** 2
 
