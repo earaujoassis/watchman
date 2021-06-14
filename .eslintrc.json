@@ -5,7 +5,8 @@
   },
   "globals": {
       "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
+      "SharedArrayBuffer": "readonly",
+      "NProgress": "readonly"
   },
   "parserOptions": {
       "ecmaFeatures": {

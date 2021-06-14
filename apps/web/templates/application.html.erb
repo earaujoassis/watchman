@@ -6,6 +6,7 @@
     <%= stylesheet 'https://unpkg.com/normalize.css@8.0.1/normalize.css' %>
     <%= stylesheet 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css' %>
     <%= favicon 'https://cdn.quatrolabs.com/favicon.ico' %>
+    <%= stylesheet 'nprogress.css' %>
     <% if Hanami.env?(:production) %>
     <%= stylesheet 'app.css' %>
     <% else %>
@@ -15,6 +16,7 @@
   <body>
     <%= yield %>
     <script>(function(){window.Watchman = JSON.parse('{"version": "<%= Backdoor::VERSION %>"}');})();</script>
+    <%= javascript 'nprogress.js' %>
     <% if Hanami.env?(:production) %>
     <%= javascript 'app.js' %>
     <% else %>

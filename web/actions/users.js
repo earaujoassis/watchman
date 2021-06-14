@@ -1,6 +1,11 @@
 import * as actionTypes from './types';
 import fetch from './fetch';
 
+import {
+  internalSetConfigurationDisplayMode,
+  internalSetConfigurationDisplayModeError
+} from './internal';
+
 export const userRecordStart = () => {
   return {
     type: actionTypes.USER_RECORD_START
@@ -53,9 +58,11 @@ export const updateUser = (id, data) => {
     fetch.patch(`users/${id}`, data)
       .then(response => {
         dispatch(userRecordSuccess(response.data));
+        dispatch(internalSetConfigurationDisplayMode('default'));
       })
       .catch(error => {
         dispatch(userRecordError(error));
+        dispatch(internalSetConfigurationDisplayModeError());
       });
   };
 };

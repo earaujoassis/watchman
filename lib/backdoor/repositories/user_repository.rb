@@ -1,6 +1,9 @@
 require "securerandom"
+require "bcrypt"
 
 class UserRepository < Hanami::Repository
+  include BCrypt
+
   associations do
     has_many :applications
   end
@@ -10,6 +13,7 @@ class UserRepository < Hanami::Repository
   end
 
   def create_master_user(data)
+    data[:passphrase] = Password.create(data[:passphrase]) unless data[:passphrase].nil?
     self.create(data.clone.merge({ category: User::MASTER }))
   end
 
@@ -19,6 +23,7 @@ class UserRepository < Hanami::Repository
 
   def update_user(uuid, data)
     user = self.find(uuid)
+    data[:passphrase] = Password.create(data[:passphrase]) unless data[:passphrase].nil?
     self.update(user.id, data)
   end
 
