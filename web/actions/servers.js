@@ -24,7 +24,7 @@ export const serverRecordError = (error) => {
 export const fetchServers = () => {
   return dispatch => {
     dispatch(serverRecordStart());
-    fetch.get(`servers`)
+    fetch.get('servers')
       .then(response => {
         dispatch(serverRecordSuccess(response.data));
       })

@@ -32,34 +32,43 @@ const servers = ({ fetchServers, loading, servers = [] }) => {
     setSeconds(seconds + 1 > 960 ? 0 : seconds + 1);
   }, 1000);
 
+  if (loading.includes('server')) {
+    return (
+      <div className="layout-root__siblings">
+        <div className="servers-root">
+          <h2>Servers</h2>
+          <SpinningSquare />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="layout-root__siblings">
       <div className="servers-root">
         <h2>Servers</h2>
-        {loading.includes('server') ? <SpinningSquare /> : (
-          <ul className="servers-list">
-            {servers.map((server, i) => (
-              <li key={i}>
-                <div className="servers-box">
-                  <span className="server-status-box"
-                    title={diffAboveThreshold(server.updated_at) ? 'Inactive' : 'Active'}>
-                    <span
-                      className={`server-status ${diffAboveThreshold(server.updated_at) ? 'inactive' : 'active'}`}></span>
-                    <span className="server-time-lapse" title={server.updated_at}>
-                      {diffDisplay(server.updated_at)}
-                    </span>
+        <ul className="servers-list">
+          {servers.map((server, i) => (
+            <li key={i}>
+              <div className="servers-box">
+                <span className="server-status-box"
+                  title={diffAboveThreshold(server.updated_at) ? 'Inactive' : 'Active'}>
+                  <span
+                    className={`server-status ${diffAboveThreshold(server.updated_at) ? 'inactive' : 'active'}`}></span>
+                  <span className="server-time-lapse" title={server.updated_at}>
+                    {diffDisplay(server.updated_at)}
                   </span>
-                  <h3 className="servers-title">{server.hostname}</h3>
-                  <p className="servers-description">
-                    <span>{server.ip}</span>
-                    <span className="servers-spacer">&mdash;</span>
-                    <span>v{server.latest_version || '?'}</span>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+                </span>
+                <h3 className="servers-title">{server.hostname}</h3>
+                <p className="servers-description">
+                  <span>{server.ip}</span>
+                  <span className="servers-spacer">&mdash;</span>
+                  <span>v{server.latest_version || '?'}</span>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

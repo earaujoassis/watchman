@@ -4,6 +4,11 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: normal;
@@ -28,6 +33,38 @@ body {
 
 p {
   margin: 0;
+}
+
+table {
+  width: 100%;
+  margin: 20px 0;
+}
+
+table thead tr th {
+  border: 1px solid hsl(0,0%,90%);
+  border-left: 0;
+  padding: 12px;
+  text-align: center;
+}
+
+table thead tr th:first-of-type {
+  border-left: 1px solid hsl(0,0%,90%);
+}
+
+table tbody tr td {
+  border: 1px solid hsl(0,0%,90%);
+  border-top: 0;
+  border-left: 0;
+  padding: 12px;
+  text-align: center;
+}
+
+table tbody tr td:first-of-type {
+  border-left: 1px solid hsl(0,0%,90%);
+  text-align: left;
+  font-family: monospace;
+  font-style: normal;
+  font-weight: normal;
 }
 
 .label,

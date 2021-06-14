@@ -1,6 +1,6 @@
 module Api
   module Controllers
-    module Applications
+    module Credentials
       class Index
         include Api::Action
 
@@ -8,10 +8,10 @@ module Api
           self.format = :json
 
           repository = UserRepository.new
-          user = repository.find(params[:id])
+          user = repository.find_with_credentials(params[:id])
           halt 404, { error: "unknown user" } if user.nil?
-          applications = ApplicationRepository.new.from_user_with_actions(user)
-          self.body = { user: { applications: applications.map(&:serialize) } }.to_json
+
+          self.body = { user: { credentials: user.credentials.map(&:serialize) } }.to_json
         end
       end
     end

@@ -4,6 +4,7 @@ const initialState = {
   user: undefined,
   projects: undefined,
   applications: undefined,
+  credentials: undefined,
   servers: undefined,
   reportTopics: undefined,
   reportView: undefined,
@@ -65,7 +66,7 @@ const projectRecordSuccess = (state, action) => {
     loading: reduceLoading(state, 'project'),
     success: true,
     error: null,
-    projects: action.user.repos
+    projects: action.user.repositories
   });
 };
 
@@ -88,7 +89,7 @@ const applicationRecordSuccess = (state, action) => {
     loading: reduceLoading(state, 'application'),
     success: true,
     error: null,
-    applications: action.user.apps
+    applications: action.user.applications
   });
 };
 
@@ -150,6 +151,30 @@ const reportRecordError = (state, action) => {
   });
 };
 
+const credentialReportStart = (state, action) => {
+  NProgress.start();
+  return Object.assign({}, state, { loading: addLoading(state, 'credential') });
+};
+
+const credentialReportSuccess = (state, action) => {
+  NProgress.done();
+  return Object.assign({}, state, {
+    loading: reduceLoading(state, 'credential'),
+    success: true,
+    error: null,
+    credentials: action.user.credentials
+  });
+};
+
+const credentialReportError = (state, action) => {
+  NProgress.done();
+  return Object.assign({}, state, {
+    loading: reduceLoading(state, 'credential'),
+    success: false,
+    error: action.error
+  });
+};
+
 const internalConfigurationDisplayMode = (state, action) => {
   return Object.assign({}, state, {
     configurationMode: Object.assign({}, state.configurationMode, action.mode)
@@ -180,6 +205,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REPORT_RECORD_START: return reportRecordStart(state, action);
     case actionTypes.REPORT_RECORD_SUCCESS: return reportRecordSuccess(state, action);
     case actionTypes.REPORT_RECORD_ERROR: return reportRecordError(state, action);
+    case actionTypes.CREDENTIAL_RECORD_START: return credentialReportStart(state, action);
+    case actionTypes.CREDENTIAL_RECORD_SUCCESS: return credentialReportSuccess(state, action);
+    case actionTypes.CREDENTIAL_RECORD_ERROR: return credentialReportError(state, action);
     case actionTypes.INTERNAL_CONFIGURATION_DISPLAY_MODE: return internalConfigurationDisplayMode(state, action);
     case actionTypes.INTERNAL_DISPLAY_MODAL: return internalSetModalDisplay(state, action);
     default: return state;

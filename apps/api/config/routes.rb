@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Configure your routes here
 # See: http://hanamirb.org/guides/routing/overview/
 #
@@ -9,7 +11,9 @@ get '/health-check', to: "health_check#index"
 namespace 'users' do
   post "/", to: "users#create"
   get "/", to: "users#index"
-  get "/:id/credentials", to: "credentials#create"
+  get "/:id/credentials", to: "credentials#index"
+  post "/:id/credentials", to: "credentials#create"
+  put "/:user_id/credentials/:credential_id/inactivate", to: "credentials#inactivate"
   patch "/:id", to: "users#update"
   get "/:id/repositories", to: "repositories#index"
   post "/:id/applications", to: "applications#create"

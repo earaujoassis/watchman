@@ -18,7 +18,8 @@
   },
   "extends": [
     "standard",
-    "standard-react"
+    "standard-react",
+    "plugin:react/recommended"
   ],
   "plugins": [
       "react"

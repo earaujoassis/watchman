@@ -19,7 +19,7 @@ class Backdoor::Services::Authentication
       return false
     end
 
-    user_repository = UserRepository.new
-    user_repository.authentic_client?(client_key, client_secret)
+    credential_repository = CredentialRepository.new
+    credential_repository.authentic_client?(client_key, client_secret)
   end
 end
