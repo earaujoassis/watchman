@@ -6,6 +6,7 @@ class UserRepository < Hanami::Repository
 
   associations do
     has_many :applications
+    has_many :credentials
   end
 
   def master_user
@@ -27,15 +28,6 @@ class UserRepository < Hanami::Repository
     self.update(user.id, data)
   end
 
-  def generate_credentials(uuid)
-    user = self.find(uuid)
-    data = {
-      client_key: SecureRandom.hex(User::CLIENT_KEY_LENGTH),
-      client_secret: SecureRandom.hex(User::CLIENT_SECRET_LENGTH)
-    }
-    self.update(user.id, data)
-  end
-
   def authentic_client?(client_key, client_secret)
     user = users.where(client_key: client_key).first
     return false if user.nil?
@@ -48,5 +40,17 @@ class UserRepository < Hanami::Repository
 
   def add_application(user, data)
     assoc(:applications, user).add(data)
+  end
+
+  def find_with_credentials(uuid)
+    aggregate(:credentials).where(uuid: uuid).map_to(User).one
+  end
+
+  def add_credential(user)
+    data = {
+      client_key: "W#{SecureRandom.hex(User::CLIENT_KEY_LENGTH)}"[0..31].upcase,
+      client_secret: SecureRandom.hex(User::CLIENT_SECRET_LENGTH)
+    }
+    assoc(:credentials, user).add(data)
   end
 end

@@ -1,7 +1,7 @@
 module Api
   module Controllers
-    module Server
-      class List
+    module Servers
+      class Index
         include Api::Action
 
         def call(params)

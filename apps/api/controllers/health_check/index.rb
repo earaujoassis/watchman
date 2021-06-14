@@ -1,7 +1,7 @@
 module Api
   module Controllers
     module HealthCheck
-      class Get
+      class Index
         include Api::Action
 
         def call(params)

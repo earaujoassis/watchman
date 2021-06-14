@@ -1,13 +1,14 @@
 module Api
   module Controllers
-    module User
-      class Update
+    module Users
+      class Create
         include Api::Action
 
         params do
           required(:user).schema do
+            required(:email).filled(:str?, format?: /@/)
             required(:github_token).filled(:str?)
-            required(:password_confirmation).filled(:str?)
+            required(:passphrase).filled(:str?)
           end
         end
 
@@ -17,10 +18,7 @@ module Api
           halt 400, { error: params.errors }.to_json unless params.errors.empty?
 
           repository = UserRepository.new
-          user = repository.find(params[:id])
-          halt 401, { error: "wrong password" }.to_json unless user.password == params[:user][:password_confirmation]
-
-          repository.update_user(params[:id], params[:user].slice(:github_token))
+          repository.create_master_user(params[:user])
           status 201, { user: repository.master_user.serialize }.to_json
         end
       end

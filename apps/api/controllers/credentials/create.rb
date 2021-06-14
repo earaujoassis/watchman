@@ -1,7 +1,7 @@
 module Api
   module Controllers
-    module User
-      class Credentials
+    module Credentials
+      class Create
         include Api::Action
 
         def call(params)
@@ -10,10 +10,9 @@ module Api
           repository = UserRepository.new
           user = repository.find(params[:id])
           halt 404, { error: "unknown user" } if user.nil?
-          repository.generate_credentials(params[:id])
-          user = repository.find(params[:id])
+          credential = repository.add_credential(user)
 
-          content = "client_key,client_secret\n#{user.client_key},#{user.client_secret}\n"
+          content = "client_key,client_secret\n#{credential.client_key},#{credential.client_secret}\n"
           self.headers.merge!({
             "Content-Type" => "text/csv",
             "Content-Disposition" => 'attachment; filename="credentials.csv"',
