@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Action < Hanami::Entity
   ACTION_TYPES = [
     DEPLOY = :A001

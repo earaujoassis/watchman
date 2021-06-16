@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module Controllers
     module Reports
@@ -28,7 +30,7 @@ module Api
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
 
-          Backdoor::Ws::Connection.broadcast({ servers: server_repository.all_serialized }.to_json)
+          Backdoor::Sockets::Connection.broadcast({ servers: server_repository.all_serialized }.to_json)
 
           report = server_repository.add_report(server, params[:report])
 

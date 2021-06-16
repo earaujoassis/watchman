@@ -1,9 +1,11 @@
-RSpec.describe Api::Controllers::User::Index, type: :action do
+# frozen_string_literal: true
+
+RSpec.describe Api::Controllers::Users::Index, type: :action do
   let(:action) { described_class.new }
   let(:params) { Hash[] }
 
   before(:each) do
-    UserRepository.new.clear
+    clear_repositories
   end
 
   it "should return nil when no user is available" do
@@ -17,6 +19,7 @@ RSpec.describe Api::Controllers::User::Index, type: :action do
   it "should the user if it already exists" do
     UserRepository.new.create_master_user({
       email: "john.doe@example.com",
+      passphrase: "testingpassword",
       github_token: "testingtoken"
     })
     response = action.call(params)
@@ -24,6 +27,6 @@ RSpec.describe Api::Controllers::User::Index, type: :action do
     expect(status_code).to eq 200
     body = JSON.parse(response[2].first)
     expect(body["user"]["email"]).to eq "john.doe@example.com"
-    expect(body["user"]["github_token"]).to eq "testingtoken"
+    expect(body["user"]["github_token"]).to eq "******gtoken"
   end
 end

@@ -1,4 +1,6 @@
-RSpec.describe Api::Controllers::Server::ReportUpdate, type: :action do
+# frozen_string_literal: true
+
+RSpec.describe Api::Controllers::Applications::Create, type: :action do
   let(:action) { described_class.new }
   let(:params) { Hash[] }
 

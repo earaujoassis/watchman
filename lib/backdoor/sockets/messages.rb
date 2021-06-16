@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Backdoor
-  module Ws
+  module Sockets
     module Messages
       CONNECTED_MESSAGE = {
         type: "control",

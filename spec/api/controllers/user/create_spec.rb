@@ -1,9 +1,11 @@
-RSpec.describe Api::Controllers::User::Create, type: :action do
+# frozen_string_literal: true
+
+RSpec.describe Api::Controllers::Users::Create, type: :action do
   let(:action) { described_class.new }
-  let(:params) { Hash[user: { email: "john.doe@example.com", github_token: "testingtoken" }] }
+  let(:params) { Hash[user: { email: "john.doe@example.com", passphrase: "testingpassword", github_token: "testingtoken" }] }
 
   before(:each) do
-    UserRepository.new.clear
+    clear_repositories
   end
 
   it "should return Bad Request when there's any missing attribute" do
@@ -18,6 +20,6 @@ RSpec.describe Api::Controllers::User::Create, type: :action do
     expect(status_code).to eq 201
     body = JSON.parse(response[2].first)
     expect(body["user"]["email"]).to eq "john.doe@example.com"
-    expect(body["user"]["github_token"]).to eq "testingtoken"
+    expect(body["user"]["github_token"]).to eq "******gtoken"
   end
 end

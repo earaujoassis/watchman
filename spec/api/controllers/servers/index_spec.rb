@@ -1,10 +1,11 @@
-RSpec.describe Api::Controllers::Server::List, type: :action do
+# frozen_string_literal: true
+
+RSpec.describe Api::Controllers::Servers::Index, type: :action do
   let(:action) { described_class.new }
   let(:params) { Hash[] }
 
   before(:each) do
-    ReportRepository.new.clear
-    ServerRepository.new.clear
+    clear_repositories
   end
 
   it "should retrieve an empty server list by default" do

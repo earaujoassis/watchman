@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "./config/environment"
 require "./lib/backdoor"
-require "./lib/backdoor/ws/connection"
+require "./lib/backdoor/sockets/connection"
 
-use Backdoor::Ws::Connection
+use Backdoor::Sockets::Connection
 
 run Hanami.app

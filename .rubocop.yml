@@ -7,12 +7,10 @@ inherit_mode:
 AllCops:
   Exclude:
     - .vscode
-    - agents
     - node_modules
     - public
-    - venv
     - web
 Style/FrozenStringLiteralComment:
-  Enabled: false
+  Enabled: true
 Style/BlockComments:
-  Enabled: false
+  Enabled: true
