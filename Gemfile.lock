@@ -285,11 +285,13 @@ DEPENDENCIES
   concurrent-ruby-ext
   coveralls
   dotenv (~> 2.4)
+  dry-types
   faye-websocket
   foreman
-  hanami
-  hanami-model
+  hanami (~> 1.3)
+  hanami-model (~> 1.3)
   hanami-utils
+  hanami-validations
   hanami-webconsole
   minitest
   octokit (~> 4.0)

@@ -6,7 +6,8 @@
   "globals": {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly",
-      "NProgress": "readonly"
+      "NProgress": "readonly",
+      "__COMMIT_HASH__": "readonly"
   },
   "parserOptions": {
       "ecmaFeatures": {
@@ -18,7 +19,8 @@
   },
   "extends": [
     "standard",
-    "standard-react"
+    "standard-react",
+    "plugin:react/recommended"
   ],
   "plugins": [
       "react"
