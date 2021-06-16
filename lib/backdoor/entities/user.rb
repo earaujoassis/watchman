@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bcrypt"
 
 class User < Hanami::Entity
@@ -11,7 +13,7 @@ class User < Hanami::Entity
     {
       id: self.uuid,
       email: self.email,
-      github_token: github_token_obfuscated(length: 30)
+      github_token: github_token_obfuscated(length: self.github_token.length * 0.5)
     }
   end
 

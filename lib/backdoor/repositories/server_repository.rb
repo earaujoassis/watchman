@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ServerRepository < Hanami::Repository
   associations do
     has_many :reports

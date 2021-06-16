@@ -1,4 +1,6 @@
-RSpec.describe Api::Controllers::Server::ReportCreate, type: :action do
+# frozen_string_literal: true
+
+RSpec.describe Api::Controllers::Reports::Create, type: :action do
   let(:action) { described_class.new }
   let(:params) do
     Hash[
@@ -14,8 +16,7 @@ RSpec.describe Api::Controllers::Server::ReportCreate, type: :action do
   end
 
   before(:each) do
-    ReportRepository.new.clear
-    ServerRepository.new.clear
+    clear_repositories
   end
 
   it "should return Bad Request when there's any missing attribute" do

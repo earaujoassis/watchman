@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Backdoor
-  VERSION = "0.2.4".freeze
+  VERSION = "0.2.4"
 
   module Commands; end
 
@@ -7,5 +9,5 @@ module Backdoor
 
   module Services; end
 
-  module Ws; end
+  module Sockets; end
 end
