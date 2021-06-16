@@ -8,7 +8,6 @@ class ReportRepository < Hanami::Repository
   end
 
   def update_body(report, body_file)
-    report = self.find(report.uuid)
     self.update(report.id, { body: Sequel.blob(body_file.read) })
   end
 

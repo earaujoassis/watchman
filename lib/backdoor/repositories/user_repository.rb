@@ -28,18 +28,21 @@ class UserRepository < Hanami::Repository
     self.update(user.id, data)
   end
 
-  def authentic_client?(client_key, client_secret)
-    user = users.where(client_key: client_key).first
-    return false if user.nil?
-    return user.client_secret == client_secret
-  end
-
   def find_with_applications(uuid)
     aggregate(:applications).where(uuid: uuid).map_to(User).one
   end
 
   def add_application(user, data)
     assoc(:applications, user).add(data)
+  end
+
+  def owned_credential(user_id, credential_id)
+    credentials
+      .join(users)
+      .where(users__uuid: user_id)
+      .where(credentials__uuid: credential_id)
+      .map_to(Credential)
+      .one
   end
 
   def find_with_credentials(uuid)

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require "hanami/helpers"
+require "hanami/validations"
 
 module Api
   class Application < Hanami::Application

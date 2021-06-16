@@ -13,8 +13,6 @@ module Api
         end
 
         def call(params)
-          self.format = :json
-
           halt 400, { error: params.errors }.to_json unless params.errors.empty?
 
           repository = UserRepository.new

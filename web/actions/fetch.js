@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import axios from 'axios';
 
 const fetch = axios.create({

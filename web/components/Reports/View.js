@@ -11,7 +11,25 @@ const fromNow = (updatedAt) => {
   return moment.utc(updatedAt, 'YYYY-MM-DD HH:mm:ss UTC').startOf('minute').fromNow();
 };
 
-const view = ({ fetchReport, topic, server, report }) => {
+const ReportBody = ({ topic, report }) => {
+  if (topic.body_available) {
+    return (
+      <div className="report-body terminal-root" style={{ maxWidth: `${width}px` }}>
+        {width && report && report.body
+          ? <pre>{report.body}</pre>
+          : <SpinningSquare style={{ padding: '30px 0', color: '#fff' }} />}
+      </div>
+    );
+  }
+
+  return (
+    <div className="report-body terminal-root" style={{ maxWidth: `${width}px` }}>
+      <p>Report file is not available</p>
+    </div>
+  );
+};
+
+export const View = ({ fetchReport, topic, server, report }) => {
   useEffect(() => {
     fetchReport(server.id, topic.id);
   }, []);
@@ -32,19 +50,7 @@ const view = ({ fetchReport, topic, server, report }) => {
           <p title={topic.updated_at}>{fromNow(topic.updated_at)}</p>
         </div>
       </div>
-      {topic.body_available ? (
-        <div className="report-body terminal-root" style={{ maxWidth: `${width}px` }}>
-          {width && report && report.body
-            ? <pre>{report.body}</pre>
-            : <SpinningSquare style={{ padding: '30px 0', color: '#fff' }} />}
-        </div>
-      ) : (
-        <div className="report-body terminal-root" style={{ maxWidth: `${width}px` }}>
-          <p>Report file is not available</p>
-        </div>
-      )}
+      <ReportBody topic={topic} report={report} />
     </div>
   );
 };
-
-export default view;

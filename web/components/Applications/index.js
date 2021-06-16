@@ -15,36 +15,44 @@ const classNameForStatus = (status) => {
   }
 };
 
-const applications = ({ fetchApplications, loading, user, applications = [] }) => {
+const applications = ({ fetchApplications, loading, user = {}, applications = [] }) => {
   useEffect(() => {
-    if (user) {
+    if (user.id) {
       fetchApplications(user.id);
     }
   }, [user]);
 
+  if (loading.includes('application')) {
+    return (
+      <div className="applications-root">
+        <h2>Applications</h2>
+        <SpinningSquare />
+      </div>
+    );
+  }
+
   return (
     <div className="applications-root">
       <h2>Applications</h2>
-      {loading.includes('application') ? <SpinningSquare /> : (
-        <ul className="applications-list">
-          {applications.map((application, i) => (
-            <li key={i}>
-              <div className="application-box">
-                <h2 className="application-name">{application.full_name}</h2>
-                <p className="application-description">{application.description}</p>
-                <div className="application-deploys-box">
-                  {application.actions.map((action, i) => (
-                    <span
-                      key={i}
-                      className={`app-square ${classNameForStatus(action.current_status)}`}
-                      title={`${action.description} - ${action.current_status}`} />
-                  ))}
-                </div>
+      <ul className="applications-list">
+        {applications.map((application, i) => (
+          <li key={i}>
+            <div className="application-box">
+              <h2 className="application-name">{application.full_name}</h2>
+              <p className="application-description"><b>UUID</b>: {application.id}</p>
+              <p className="application-description">{application.description}</p>
+              <div className="application-deploys-box">
+                {application.actions.map((action, i) => (
+                  <span
+                    key={i}
+                    className={`app-square ${classNameForStatus(action.current_status)}`}
+                    title={`${action.description} - ${action.current_status}`} />
+                ))}
               </div>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

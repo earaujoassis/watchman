@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { SpinningSquare } from '../UI';
 
-import Entries from './Entries';
-import View from './View';
+import { Entries } from './Entries';
+import { View } from './View';
 
 import './style.css';
 
@@ -19,7 +19,8 @@ const reports = (props) => {
     servers = [],
     reportsTopics = [],
     report,
-    loading } = props;
+    loading
+  } = props;
 
   const [currentServer, setServer] = useState(null);
   const [currentTopic, setTopic] = useState(null);
@@ -50,6 +51,22 @@ const reports = (props) => {
     innerView = null;
   }
 
+  if (loading.includes('server')) {
+    return (
+      <div className="reports-root">
+        <div className="reports-header">
+          <h2>Reports</h2>
+        </div>
+        <div className="reports-body">
+          <aside className="reporters-menu">
+            <SpinningSquare style={{ padding: '30px 0' }} />
+          </aside>
+          {innerView}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="reports-root">
       <div className="reports-header">
@@ -57,34 +74,32 @@ const reports = (props) => {
       </div>
       <div className="reports-body">
         <aside className="reporters-menu">
-          {loading.includes('server') ? <SpinningSquare style={{ padding: '30px 0' }} /> : (
-            <ul className="servers-list">
-              {servers.map((server, i) => (
-                <li key={i}>
-                  <div className="servers-box">
-                    <h3 className="servers-title">
-                      <button
-                        className="anchor"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setServer(server);
-                          setTopic(null);
-                          history.replace('/reports');
-                          fetchReports(server.id);
-                        }}>
-                        {server.hostname}
-                      </button>
-                    </h3>
-                    <p className="servers-description">
-                      <span>{server.ip}</span>
-                      <span className="servers-spacer">&mdash;</span>
-                      <span>v{server.latest_version || '?'}</span>
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul className="servers-list">
+            {servers.map((server, i) => (
+              <li key={i}>
+                <div className="servers-box">
+                  <h3 className="servers-title">
+                    <button
+                      className="anchor"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setServer(server);
+                        setTopic(null);
+                        history.replace('/reports');
+                        fetchReports(server.id);
+                      }}>
+                      {server.hostname}
+                    </button>
+                  </h3>
+                  <p className="servers-description">
+                    <span>{server.ip}</span>
+                    <span className="servers-spacer">&mdash;</span>
+                    <span>v{server.latest_version || '?'}</span>
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </aside>
         {innerView}
       </div>

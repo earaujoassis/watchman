@@ -11,15 +11,24 @@ class Backdoor::Services::Authentication
   end
 
   def authentic_client?
-    return true unless Hanami.env?(:production)
+    return true unless ENV['WATCHMAN_DISABLE_AUTHENTICATION'].nil?
 
     begin
       client_key, client_secret = authorization_bearer
-    rescue StandardError
+      credential_repository = CredentialRepository.new
+      credential_repository.authentic_client?(client_key, client_secret)
+    rescue StandardError, PG::Error
       return false
     end
+  end
 
-    user_repository = UserRepository.new
-    user_repository.authentic_client?(client_key, client_secret)
+  def retrieve_credential!
+    begin
+      client_key, client_secret = authorization_bearer
+      credential_repository = CredentialRepository.new
+      credential_repository.retrieve_credential!(client_key, client_secret)
+    rescue StandardError
+      raise Backdoor::Errors::UndefinedEntity
+    end
   end
 end

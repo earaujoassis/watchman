@@ -3,7 +3,8 @@ class Credential < Hanami::Entity
     {
       id: self.uuid,
       client_key: self.client_key,
-      description: self.description
+      description: self.description,
+      is_active: self.is_active
     }
   end
 end

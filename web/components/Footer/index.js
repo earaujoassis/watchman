@@ -7,8 +7,8 @@ const footer = () => {
   return (
     <div role="footer" className="footer-root">
       <p>Copyright &copy; 2016-present, Ewerton Carlos Assis</p>
-      <p>Watchman helps to keep track of GitHub projects; a tiny continuous deployment service</p>
-      <p>Application version v{Watchman.version}</p>
+      <p>Watchman helps to keep track of automating services; a tiny continuous deployment service</p>
+      <p>Application version v{Watchman.version} ({__COMMIT_HASH__})</p>
     </div>
   );
 };

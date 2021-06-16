@@ -8,6 +8,12 @@ class ApplicationRepository < Hanami::Repository
     applications.where(uuid: uuid).first
   end
 
+  def find!(uuid)
+    application = applications.where(uuid: uuid).first
+    raise Backdoor::Errors::UndefinedEntity if application.nil?
+    application
+  end
+
   # FIXME belongs_to associations are not properly working
   def find_with_user(uuid)
     aggregate(:user)
