@@ -58,10 +58,12 @@ const userRecordError = (state, action) => {
 };
 
 const projectRecordStart = (state, action) => {
+  NProgress.start();
   return Object.assign({}, state, { loading: addLoading(state, 'project') });
 };
 
 const projectRecordSuccess = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'project'),
     success: true,
@@ -71,6 +73,7 @@ const projectRecordSuccess = (state, action) => {
 };
 
 const projectRecordError = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'project'),
     success: false,
@@ -103,10 +106,12 @@ const applicationRecordError = (state, action) => {
 };
 
 const serverRecordStart = (state, action) => {
+  NProgress.start();
   return Object.assign({}, state, { loading: addLoading(state, 'server') });
 };
 
 const serverRecordSuccess = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'server'),
     success: true,
@@ -116,6 +121,7 @@ const serverRecordSuccess = (state, action) => {
 };
 
 const serverRecordError = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'server'),
     success: false,
@@ -124,10 +130,12 @@ const serverRecordError = (state, action) => {
 };
 
 const reportRecordStart = (state, action) => {
+  NProgress.start();
   return Object.assign({}, state, { loading: addLoading(state, 'report') });
 };
 
 const reportRecordSuccess = (state, action) => {
+  NProgress.done();
   let data;
 
   if (action.reportTopics) {
@@ -144,6 +152,7 @@ const reportRecordSuccess = (state, action) => {
 };
 
 const reportRecordError = (state, action) => {
+  NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'report'),
     success: false,
