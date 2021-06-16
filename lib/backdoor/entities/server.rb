@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Server < Hanami::Entity
   def serialize
     {

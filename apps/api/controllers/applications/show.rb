@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require_relative "../authentication"
 
 module Api
   module Controllers
     module Applications
-      class View
+      class Show
         include Api::Action
         include Api::Authentication
 

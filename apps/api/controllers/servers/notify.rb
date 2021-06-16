@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module Controllers
     module Servers
@@ -26,7 +28,7 @@ module Api
           server = server_repository.find(params[:server][:hostname])
           latest_tag = Backdoor::Services::PublicGitHub.new("earaujoassis/watchman").latest_tag
 
-          Backdoor::Ws::Connection.broadcast({
+          Backdoor::Sockets::Connection.broadcast({
             servers: server_repository.all_serialized
           }.to_json)
 

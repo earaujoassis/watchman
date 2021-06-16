@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Backdoor::Commands::ActionCreateCommand
   @@actions_valid_types = %w(git_ops_updater)
 
@@ -11,7 +13,7 @@ class Backdoor::Commands::ActionCreateCommand
 
   def perform
     validate
-    raise Backdoor::Errors::ActionError, "cannot create action: #{@errors.to_s}" unless valid?
+    raise Backdoor::Errors::ActionError, "cannot create action: #{@errors}" unless valid?
     repository = ActionRepository.new
     @params[:credential_id] = @credential.id
     @params[:application_id] = @application.id

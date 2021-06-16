@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Watchman
   ROOT = File.expand_path("../../", __FILE__)
 

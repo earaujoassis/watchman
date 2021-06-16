@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../authentication"
 
 module Api
@@ -36,7 +38,7 @@ module Api
             halt 404, { error: e.message }.to_json
           end
 
-          self.body = ''
+          self.body = ""
           self.status = 201
         end
       end

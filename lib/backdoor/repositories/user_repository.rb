@@ -1,5 +1,7 @@
-require "securerandom"
+# frozen_string_literal: true
+
 require "bcrypt"
+require "securerandom"
 
 class UserRepository < Hanami::Repository
   include BCrypt
