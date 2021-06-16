@@ -5,8 +5,6 @@ module Api
         include Api::Action
 
         def call(params)
-          self.format = :json
-
           repository = UserRepository.new
           user = repository.find(params[:id])
           halt 404, { error: "unknown user" } if user.nil?
