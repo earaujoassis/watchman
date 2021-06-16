@@ -5,8 +5,6 @@ module Api
         include Api::Action
 
         def call(params)
-          self.format = :json
-
           UserRepository.new.master_user # simply check DB connection
           status 200, { message: "healthy" }.to_json
         end
