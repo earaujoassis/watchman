@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
+gem "bcrypt"
 gem "bundler"
 gem "concurrent-ruby", require: "concurrent"
 gem "concurrent-ruby-ext"
+gem "dry-types"
 gem "faye-websocket"
 gem "foreman"
 gem "hanami", "~> 1.3"
 gem "hanami-model", "~> 1.3"
-gem "hanami-validations"
 gem "hanami-utils"
-gem "dry-types"
-gem "bcrypt"
+gem "hanami-validations"
 gem "octokit", "~> 4.0"
 gem "permessage_deflate"
 gem "pg"

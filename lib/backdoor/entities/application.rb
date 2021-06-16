@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Application < Hanami::Entity
   def serialize
     {

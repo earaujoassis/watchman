@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Controllers::Users::Update, type: :action do
+RSpec.describe Api::Controllers::Repositories::Index, type: :action do
   let(:action) { described_class.new }
   let(:params) { Hash[] }
 
-  it "should return Bad Request when there's any missing attribute" do
+  it "should return Not Found when there's no user" do
     response = action.call(params)
     status_code = response[0]
-    expect(status_code).to eq 400
+    expect(status_code).to eq 404
   end
 end

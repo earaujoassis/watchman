@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "concurrent"
 
 # Module used for WebSocket communication
@@ -7,7 +9,7 @@ require "concurrent"
 # - Have specific protocol/channels for each communication channel
 #
 module Backdoor
-  module Ws
+  module Sockets
     class Connection
       KEEPALIVE_TIME = 10 # seconds
 
@@ -31,10 +33,10 @@ module Backdoor
 
           ws.on :open do |event|
             @@clients << ws
-            ws.send(Backdoor::Ws::Messages::CONNECTED_MESSAGE)
+            ws.send(Backdoor::Sockets::Messages::CONNECTED_MESSAGE)
             if @beat.nil?
               @beat = Concurrent::TimerTask.new(execution_interval: KEEPALIVE_TIME) do
-                Connection.broadcast(Backdoor::Ws::Messages::SYNC_MESSAGE)
+                Connection.broadcast(Backdoor::Sockets::Messages::SYNC_MESSAGE)
               end
               @beat.execute
             end

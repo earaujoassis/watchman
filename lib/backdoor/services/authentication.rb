@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "base64"
 
 class Backdoor::Services::Authentication
@@ -11,7 +13,7 @@ class Backdoor::Services::Authentication
   end
 
   def authentic_client?
-    return true unless ENV['WATCHMAN_DISABLE_AUTHENTICATION'].nil?
+    return true unless ENV["WATCHMAN_DISABLE_AUTHENTICATION"].nil?
 
     begin
       client_key, client_secret = authorization_bearer
