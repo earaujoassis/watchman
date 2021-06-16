@@ -39,6 +39,7 @@ const applications = ({ fetchApplications, loading, user = {}, applications = []
           <li key={i}>
             <div className="application-box">
               <h2 className="application-name">{application.full_name}</h2>
+              <p className="application-description"><b>UUID</b>: {application.id}</p>
               <p className="application-description">{application.description}</p>
               <div className="application-deploys-box">
                 {application.actions.map((action, i) => (

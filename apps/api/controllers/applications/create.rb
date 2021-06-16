@@ -3,7 +3,6 @@ module Api
     module Applications
       class Create
         include Api::Action
-        MEGABYTE = 1024 ** 2
 
         params do
           required(:application).schema do
@@ -19,7 +18,7 @@ module Api
 
           repository = UserRepository.new
           user = repository.find(params[:id])
-          halt 404, { error: "unknown user" } if user.nil?
+          halt 404, { error: "unknown user" }.to_json if user.nil?
           begin
             application = repository.add_application(user, params[:application])
             application = ApplicationRepository.new.find(application.uuid)

@@ -21,10 +21,21 @@ class CredentialRepository < Hanami::Repository
   def authentic_client?(client_key, client_secret)
     credential = credentials
       .where(client_key: client_key)
+      .where(client_secret: client_secret)
       .where(is_active: true)
       .first
     return false if credential.nil?
-    return credential.client_secret == client_secret
+    true
+  end
+
+  def retrieve_credential!(client_key, client_secret)
+    credential = credentials
+      .where(client_key: client_key)
+      .where(client_secret: client_secret)
+      .where(is_active: true)
+      .first
+    raise Backdoor::Errors::UndefinedEntity if credential.nil?
+    credential
   end
 
   # FIXME belongs_to associations are not properly working
