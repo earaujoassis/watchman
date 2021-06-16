@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const commitHash = process.env.COMMIT_HASH || require('child_process').execSync('git describe --always').toString().trim();
 
 module.exports = {
   entry: './web/index.js',
@@ -19,10 +21,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'app.css',
       chunkFilename: '[id].css'
+    }),
+    new webpack.DefinePlugin({
+      __COMMIT_HASH__: JSON.stringify(commitHash)
     })
   ],
   optimization: {
-    minimizer: [new TerserPlugin({ extractComments: false })],
+    minimizer: [new TerserPlugin({ extractComments: false })]
   },
   module: {
     rules: [

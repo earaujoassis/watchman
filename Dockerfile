@@ -35,6 +35,10 @@ COPY . /app
 RUN gem update --system
 RUN gem install bundler:2.2.19
 RUN bundle install --verbose --jobs=5 --retry=5
+
+ARG COMMIT_HASH_ARG
+ENV COMMIT_HASH=${COMMIT_HASH_ARG}
+
 RUN yarn install --network-timeout 1000000 --verbose
 RUN yarn build
 RUN bundle exec hanami assets precompile
