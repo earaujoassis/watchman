@@ -9,6 +9,7 @@ gem "concurrent-ruby-ext"
 gem "dry-types"
 gem "faye-websocket"
 gem "foreman"
+gem "git"
 gem "hanami", "~> 1.3"
 gem "hanami-model", "~> 1.3"
 gem "hanami-utils"
@@ -18,8 +19,8 @@ gem "permessage_deflate"
 gem "pg"
 gem "puma"
 gem "rake"
-
-# Watchman
+gem "rest-client"
+gem "rufus-scheduler", "~> 3.6", require: false
 gem "whois"
 
 group :development do

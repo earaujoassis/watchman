@@ -21,7 +21,7 @@ module Api
           halt 401, { error: "wrong password" }.to_json unless user.password == params[:user][:password_confirmation]
 
           repository.update_user(params[:id], params[:user].slice(:github_token))
-          status 201, { user: repository.master_user.serialize }.to_json
+          self.body = { user: repository.master_user.serialize }.to_json
         end
       end
     end

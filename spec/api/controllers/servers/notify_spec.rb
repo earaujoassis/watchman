@@ -23,7 +23,7 @@ RSpec.describe Api::Controllers::Servers::Notify, type: :action do
   it "should notify about a remote server" do
     response = action.call(params)
     status_code = response[0]
-    expect(status_code).to eq 201
+    expect(status_code).to eq 200
     body = JSON.parse(response[2].first)
     expect(body["version"]).to eq Backdoor::VERSION
     expect(body["server"]["hostname"]).to eq "testing.example.com"
@@ -43,7 +43,7 @@ RSpec.describe Api::Controllers::Servers::Notify, type: :action do
       latest_version: "0.1.0"
     }])
     status_code = response[0]
-    expect(status_code).to eq 201
+    expect(status_code).to eq 200
     body = JSON.parse(response[2].first)
     expect(body["version"]).to eq Backdoor::VERSION
     expect(body["server"]["id"]).to eq server.uuid

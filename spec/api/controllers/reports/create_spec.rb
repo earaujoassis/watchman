@@ -28,7 +28,7 @@ RSpec.describe Api::Controllers::Reports::Create, type: :action do
   it "should create a server and a report for it" do
     response = action.call(params)
     status_code = response[0]
-    expect(status_code).to eq 201
+    expect(status_code).to eq 200
     body = JSON.parse(response[2].first)
     expect(body["report"]["id"]).not_to be_empty
   end
@@ -50,7 +50,7 @@ RSpec.describe Api::Controllers::Reports::Create, type: :action do
       }
     ])
     status_code = response[0]
-    expect(status_code).to eq 201
+    expect(status_code).to eq 200
     body = JSON.parse(response[2].first)
     expect(body["report"]["id"]).not_to be_empty
   end

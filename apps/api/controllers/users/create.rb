@@ -19,7 +19,7 @@ module Api
 
           repository = UserRepository.new
           repository.create_master_user(params[:user])
-          status 201, { user: repository.master_user.serialize }.to_json
+          self.body = { user: repository.master_user.serialize }.to_json
         end
       end
     end
