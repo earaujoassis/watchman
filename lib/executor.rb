@@ -7,6 +7,8 @@ module Executor
 
   module Commands; end
 
+  module Core; end
+
   module Helpers; end
 
   class << self
@@ -18,6 +20,13 @@ module Executor
     end
 
     def start!
+      commands_identified = Hash.new
+      commands = Executor::Commands.constants.select { |c| Executor::Commands.const_get(c).is_a? Class }
+      commands.each do |command|
+        identifier = Executor::Commands.const_get(command).const_get(:Identifier)
+        commands_identified[identifier] = Executor::Commands.const_get(command)
+      end
+      Core.perform(commands_identified)
     end
 
     def tick!
@@ -33,12 +42,6 @@ module Executor
         logger
       end
       @logger
-    end
-
-    def retrieve_communicator
-      @communicator ||= begin
-
-      end
     end
   end
 end

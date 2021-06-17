@@ -22,6 +22,7 @@ gem "rake"
 gem "rest-client"
 gem "rufus-scheduler", "~> 3.6", require: false
 gem "whois"
+gem "yaml"
 
 group :development do
   # Code reloading

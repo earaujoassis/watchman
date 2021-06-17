@@ -39,6 +39,16 @@ class Action < Hanami::Entity
     })
   end
 
+  def serialize_with_application
+    data = JSON.parse(self.payload)
+    data.merge({
+      action_id: self.uuid,
+      current_status: self.current_status,
+      type: self.type,
+      application: self.application.full_name
+    })
+  end
+
   def serialize_for_web
     {
       id: self.uuid,

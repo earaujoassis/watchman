@@ -9,7 +9,7 @@ scheduler = Rufus::Scheduler.new
 
 Executor.logger.info("Starting scheduler")
 
-scheduler.every "1m", first_in: "10s", allow_overlapping: false do
+scheduler.every "30s", first_in: "10s", allow_overlapping: false do
   Executor.tick!
 end
 
