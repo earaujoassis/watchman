@@ -25,12 +25,10 @@ class Backdoor::Services::Authentication
   end
 
   def retrieve_credential!
-    begin
-      client_key, client_secret = authorization_bearer
-      credential_repository = CredentialRepository.new
-      credential_repository.retrieve_credential!(client_key, client_secret)
-    rescue StandardError
-      raise Backdoor::Errors::UndefinedEntity
-    end
+    client_key, client_secret = authorization_bearer
+    credential_repository = CredentialRepository.new
+    credential_repository.retrieve_credential!(client_key, client_secret)
+  rescue StandardError
+    raise Backdoor::Errors::UndefinedEntity
   end
 end
