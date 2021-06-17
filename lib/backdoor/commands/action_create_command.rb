@@ -28,6 +28,7 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
     validator(Action.valid_type?(@params[:type]), :type, "is not valid")
     validator(validate_managed_realm, :managed_realm, "is not valid")
     validator(validate_managed_project, :managed_project, "is not valid")
+    validator(validate_commit_hash, :commit_hash, "is not valid")
   end
 
   def valid?
@@ -49,5 +50,10 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
 
   def validate_managed_project
     @application.managed_projects.split("\n").include?(@params[:payload][:managed_project])
+  end
+
+  def validate_commit_hash
+    return true if @params[:payload][:commit_hash].nil?
+    (@params[:payload][:commit_hash] =~ /^\w{7}$/) == 0
   end
 end

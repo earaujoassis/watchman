@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../authentication"
+require_relative "../../middleware/authentication"
 
 module Api
   module Controllers
@@ -16,6 +16,7 @@ module Api
             required(:payload).schema do
               required(:managed_realm).filled(:str?)
               required(:managed_project).filled(:str?)
+              optional(:commit_hash).filled(:str?)
             end
           end
         end

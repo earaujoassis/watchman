@@ -8,7 +8,9 @@ module Api
 
         def call(params)
           repository = ActionRepository.new
-          self.body = { actions: repository.all_pending.map(&:serialize) }.to_json
+          self.body = {
+            actions: repository.all_pending_with_application.map(&:serialize_with_application)
+          }.to_json
         end
       end
     end

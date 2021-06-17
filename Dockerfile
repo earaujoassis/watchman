@@ -13,6 +13,9 @@ RUN apk add --update --no-cache \
     linux-headers \
     make \
     python \
+    git \
+    less \
+    openssh \
     postgresql \
     postgresql-contrib \
     postgresql-libs \

@@ -20,6 +20,13 @@ class ActionRepository < Hanami::Repository
     actions.where(current_status: Action::CREATED).to_a
   end
 
+  def all_pending_with_application
+    aggregate(:application)
+      .where(current_status: Action::CREATED)
+      .map_to(Action)
+      .to_a
+  end
+
   def executor_update(action, data)
     self.update(action.id, data)
   end

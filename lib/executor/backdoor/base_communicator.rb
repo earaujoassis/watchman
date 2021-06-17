@@ -19,5 +19,10 @@ module Executor
       url = @base_url + "/api/executors/actions"
       RestClient::Resource.new(url, { headers: headers })
     end
+
+    def users
+      url = @base_url + "/api/executors/users"
+      RestClient::Resource.new(url, { headers: headers })
+    end
   end
 end
