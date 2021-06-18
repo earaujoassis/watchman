@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-class Backdoor::Commands::ActionCreateCommand
-  @@actions_valid_types = %w(git_ops_updater)
+require_relative "./base_command"
 
+class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
   def initialize(params:, application:, credential:)
-    @params = params
+    super(params: params)
     @application = application
     @credential = credential
-    @valid = nil
-    @errors = Hash.new
   end
 
   def perform
@@ -27,15 +25,10 @@ class Backdoor::Commands::ActionCreateCommand
   end
 
   def validate
-    validator(
-      @@actions_valid_types.include?(@params[:type]), :type, "is not valid"
-    )
-    validator(
-      @application.managed_realm == @params[:payload][:managed_realm], :managed_realm, "is not valid"
-    )
-    validator(@application.managed_projects.split("\n").include?(
-      @params[:payload][:managed_project]), :managed_project, "is not valid"
-    )
+    validator(Action.valid_type?(@params[:type]), :type, "is not valid")
+    validator(validate_managed_realm, :managed_realm, "is not valid")
+    validator(validate_managed_project, :managed_project, "is not valid")
+    validator(validate_commit_hash, :commit_hash, "is not valid")
   end
 
   def valid?
@@ -49,5 +42,18 @@ class Backdoor::Commands::ActionCreateCommand
     @valid = rule if @valid.nil?
     @errors[attr] = message unless rule
     @valid = rule && @valid
+  end
+
+  def validate_managed_realm
+    @application.managed_realm == @params[:payload][:managed_realm]
+  end
+
+  def validate_managed_project
+    @application.managed_projects.split("\n").include?(@params[:payload][:managed_project])
+  end
+
+  def validate_commit_hash
+    return true if @params[:payload][:commit_hash].nil?
+    (@params[:payload][:commit_hash] =~ /^\w{7}$/) == 0
   end
 end

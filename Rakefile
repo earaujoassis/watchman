@@ -27,14 +27,20 @@ task :console do
   sh %{irb -r ./console}
 end
 
-desc "Run the foreman Procfile"
-task :foreman do
-  sh "foreman start -p 3000 -e /dev/null"
-end
+namespace :foreman do
+  desc "Run the foreman Procfile"
+  task :all do
+    sh "foreman start -p 3000 -e /dev/null"
+  end
 
-task :foreman_web do
-  sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
-  sh "foreman start -p 3000 -e /dev/null web"
+  task :scheduler do
+    sh "foreman start -p 3000 -e /dev/null scheduler"
+  end
+
+  task :web do
+    sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
+    sh "foreman start -p 3000 -e /dev/null web"
+  end
 end
 
 desc "Run the Rubocop code analyzer/linter"

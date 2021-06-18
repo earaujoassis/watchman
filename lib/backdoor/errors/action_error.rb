@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class Backdoor::Errors::ActionError < StandardError
+require_relative "./base"
+
+class Backdoor::Errors::ActionError < Backdoor::Error
   def initialize(msg)
     super
   end

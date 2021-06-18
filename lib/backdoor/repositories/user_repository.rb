@@ -24,6 +24,12 @@ class UserRepository < Hanami::Repository
     users.where(uuid: uuid).first
   end
 
+  def find!(uuid)
+    user = users.where(uuid: uuid).first
+    raise Backdoor::Errors::UndefinedEntity if user.nil?
+    user
+  end
+
   def update_user(uuid, data)
     user = self.find(uuid)
     data[:passphrase] = Password.create(data[:passphrase]) unless data[:passphrase].nil?

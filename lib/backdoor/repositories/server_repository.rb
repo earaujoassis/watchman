@@ -18,10 +18,6 @@ class ServerRepository < Hanami::Repository
     self.update(server.id, data)
   end
 
-  def all_serialized
-    self.all.map(&:serialize)
-  end
-
   def find_with_reports(uuid)
     aggregate(:reports).where(uuid: uuid).order { created_at.desc }.map_to(Server).one
   end
