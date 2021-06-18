@@ -13,7 +13,7 @@ module Api
     def authenticate!
       authentication = Backdoor::Services::Authentication.new(request.env)
       unless authentication.authentic_client?
-        halt 401, { error: "Invalid client credentials" }.to_json
+        halt 401, { error: "Invalid client credentials" }
       end
     end
   end

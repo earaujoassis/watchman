@@ -191,16 +191,16 @@ module Executors
       # FRAMEWORKS
       #
 
-      # Configure the code that will yield each time Api::Action is included
+      # Configure the code that will yield each time Executors::Action is included
       # This is useful for sharing common functionality
       #
       # See: http://www.rubydoc.info/gems/hanami-controller#Configuration
       controller.prepare do
-        # include MyAuthentication # included in all the actions
-        # before :authenticate!    # run an authentication before callback
+        include Executors::SidecarContext
+        use JsonViewer
       end
 
-      # Configure the code that will yield each time Api::View is included
+      # Configure the code that will yield each time Executors::View is included
       # This is useful for sharing common functionality
       #
       # See: http://www.rubydoc.info/gems/hanami-view#Configuration

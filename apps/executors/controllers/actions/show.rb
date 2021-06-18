@@ -5,13 +5,12 @@ module Executors
     module Actions
       class Show
         include Executors::Action
-        include Executors::SidecarContext
 
         def call(params)
           repository = ActionRepository.new
-          self.body = { action: repository.find!(params[:id]).serialize }.to_json
+          self.body = { action: repository.find!(params[:id]).serialize }
         rescue Backdoor::Errors::UndefinedEntity
-          halt 404, { error: "unknown action" }.to_json
+          halt 404, { error: "unknown action" }
         end
       end
     end
