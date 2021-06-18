@@ -46,6 +46,7 @@ RUN yarn install --network-timeout 1000000 --verbose
 RUN yarn build
 RUN bundle exec hanami assets precompile
 
+ENV SIDECAR_EXECUTOR_USE_PORT=3000
 EXPOSE 3000
 
 ENTRYPOINT [ "rake" ]

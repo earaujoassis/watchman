@@ -11,7 +11,7 @@ module Executor
 
       def users
         @users ||=
-          BaseBackdoor.new(base_url: ENV["WATCHMAN_URL"] || "http://localhost:3000").users
+          BaseBackdoor.new.users
       end
 
       def user
@@ -20,6 +20,8 @@ module Executor
         raise HttpError, "connection refused"
       rescue RestClient::InternalServerError
         raise HttpError, "server error"
+      rescue RestClient::Unauthorized
+        raise HttpError, "unauthorized request"
       end
     end
   end
