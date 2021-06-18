@@ -14,14 +14,14 @@ module Api
         end
 
         def call(params)
-          halt 400, { error: params.errors }.to_json unless params.errors.empty?
+          halt 400, { error: params.errors } unless params.errors.empty?
 
           repository = UserRepository.new
           user = repository.find(params[:id])
-          halt 401, { error: "wrong password" }.to_json unless user.password == params[:user][:password_confirmation]
+          halt 401, { error: "wrong password" } unless user.password == params[:user][:password_confirmation]
 
           repository.update_user(params[:id], params[:user].slice(:github_token))
-          self.body = { user: repository.master_user.serialize }.to_json
+          self.body = { user: repository.master_user.serialize }
         end
       end
     end

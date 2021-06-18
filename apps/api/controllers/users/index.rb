@@ -8,7 +8,7 @@ module Api
 
         def call(params)
           user = UserRepository.new.master_user
-          self.body = { user: user&.serialize }.to_json
+          self.body = { user: user&.serialize }
         end
       end
     end

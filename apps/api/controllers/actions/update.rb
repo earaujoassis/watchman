@@ -19,13 +19,13 @@ module Api
         def call(params)
           repository = ApplicationRepository.new
           action = repository.child_action(params[:application_id], params[:action_id])
-          halt 404, { error: "unknown action" }.to_json if action.nil?
+          halt 404, { error: "unknown action" } if action.nil?
 
           action_repository = ActionRepository.new
           action_repository.agent_update(action, params[:action])
 
           action = repository.child_action(params[:application_id], params[:action_id])
-          self.body = { action: action.serialize }.to_json
+          self.body = { action: action.serialize }
         end
       end
     end
