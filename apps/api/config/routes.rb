@@ -34,10 +34,3 @@ namespace "applications" do
   post "/:id/actions", to: "actions#create"
   put "/:application_id/actions/:action_id/executor", to: "actions#update"
 end
-
-namespace "executors" do
-  get "/actions", to: "executors#actions_index"
-  get "/actions/:id", to: "executors#actions_show"
-  put "/actions/:id", to: "executors#actions_update"
-  get "/users", to: "executors#users_index"
-end

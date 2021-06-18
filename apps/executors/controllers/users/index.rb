@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "../../middleware/executor_context"
-
-module Api
+module Executors
   module Controllers
-    module Executors
-      class UsersIndex
-        include Api::Action
-        include Api::ExecutorContext
+    module Users
+      class Index
+        include Executors::Action
+        include Executors::SidecarContext
 
         def call(params)
           user = UserRepository.new.master_user

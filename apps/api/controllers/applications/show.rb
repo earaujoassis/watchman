@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../../middleware/authentication"
-
 module Api
   module Controllers
     module Applications

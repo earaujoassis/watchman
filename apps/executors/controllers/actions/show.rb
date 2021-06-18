@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "../../middleware/executor_context"
-
-module Api
+module Executors
   module Controllers
-    module Executors
-      class ActionsShow
-        include Api::Action
-        include Api::ExecutorContext
+    module Actions
+      class Show
+        include Executors::Action
+        include Executors::SidecarContext
 
         def call(params)
           repository = ActionRepository.new
