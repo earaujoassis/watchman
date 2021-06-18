@@ -23,8 +23,8 @@ end
 namespace "servers" do
   get "/", to: "servers#index"
   put "/notify", to: "servers#notify"
-  post "/report", to: "reports#create"
-  put "/report/:id", to: "reports#update"
+  post "/reports", to: "reports#create"
+  put "/reports/:id", to: "reports#update"
   get "/:id/reports", to: "reports#index"
   get "/:server_id/reports/:report_id", to: "reports#show"
 end

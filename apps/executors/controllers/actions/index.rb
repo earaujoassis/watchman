@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+module Executors
+  module Controllers
+    module Actions
+      class Index
+        include Executors::Action
+        include Executors::SidecarContext
+
+        def call(params)
+          repository = ActionRepository.new
+          self.body = {
+            actions: repository.all_pending_with_application.map(&:serialize_with_application)
+          }.to_json
+        end
+      end
+    end
+  end
+end

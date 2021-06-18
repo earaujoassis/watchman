@@ -30,11 +30,11 @@ module Api
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
 
-          Backdoor::Sockets::Connection.broadcast({ servers: server_repository.all_serialized }.to_json)
+          Backdoor::Sockets::Connection.broadcast({ servers: server_repository.all.map(&:serialize) }.to_json)
 
           report = server_repository.add_report(server, params[:report])
 
-          status 201, { report: { id: report.uuid } }.to_json
+          self.body = { report: { id: report.uuid } }.to_json
         end
       end
     end

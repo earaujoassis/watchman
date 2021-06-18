@@ -10,10 +10,12 @@ require "json"
 require_relative "../lib/backdoor"
 require_relative "../apps/web/application"
 require_relative "../apps/api/application"
+require_relative "../apps/executors/application"
 
 Sequel.split_symbols = true
 
 Hanami.configure do
+  mount Executors::Application, at: "/api/executors"
   mount Api::Application, at: "/api"
   mount Web::Application, at: "/"
 

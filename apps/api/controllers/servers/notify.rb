@@ -29,10 +29,10 @@ module Api
           latest_tag = Backdoor::Services::PublicGitHub.new("earaujoassis/watchman").latest_tag
 
           Backdoor::Sockets::Connection.broadcast({
-            servers: server_repository.all_serialized
+            servers: server_repository.all.map(&:serialize)
           }.to_json)
 
-          status 201, {
+          self.body = {
             version: Backdoor::VERSION,
             available_tag: latest_tag,
             server: server.serialize

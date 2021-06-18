@@ -6,7 +6,7 @@ class Backdoor::Services::GitHub
   class Error < StandardError; end
 
   def initialize(access_token)
-    @client = Octokit::Client.new(access_token: access_token, per_page: 50)
+    @client = Octokit::Client.new(access_token: access_token, per_page: 5)
   end
 
   def repos
@@ -15,5 +15,9 @@ class Backdoor::Services::GitHub
     raise Error, "unauthorized_access"
   rescue StandardError
     raise Error, "internal"
+  end
+
+  def user
+    @client.user
   end
 end

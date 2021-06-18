@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../authentication"
-
 module Api
   module Controllers
     module Actions
@@ -24,10 +22,10 @@ module Api
           halt 404, { error: "unknown action" }.to_json if action.nil?
 
           action_repository = ActionRepository.new
-          action_repository.executor_update(action, params[:action])
+          action_repository.agent_update(action, params[:action])
 
           action = repository.child_action(params[:application_id], params[:action_id])
-          status 201, { action: action.serialize }.to_json
+          self.body = { action: action.serialize }.to_json
         end
       end
     end

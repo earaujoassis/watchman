@@ -68,7 +68,7 @@ module Web
       #
       # cookies true
       # or
-      # cookies max_age: 300
+      cookies max_age: 3600
 
       # Enable sessions
       # Argument: Symbol the Rack session adapter
@@ -76,10 +76,8 @@ module Web
       #
       # See: http://www.rubydoc.info/gems/rack/Rack/Session/Cookie
       #
-      # sessions :cookie, secret: ENV['WEB_SESSIONS_SECRET']
+      sessions :cookie, secret: ENV["WEB_SESSIONS_SECRET"]
 
-      # Configure Rack middleware for this application
-      #
       # middleware.use Rack::Protection
 
       # Default format for the requests that don't specify an HTTP_ACCEPT header
