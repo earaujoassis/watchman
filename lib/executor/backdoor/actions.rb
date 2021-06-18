@@ -11,7 +11,7 @@ module Executor
 
       def actions
         @actions ||=
-          BaseBackdoor.new(base_url: ENV["WATCHMAN_URL"] || "http://localhost:3000").actions
+          BaseBackdoor.new.actions
       end
 
       def all_pending
@@ -20,6 +20,8 @@ module Executor
         raise HttpError, "connection refused"
       rescue RestClient::InternalServerError
         raise HttpError, "server error"
+      rescue RestClient::Unauthorized
+        raise HttpError, "unauthorized request"
       end
 
       def update(uuid:, current_status:, status_reason:)
@@ -35,6 +37,8 @@ module Executor
         raise HttpError, "server error"
       rescue RestClient::NotAcceptable
         raise HttpError, "cannot update"
+      rescue RestClient::Unauthorized
+        raise HttpError, "unauthorized request"
       end
     end
   end

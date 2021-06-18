@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "../../middleware/authentication"
+require_relative "../../middleware/executor_context"
 
 module Api
   module Controllers
     module Executors
       class ActionsUpdate
         include Api::Action
+        include Api::ExecutorContext
 
         params do
           required(:action).schema do
