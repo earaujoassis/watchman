@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Api
-  module ExecutorContext
+module Executors
+  module SidecarContext
     def self.included(action)
       action.class_eval do
         before :executor_context_enforce_sidecar!

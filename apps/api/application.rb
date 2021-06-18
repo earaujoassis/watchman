@@ -21,6 +21,7 @@ module Api
       # When you add new directories, remember to add them here.
       #
       load_paths << [
+        "middleware",
         "controllers"
       ]
 
@@ -61,20 +62,17 @@ module Api
       # Argument: boolean to toggle the feature
       #           A Hash with options
       #
-      # Options:
-      #   :domain   - The domain (String - nil by default, not required)
-      #   :path     - Restrict cookies to a relative URI
-      #               (String - nil by default)
-      #   :max_age  - Cookies expiration expressed in seconds
-      #               (Integer - nil by default)
-      #   :secure   - Restrict cookies to secure connections
-      #               (Boolean - Automatically true when using HTTPS)
-      #               See #scheme and #ssl?
-      #   :httponly - Prevent JavaScript access (Boolean - true by default)
+      # Options: :domain   - The domain (String - nil by default, not required)
+      #          :path     - Restrict cookies to a relative URI (String - nil by default)
+      #          :max_age  - Cookies expiration expressed in seconds (Integer - nil by default)
+      #          :secure   - Restrict cookies to secure connections
+      #                      (Boolean - Automatically set on true if currently using a secure connection)
+      #                      See #scheme and #ssl?
+      #          :httponly - Prevent JavaScript access (Boolean - true by default)
       #
       # cookies true
       # or
-      # cookies max_age: 300
+      # cookies max_age: 3600
 
       # Enable sessions
       # Argument: Symbol the Rack session adapter
@@ -82,10 +80,8 @@ module Api
       #
       # See: http://www.rubydoc.info/gems/rack/Rack/Session/Cookie
       #
-      # sessions :cookie, secret: ENV['API_SESSIONS_SECRET']
+      # sessions :cookie, secret: ENV["API_SESSIONS_SECRET"]
 
-      # Configure Rack middleware for this application
-      #
       # middleware.use Rack::Protection
 
       # Default format for the requests that don't specify an HTTP_ACCEPT header

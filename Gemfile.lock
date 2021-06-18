@@ -196,6 +196,8 @@ GEM
     raabro (1.4.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
@@ -331,6 +333,7 @@ DEPENDENCIES
   permessage_deflate
   pg
   puma
+  rack-protection (~> 2.1)
   rake
   rest-client
   rspec

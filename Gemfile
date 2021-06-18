@@ -18,6 +18,7 @@ gem "octokit", "~> 4.0"
 gem "permessage_deflate"
 gem "pg"
 gem "puma"
+gem "rack-protection", "~> 2.1"
 gem "rake"
 gem "rest-client"
 gem "rufus-scheduler", "~> 3.6", require: false
