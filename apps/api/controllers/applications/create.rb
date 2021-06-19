@@ -16,11 +16,11 @@ module Api
         end
 
         def call(params)
-          halt 400, { error: params.errors }.to_json unless params.errors.empty?
+          halt 400, { error: params.errors } unless params.errors.empty?
 
           repository = UserRepository.new
           user = repository.find(params[:id])
-          halt 404, { error: "unknown user" }.to_json if user.nil?
+          halt 404, { error: "unknown user" } if user.nil?
           begin
             application = repository.add_application(user, params[:application])
             application = ApplicationRepository.new.find(application.uuid)
@@ -29,10 +29,10 @@ module Api
               error: {
                 application: "already exists"
               }
-            }.to_json
+            }
           end
           applications = ApplicationRepository.new.from_user_with_actions(user)
-          self.body = { user: { applications: applications.map(&:serialize) } }.to_json
+          self.body = { user: { applications: applications.map(&:serialize) } }
         end
       end
     end

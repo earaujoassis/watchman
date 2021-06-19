@@ -3,7 +3,10 @@
 require_relative "./base"
 
 class Backdoor::Errors::ActionError < Backdoor::Error
-  def initialize(msg)
-    super
+  attr_reader :errors
+
+  def initialize(msg, errors = Hash.new)
+    super(msg)
+    @errors = errors
   end
 end

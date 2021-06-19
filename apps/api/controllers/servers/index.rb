@@ -8,7 +8,7 @@ module Api
 
         def call(params)
           repository = ServerRepository.new
-          self.body = { servers: repository.all.map(&:serialize) }.to_json
+          self.body = { servers: repository.all.map(&:serialize) }
         end
       end
     end

@@ -10,7 +10,7 @@ class Backdoor::Commands::ActionUpdateCommand < Backdoor::Commands::BaseCommand
 
   def perform
     validate
-    raise Backdoor::Errors::ActionError, "cannot update action: #{@errors}" unless valid?
+    raise Backdoor::Errors::ActionError.new("cannot update action", @errors) unless valid?
     repository = ActionRepository.new
     begin
       repository.executor_update(@action, @params)

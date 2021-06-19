@@ -9,7 +9,7 @@ module Api
         def call(params)
           repository = UserRepository.new
           user = repository.find(params[:id])
-          halt 404, { error: "unknown user" }.to_json if user.nil?
+          halt 404, { error: "unknown user" } if user.nil?
           credential = repository.add_credential(user)
 
           content = "client_key,client_secret\n#{credential.client_key},#{credential.client_secret}\n"

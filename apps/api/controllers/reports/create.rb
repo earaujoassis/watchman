@@ -20,7 +20,7 @@ module Api
         end
 
         def call(params)
-          halt 400, { error: params.errors }.to_json unless params.errors.empty?
+          halt 400, { error: params.errors } unless params.errors.empty?
 
           server_repository = ServerRepository.new
           server = server_repository.find(params[:server][:hostname])
@@ -30,11 +30,11 @@ module Api
             server_repository.update_server(params[:server][:hostname], params[:server])
           end
 
-          Backdoor::Sockets::Connection.broadcast({ servers: server_repository.all.map(&:serialize) }.to_json)
+          Backdoor::Sockets::Connection.broadcast({ servers: server_repository.all.map(&:serialize) })
 
           report = server_repository.add_report(server, params[:report])
 
-          self.body = { report: { id: report.uuid } }.to_json
+          self.body = { report: { id: report.uuid } }
         end
       end
     end

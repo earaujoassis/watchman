@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Controllers::Applications::Index, type: :action do
-  let(:action) { described_class.new }
-  let(:params) { Hash[] }
-
   before(:each) do
     clear_repositories
   end
 
   it "should return Not Found when there's no user" do
-    response = action.call(Hash.new)
-    status_code = response[0]
+    perform_request
     expect(status_code).to eq 404
   end
 
@@ -20,10 +16,8 @@ RSpec.describe Api::Controllers::Applications::Index, type: :action do
       passphrase: "testingpassword",
       github_token: "testingtoken"
     })
-    response = action.call(Hash[id: user.uuid])
-    status_code = response[0]
+    perform_request_with_params({ id: user.uuid })
     expect(status_code).to eq 200
-    body = JSON.parse(response[2].first)
-    expect(body["user"]["applications"]).to be_empty
+    expect(body[:user][:applications]).to be_empty
   end
 end
