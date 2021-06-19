@@ -3,25 +3,21 @@
 > Watchman helps to keep track of automating services; a tiny continuous deployment service
 
 Watchman is a tiny continuous deployment service and a set of tools to keep track of projects,
-deployments and servers. A previous project, Backdoor (a GitHub integration server), was merged
-into it.
+deployments, and servers. A previous project, Backdoor (a GitHub integration server), was merged
+into it. It is intended to edge computing contexts.
 
 ## Backdoor
 
 > A simple integration to GitHub's API to make deployments easier
 
 Backdoor is a really simple service that tracks GitHub projects and make it easy to deploy them
-in Hanami's host machine. The Backdoor's server is written in Ruby and Hanami (a really cool web
-framework) and it uses PostgreSQL to save application state. The Agents are written in Python.
+in a host machine. The Backdoor's server is written in Ruby and Hanami and it uses PostgreSQL to
+save application state. [Agents are written in Python and Robots in Go](https://github.com/earaujoassis/watchman-bot).
 
-Backdoor and Agents are decoupled because we could have an Agent for every single service and a
-master Backdoor instance. Backdoor is concerned about providing continuous deployment to a small
-set of projects, in one server instance, used by a small portion of people and with GitHub's
-integration.
-
-Backdoor is also influenced by YouGov's velociraptor
-([yougov/velociraptor](https://github.com/yougov/velociraptor)). However, velociraptor goes (way)
-beyond what is offered here.
+Backdoor, Agents, and Robots are decoupled because we could have an Agent/Robot for every single
+service and a central Backdoor deployment. Backdoor is concerned about providing continuous deployment
+to a small set of projects, in one server instance, used by a small team and with GitHub's
+integration through access tokens.
 
 ### Setup and running
 
@@ -31,21 +27,16 @@ run the following commands:
 ```sh
 $ bundle install
 $ bundle exec hanami db prepare
-$ rake foreman
+$ rake foreman:all
 ```
 
-### Caution
+## Agents & Robots
 
-The current implementation doesn't worry about HTTPS and any other measure to secure the communication
-between GitHub and your server. It's not a serious problem because no sensitive data is transmitted
-if you're working with public repositories; but you should avoid this if you plan to use it with
-a private repository. Ideally, Agents shouldn't be allowed to write in your repository.
-
-## Agents
-
-Agents are running services inside each deployable server. They listen to the Watchman-Backdoor
-server in order to receive instructions for deployment, for instance. They have been migrated to
+Agents are running processes inside each managed server. They listen to the Watchman-Backdoor
+server in order to receive messages and instructions. They have been migrated to
 their own project at [earaujoassis/watchman-bot](https://github.com/earaujoassis/watchman-bot).
+
+Robots are tiny agents intended to send messages and instructions to the Watchman-Backdoor server.
 
 ## Watchman Expiry (deprecated)
 

@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Controllers::Users::Update, type: :action do
-  let(:action) { described_class.new }
-  let(:params) { Hash[] }
-
   it "should return Bad Request when there's any missing attribute" do
-    response = action.call(params)
-    status_code = response[0]
+    perform_request
     expect(status_code).to eq 400
+    expect(body).to eq({ error: { user: ["is missing"] } })
   end
 end

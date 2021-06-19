@@ -9,5 +9,4 @@ matrix:
         - psql -c 'create database backdoor_test;' -U postgres
         - HANAMI_ENV=test bundle exec hanami db prepare
       script:
-        - bundle exec rspec
-        - bundle exec rubocop
+        - bundle exec rake

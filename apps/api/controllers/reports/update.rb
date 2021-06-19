@@ -15,13 +15,13 @@ module Api
           report = report_repository.find(params[:id])
           report_repository.update_body(report, tempfile)
 
-          self.body = { report: report.serialize }.to_json
+          self.body = { report: report.serialize }
         rescue NoMethodError, TypeError
           halt 400, {
             error: {
               report: { body: ["is missing"] }
             }
-          }.to_json
+          }
         end
       end
     end

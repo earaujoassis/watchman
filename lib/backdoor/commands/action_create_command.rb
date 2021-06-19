@@ -11,17 +11,18 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
 
   def perform
     validate
-    raise Backdoor::Errors::ActionError, "cannot create action: #{@errors}" unless valid?
+    raise Backdoor::Errors::ActionError.new("cannot create action", @errors) unless valid?
     repository = ActionRepository.new
     @params[:credential_id] = @credential.id
     @params[:application_id] = @application.id
     @params[:payload] = @params[:payload].to_json.to_s
     @params[:current_status] = Action::CREATED
     begin
-      repository.create(@params)
+      action = repository.create(@params)
     rescue PG::Error
       raise Backdoor::Errors::ActionError, "cannot create action: database error"
     end
+    action
   end
 
   def validate

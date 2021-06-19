@@ -8,7 +8,7 @@ module Api
 
         def call(params)
           UserRepository.new.master_user # simply check DB connection
-          self.body = { message: "healthy" }.to_json
+          self.body = { message: "healthy" }
         end
       end
     end

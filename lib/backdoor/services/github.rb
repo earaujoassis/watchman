@@ -19,5 +19,9 @@ class Backdoor::Services::GitHub
 
   def user
     @client.user
+  rescue Octokit::Unauthorized
+    raise Error, "unauthorized_access"
+  rescue StandardError
+    raise Error, "internal"
   end
 end

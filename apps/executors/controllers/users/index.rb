@@ -5,10 +5,9 @@ module Executors
     module Users
       class Index
         include Executors::Action
-        include Executors::SidecarContext
 
         def call(params)
-          user = UserRepository.new.master_user
+          user = UserRepository.new.master_user!
           github_service = Backdoor::Services::GitHub.new user.github_token
           github_user = github_service.user
           self.body = {
@@ -17,9 +16,11 @@ module Executors
               email: user.email,
               token: user.github_token
             }
-          }.to_json
+          }
         rescue Backdoor::Services::GitHub::Error => e
-          halt 500, { error: e.to_s }.to_json
+          halt 500, { error: e.to_s }
+        rescue Backdoor::Errors::UndefinedEntity
+          self.body = { user: nil }
         end
       end
     end

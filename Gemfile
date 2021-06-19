@@ -44,6 +44,7 @@ group :test do
   gem "coveralls", require: false
   gem "minitest"
   gem "rspec"
+  gem "webmock", require: false
 end
 
 group :production do
