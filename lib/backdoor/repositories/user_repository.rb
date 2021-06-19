@@ -15,6 +15,12 @@ class UserRepository < Hanami::Repository
     users.where(category: User::MASTER).first
   end
 
+  def master_user!
+    user = users.where(category: User::MASTER).first
+    raise Backdoor::Errors::UndefinedEntity if user.nil?
+    user
+  end
+
   def create_master_user(data)
     data[:passphrase] = Password.create(data[:passphrase]) unless data[:passphrase].nil?
     self.create(data.clone.merge({ category: User::MASTER }))

@@ -31,7 +31,7 @@ class Action < Hanami::Entity
   end
 
   def serialize
-    data = JSON.parse(self.payload)
+    data = JSON.parse(self.payload, symbolize_names: true)
     data.merge({
       action_id: self.uuid,
       current_status: self.current_status,
@@ -40,7 +40,7 @@ class Action < Hanami::Entity
   end
 
   def serialize_with_application
-    data = JSON.parse(self.payload)
+    data = JSON.parse(self.payload, symbolize_names: true)
     data.merge({
       action_id: self.uuid,
       current_status: self.current_status,

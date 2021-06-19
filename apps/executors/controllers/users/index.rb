@@ -7,7 +7,7 @@ module Executors
         include Executors::Action
 
         def call(params)
-          user = UserRepository.new.master_user
+          user = UserRepository.new.master_user!
           github_service = Backdoor::Services::GitHub.new user.github_token
           github_user = github_service.user
           self.body = {
@@ -19,6 +19,8 @@ module Executors
           }
         rescue Backdoor::Services::GitHub::Error => e
           halt 500, { error: e.to_s }
+        rescue Backdoor::Errors::UndefinedEntity
+          self.body = { user: nil }
         end
       end
     end

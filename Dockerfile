@@ -26,9 +26,11 @@ RUN apk add --update --no-cache yarn
 
 ENV PATH=/usr/local/bin:$PATH
 
+ENV BUNDLER_WITHOUT="development test"
 ENV HANAMI_ENV=production
 ENV HANAMI_HOST=0.0.0.0
 ENV SERVE_STATIC_ASSETS=true
+ENV SIDECAR_EXECUTOR_USE_PORT=3000
 ENV NODE_ENV=production
 
 RUN mkdir -p /app
@@ -46,7 +48,6 @@ RUN yarn install --network-timeout 1000000 --verbose
 RUN yarn build
 RUN bundle exec hanami assets precompile
 
-ENV SIDECAR_EXECUTOR_USE_PORT=3000
 EXPOSE 3000
 
 ENTRYPOINT [ "rake" ]

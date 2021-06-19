@@ -7,6 +7,8 @@ module Executors
         include Executors::Action
 
         params do
+          required(:id).filled(:str?)
+
           required(:action).schema do
             required(:current_status).filled(:str?)
             optional(:status_reason).filled(:str?)
@@ -28,7 +30,12 @@ module Executors
         rescue Backdoor::Errors::UndefinedEntity
           halt 404, { error: "unknown action" }
         rescue Backdoor::Errors::ActionError => e
-          halt 406, { error: e.message }
+          halt 406, {
+            error: {
+              message: e.message,
+              reasons: e.errors
+            }
+          }
         end
       end
     end
