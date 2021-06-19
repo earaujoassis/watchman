@@ -34,7 +34,12 @@ module Api
         rescue Backdoor::Errors::UndefinedEntity
           halt 404, { error: "unknown application" }
         rescue Backdoor::Errors::ActionError => e
-          halt 406, { error: e.message }
+          halt 406, {
+            error: {
+              message: e.message,
+              reasons: e.errors
+            }
+          }
         end
       end
     end

@@ -8,6 +8,7 @@ class Backdoor::Services::Sidecar
   end
 
   def same_pod?
+    return true unless ENV["WATCHMAN_DISABLE_AUTHENTICATION"].nil?
     @request.ip == "127.0.0.1"
   end
 end
