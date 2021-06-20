@@ -23,11 +23,7 @@ RSpec.describe Executors::Controllers::Users::Index, type: :action do
           "Content-Type" => "application/json"
         })
       .to_return(status: 200, body: github_response, headers: { "Content-Type" => "application/json" })
-    UserRepository.new.create_master_user({
-      email: "octocat@github.com",
-      passphrase: "octocat_testing_password",
-      github_token: "github_token"
-    })
+    fixture_generate_github_user
     perform_request
     expect(status_code).to eq 200
     expect(body[:user][:name]).to eq "monalisa octocat"

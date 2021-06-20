@@ -17,8 +17,8 @@ class User < Hanami::Entity
     }
   end
 
-  def password
-    Password.new(self.passphrase)
+  def passphrase_match?(passphrase)
+    Password.new(self.passphrase) == passphrase
   end
 
   private

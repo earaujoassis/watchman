@@ -194,6 +194,7 @@ module Api
       #
       # See: http://www.rubydoc.info/gems/hanami-controller#Configuration
       controller.prepare do
+        include Api::BadRequestChecker
         use JsonViewer
       end
 

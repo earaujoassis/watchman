@@ -6,6 +6,10 @@ module Api
       class Index
         include Api::Action
 
+        params do
+          required(:id).filled(:str?)
+        end
+
         def call(params)
           repository = ServerRepository.new
           reports = repository.find_with_reports(params[:id]).reports.map(&:serialize)

@@ -4,7 +4,7 @@ RSpec.describe User, type: :entity do
   it "can be initialized with attributes" do
     user = User.new(
       email: "johndoe@example.com",
-      passphrase: "testingpassword",
+      passphrase: "testing_passphrase",
       github_token: "2Y8Sj3kklJcJxxVO797wFpVGpIbuQmvc",
       category: "master"
     )

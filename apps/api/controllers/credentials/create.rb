@@ -6,6 +6,10 @@ module Api
       class Create
         include Api::Action
 
+        params do
+          required(:id).filled(:str?)
+        end
+
         def call(params)
           repository = UserRepository.new
           user = repository.find(params[:id])

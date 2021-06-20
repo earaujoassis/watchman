@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Controllers::Applications::Create, type: :action do
-  it "should return Bad Request when there's any missing attribute" do
+  it "should return Bad Request when missing any required param" do
     perform_request
     expect(status_code).to eq 400
   end
