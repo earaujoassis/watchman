@@ -5,27 +5,19 @@ RSpec.describe Api::Controllers::Credentials::Create, type: :action do
     clear_repositories
   end
 
-  it "should return Not Found when there's no user" do
+  it "should return Bad Request when missing any required param" do
     perform_request
-    expect(status_code).to eq 404
+    expect(status_code).to eq 400
   end
 
   it "should return Not Found when id is wrong" do
-    user = UserRepository.new.create_master_user({
-      email: "john.doe@example.com",
-      passphrase: "testingpassword",
-      github_token: "testingtoken"
-    })
+    user = fixture_generate_user
     perform_request_with_params({ id: "inexistent" })
     expect(status_code).to eq 404
   end
 
   it "should return a CSV file with the credentials" do
-    user = UserRepository.new.create_master_user({
-      email: "john.doe@example.com",
-      passphrase: "testingpassword",
-      github_token: "testingtoken"
-    })
+    user = fixture_generate_user
     perform_request_with_params({ id: user.uuid })
     expect(status_code).to eq 200
     expect(headers["Content-Type"]).to eq "text/csv"

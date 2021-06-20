@@ -4,11 +4,7 @@ module Helpers
   module Fixtures
     def fixture_generate_action
       repository = UserRepository.new
-      user = repository.create_master_user({
-        email: "octocat@github.com",
-        passphrase: "octocat_testing_password",
-        github_token: "github_token"
-      })
+      user = fixture_generate_github_user
       credential = repository.add_credential(user)
       application = repository.add_application(user, {
         full_name: "testing/application",

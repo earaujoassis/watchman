@@ -44,7 +44,7 @@ const editableConfiguration = ({ internalSetConfigurationDisplayMode, updateUser
       <div className="configuration-section">
         <form onSubmit={(e) => {
           e.preventDefault();
-          const data = { user: extractDataForm(e.target, ['github_token', 'password_confirmation']) };
+          const data = { user: extractDataForm(e.target, ['github_token', 'passphrase_confirmation']) };
           updateUser(user.id, data);
         }}>
           <div className="input-box">
@@ -56,8 +56,8 @@ const editableConfiguration = ({ internalSetConfigurationDisplayMode, updateUser
             <input type="text" id="user_github_token" name="github_token" />
           </div>
           <div className="input-box">
-            <label htmlFor="user_password_confirmation">Confirm password</label>
-            <input type="password" id="user_password_confirmation" name="password_confirmation" />
+            <label htmlFor="user_passphrase_confirmation">Confirm password</label>
+            <input type="password" id="user_passphrase_confirmation" name="passphrase_confirmation" />
           </div>
           <button type="submit" className="button" disabled={loading.includes('user')}>Save</button>
           <div className="input-box">

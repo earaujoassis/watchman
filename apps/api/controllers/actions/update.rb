@@ -9,6 +9,10 @@ module Api
         MEGABYTE = 1024 ** 2
 
         params do
+          required(:application_id).filled(:str?)
+
+          required(:action_id).filled(:str?)
+
           required(:action).schema do
             required(:current_status).filled(:str?)
             optional(:status_reason).filled(:str?)

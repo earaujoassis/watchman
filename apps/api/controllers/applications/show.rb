@@ -7,6 +7,10 @@ module Api
         include Api::Action
         include Api::Authentication
 
+        params do
+          required(:id).filled(:str?)
+        end
+
         def call(params)
           repository = ApplicationRepository.new
           application = repository.find(params[:id])
