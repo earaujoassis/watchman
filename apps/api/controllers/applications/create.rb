@@ -7,6 +7,8 @@ module Api
         include Api::Action
 
         params do
+          required(:id).filled(:str?)
+
           required(:application).schema do
             required(:full_name).filled(:str?)
             optional(:description).filled(:str?)
@@ -16,8 +18,6 @@ module Api
         end
 
         def call(params)
-          halt 400, { error: params.errors } unless params.errors.empty?
-
           repository = UserRepository.new
           user = repository.find(params[:id])
           halt 404, { error: "unknown user" } if user.nil?

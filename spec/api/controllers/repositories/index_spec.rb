@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Controllers::Repositories::Index, type: :action do
-  it "should return Not Found when there's no user" do
+  it "should return Bad Request when missing any required param" do
     perform_request
-    expect(status_code).to eq 404
+    expect(status_code).to eq 400
   end
 end

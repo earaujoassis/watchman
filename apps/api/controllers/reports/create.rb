@@ -20,8 +20,6 @@ module Api
         end
 
         def call(params)
-          halt 400, { error: params.errors } unless params.errors.empty?
-
           server_repository = ServerRepository.new
           server = server_repository.find(params[:server][:hostname])
           if server.nil?

@@ -6,6 +6,12 @@ module Api
       class Inactivate
         include Api::Action
 
+        params do
+          required(:user_id).filled(:str?)
+
+          required(:credential_id).filled(:str?)
+        end
+
         def call(params)
           user_repository = UserRepository.new
           user = user_repository.find(params[:user_id])

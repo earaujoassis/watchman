@@ -25,11 +25,7 @@ RSpec.describe "Requests: /api/executors/users", type: :requests do
           "Content-Type" => "application/json"
         })
       .to_return(status: 200, body: github_response, headers: { "Content-Type" => "application/json" })
-    UserRepository.new.create_master_user({
-      email: "octocat@github.com",
-      passphrase: "octocat_testing_password",
-      github_token: "github_token"
-    })
+    fixture_generate_github_user
 
     get "/api/executors/users"
 

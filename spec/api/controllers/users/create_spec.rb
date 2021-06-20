@@ -15,12 +15,12 @@ RSpec.describe Api::Controllers::Users::Create, type: :action do
     perform_request_with_params({
       user: {
         email: "john.doe@example.com",
-        passphrase: "testingpassword",
-        github_token: "testingtoken"
+        passphrase: "testing_passphrase",
+        github_token: "testing_token"
       }
     })
     expect(status_code).to eq 200
     expect(body[:user][:email]).to eq "john.doe@example.com"
-    expect(body[:user][:github_token]).to eq "******gtoken"
+    expect(body[:user][:github_token]).to eq "******g_token"
   end
 end
