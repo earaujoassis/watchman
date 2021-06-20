@@ -8,6 +8,8 @@ module Api
         include Api::Authentication
 
         params do
+          required(:id).filled(:str?)
+
           required(:action).schema do
             required(:type).filled(:str?)
             optional(:description).filled(:str?)
@@ -23,8 +25,6 @@ module Api
           credential = Backdoor::Services::Authentication.new(request.env).retrieve_credential!
           application = ApplicationRepository.new.find!(params[:id])
 
-          halt 400, { error: params.errors } unless params.errors.empty?
-
           Backdoor::Commands::ActionCreateCommand.new(
             params: params[:action], application: application, credential: credential
           ).perform
@@ -32,7 +32,7 @@ module Api
           self.body = ""
           self.status = 201
         rescue Backdoor::Errors::UndefinedEntity
-          halt 404, { error: "unknown application" }
+          halt 404, { error: "unknown application or invalid credential" }
         rescue Backdoor::Errors::ActionError => e
           halt 406, {
             error: {

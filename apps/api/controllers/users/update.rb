@@ -7,21 +7,25 @@ module Api
         include Api::Action
 
         params do
+          required(:id).filled(:str?)
+
           required(:user).schema do
             required(:github_token).filled(:str?)
-            required(:password_confirmation).filled(:str?)
+            required(:passphrase_confirmation).filled(:str?)
           end
         end
 
         def call(params)
-          halt 400, { error: params.errors } unless params.errors.empty?
-
           repository = UserRepository.new
-          user = repository.find(params[:id])
-          halt 401, { error: "wrong password" } unless user.password == params[:user][:password_confirmation]
+          user = repository.find!(params[:id])
+          unless user.passphrase_match?(params[:user][:passphrase_confirmation])
+            halt 401, { error: "wrong passphrase" }
+          end
 
           repository.update_user(params[:id], params[:user].slice(:github_token))
           self.body = { user: repository.master_user.serialize }
+        rescue Backdoor::Errors::UndefinedEntity
+          self.body = { user: nil }
         end
       end
     end

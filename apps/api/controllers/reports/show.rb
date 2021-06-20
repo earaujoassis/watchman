@@ -6,6 +6,12 @@ module Api
       class Show
         include Api::Action
 
+        params do
+          required(:server_id).filled(:str?)
+
+          required(:report_id).filled(:str?)
+        end
+
         def call(params)
           repository = ServerRepository.new
           begin

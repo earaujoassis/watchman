@@ -5,12 +5,13 @@ RSpec.describe Api::Controllers::Reports::Create, type: :action do
     clear_repositories
   end
 
-  it "should return Bad Request when there's any missing attribute" do
+  it "should return Bad Request when missing any required param" do
     perform_request
     expect(status_code).to eq 400
   end
 
   it "should create a server and a report for it" do
+    expect(ServerRepository.new.all.length).to eq 0
     perform_request_with_params({
       server: {
         hostname: "testing.example.com",
@@ -23,6 +24,7 @@ RSpec.describe Api::Controllers::Reports::Create, type: :action do
     })
     expect(status_code).to eq 200
     expect(body[:report][:id]).not_to be_empty
+    expect(ServerRepository.new.all.length).to eq 1
   end
 
   it "should create a report for an existing server" do
@@ -43,5 +45,6 @@ RSpec.describe Api::Controllers::Reports::Create, type: :action do
     })
     expect(status_code).to eq 200
     expect(body[:report][:id]).not_to be_empty
+    expect(ServerRepository.new.all.length).to eq 1
   end
 end
