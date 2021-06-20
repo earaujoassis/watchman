@@ -21,6 +21,5 @@ RSpec.describe Api::Controllers::Users::Create, type: :action do
     })
     expect(status_code).to eq 200
     expect(body[:user][:email]).to eq "john.doe@example.com"
-    expect(body[:user][:github_token]).to eq "******g_token"
   end
 end

@@ -12,10 +12,11 @@ module Api
 
         def call(params)
           repository = UserRepository.new
-          user = repository.find(params[:id])
-          halt 404, { error: "unknown user" } if user.nil?
+          user = repository.find!(params[:id])
           applications = ApplicationRepository.new.from_user_with_actions(user)
           self.body = { user: { applications: applications.map(&:serialize) } }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         end
       end
     end

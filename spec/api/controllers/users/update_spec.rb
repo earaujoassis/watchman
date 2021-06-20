@@ -5,7 +5,7 @@ RSpec.describe Api::Controllers::Users::Update, type: :action do
     clear_repositories
   end
 
-  it "should return Bad Request when there's any missing attribute" do
+  it "should return Bad Request when missing any required param" do
     perform_request
     expect(status_code).to eq 400
     expect(body).to eq({ error: { id: ["is missing"], user: ["is missing"] } })
@@ -37,8 +37,7 @@ RSpec.describe Api::Controllers::Users::Update, type: :action do
     expect(body).to eq({
       user: {
         id: user.uuid,
-        email: "octocat@github.com",
-        github_token: "********oken_anew"
+        email: "octocat@github.com"
       }
     })
   end

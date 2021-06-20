@@ -30,7 +30,6 @@ namespace "servers" do
 end
 
 namespace "applications" do
-  get "/:id/configuration_file", to: "applications#show"
   post "/:id/actions", to: "actions#create"
   put "/:application_id/actions/:action_id/executor", to: "actions#update"
 end

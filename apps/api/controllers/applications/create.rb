@@ -19,20 +19,18 @@ module Api
 
         def call(params)
           repository = UserRepository.new
-          user = repository.find(params[:id])
-          halt 404, { error: "unknown user" } if user.nil?
-          begin
-            application = repository.add_application(user, params[:application])
-            application = ApplicationRepository.new.find(application.uuid)
-          rescue Sequel::UniqueConstraintViolation
-            halt 409, {
-              error: {
-                application: "already exists"
-              }
-            }
-          end
+          user = repository.find!(params[:id])
+          repository.add_application(user, params[:application])
           applications = ApplicationRepository.new.from_user_with_actions(user)
           self.body = { user: { applications: applications.map(&:serialize) } }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
+        rescue Sequel::UniqueConstraintViolation
+          halt 409, {
+            error: {
+              application: "already exists"
+            }
+          }
         end
       end
     end
