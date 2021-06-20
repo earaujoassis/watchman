@@ -27,8 +27,8 @@ module Executors
 
           action = repository.find(params[:id])
           self.body = { action: action.serialize }
-        rescue Backdoor::Errors::UndefinedEntity
-          halt 404, { error: "unknown action" }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         rescue Backdoor::Errors::ActionError => e
           halt 406, {
             error: {

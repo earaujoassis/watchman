@@ -26,7 +26,8 @@ RSpec.describe Api::Controllers::Credentials::Index, type: :action do
 
   it "should return a CSV file with the credentials" do
     user = fixture_generate_user
-    credential = repository.add_credential(user)
+    credential_command = Backdoor::Commands::CredentialCreateCommand.new(user: user)
+    credential = credential_command.perform
     perform_request_with_params({ id: user.uuid })
     expect(status_code).to eq 200
     expect(body[:user][:credentials].first[:id]).to eq credential.uuid

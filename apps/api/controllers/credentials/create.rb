@@ -12,17 +12,20 @@ module Api
 
         def call(params)
           repository = UserRepository.new
-          user = repository.find(params[:id])
-          halt 404, { error: "unknown user" } if user.nil?
-          credential = repository.add_credential(user)
+          user = repository.find!(params[:id])
 
-          content = "client_key,client_secret\n#{credential.client_key},#{credential.client_secret}\n"
+          command = Backdoor::Commands::CredentialCreateCommand.new(user: user)
+          command.perform
+
+          content = "client_key,client_secret\n#{command.client_key},#{command.client_secret}\n"
           self.headers.merge!({
             "Content-Type" => "text/csv",
             "Content-Disposition" => 'attachment; filename="credentials.csv"',
             "Content-Length" => content.bytesize.to_s
           })
           self.body = content
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         end
       end
     end

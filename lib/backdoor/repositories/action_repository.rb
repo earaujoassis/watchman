@@ -11,9 +11,7 @@ class ActionRepository < Hanami::Repository
   end
 
   def find!(uuid)
-    action = actions.where(uuid: uuid).first
-    raise Backdoor::Errors::UndefinedEntity if action.nil?
-    action
+    check_existence!(find(uuid))
   end
 
   def all_pending
@@ -34,5 +32,12 @@ class ActionRepository < Hanami::Repository
   def agent_update(action, data)
     data[:report] = Sequel.blob(data[:report][:tempfile].read)
     self.update(action.id, data)
+  end
+
+  private
+
+  def check_existence!(entity, message = "action not found")
+    raise Backdoor::Errors::UndefinedEntity, message if entity.nil?
+    entity
   end
 end
