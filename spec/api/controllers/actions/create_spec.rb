@@ -21,7 +21,8 @@ RSpec.describe Api::Controllers::Actions::Create, type: :action do
       managed_realm: "none",
       managed_projects: "none"
     })
-    credential = repository.add_credential(user)
+    credential_command = Backdoor::Commands::CredentialCreateCommand.new(user: user)
+    credential = credential_command.perform
     params = {
       type: "git_ops_updater",
       # description: "testing context action", => optional
@@ -33,7 +34,7 @@ RSpec.describe Api::Controllers::Actions::Create, type: :action do
     }
     # rubocop:disable Style/HashSyntax
     perform_request_with_params({
-      "HTTP_AUTHORIZATION" => authorization_code(credential.client_key, credential.client_secret),
+      "HTTP_AUTHORIZATION" => authorization_code(credential_command.client_key, credential_command.client_secret),
       id: application.uuid,
       action: params
     })

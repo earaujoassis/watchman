@@ -9,8 +9,8 @@ module Executors
         def call(params)
           repository = ActionRepository.new
           self.body = { action: repository.find!(params[:id]).serialize }
-        rescue Backdoor::Errors::UndefinedEntity
-          halt 404, { error: "unknown action" }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         end
       end
     end

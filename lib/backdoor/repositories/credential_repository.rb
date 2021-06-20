@@ -20,23 +20,12 @@ class CredentialRepository < Hanami::Repository
     self.update(credential.id, {is_active: false})
   end
 
-  def authentic_client?(client_key, client_secret)
+  def retrieve_credential!(client_key)
     credential = credentials
       .where(client_key: client_key)
-      .where(client_secret: client_secret)
       .where(is_active: true)
       .first
-    return false if credential.nil?
-    true
-  end
-
-  def retrieve_credential!(client_key, client_secret)
-    credential = credentials
-      .where(client_key: client_key)
-      .where(client_secret: client_secret)
-      .where(is_active: true)
-      .first
-    raise Backdoor::Errors::UndefinedEntity if credential.nil?
+    raise Backdoor::Errors::UndefinedEntity, "credential not found" if credential.nil?
     credential
   end
 

@@ -14,16 +14,16 @@ module Api
 
         def call(params)
           user_repository = UserRepository.new
-          user = user_repository.find(params[:user_id])
-          halt 404, { error: "unknown user" } if user.nil?
-          credential = user_repository.owned_credential(params[:user_id], params[:credential_id])
-          halt 404, { error: "unknown credential" } if credential.nil?
+          user = user_repository.find!(params[:user_id])
+          credential = user_repository.owned_credential!(params[:user_id], params[:credential_id])
 
           credential_repository = CredentialRepository.new
           credential_repository.inactivate(user, credential)
 
           user = user_repository.find_with_credentials(params[:user_id])
           self.body = { user: { credentials: user.credentials.map(&:serialize) } }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         end
       end
     end

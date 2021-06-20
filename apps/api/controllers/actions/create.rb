@@ -31,8 +31,8 @@ module Api
 
           self.body = ""
           self.status = 201
-        rescue Backdoor::Errors::UndefinedEntity
-          halt 404, { error: "unknown application or invalid credential" }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         rescue Backdoor::Errors::ActionError => e
           halt 406, {
             error: {

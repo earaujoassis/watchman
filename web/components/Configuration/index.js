@@ -18,7 +18,7 @@ const defaultConfiguration = ({ internalSetConfigurationDisplayMode, user = {} }
         </div>
         <div className="input-box">
           <span className="label">GitHub Token</span>
-          <span className="input">{user.github_token}</span>
+          <span className="input">(information unavailable)</span>
         </div>
         <div className="input-box">
           <button
