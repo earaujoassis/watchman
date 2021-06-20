@@ -15,8 +15,8 @@ module Api
           user = repository.find!(params[:id])
           github_service = Backdoor::Services::GitHub.new user.github_token
           self.body = { user: { repositories: github_service.repos.map(&:to_hash) } }
-        rescue Backdoor::Errors::UndefinedEntity
-          halt 404, { error: "unknown application" }
+        rescue Backdoor::Errors::UndefinedEntity => e
+          halt 404, { error: e.message }
         rescue Backdoor::Services::GitHub::Error => e
           halt 500, { error: e.to_s }
         end

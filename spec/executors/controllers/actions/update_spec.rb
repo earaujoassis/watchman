@@ -21,7 +21,7 @@ RSpec.describe Executors::Controllers::Actions::Update, type: :action do
   it "should return Not Found when action doesn't exist" do
     perform_request_with_params({ id: "inexistent" })
     expect(status_code).to eq 404
-    expect(body).to eq({ error: "unknown action" })
+    expect(body).to eq({ error: "action not found" })
   end
 
   it "should return Unacceptable for invalid params" do

@@ -5,7 +5,8 @@ module Helpers
     def fixture_generate_action
       repository = UserRepository.new
       user = fixture_generate_github_user
-      credential = repository.add_credential(user)
+      credential_command = Backdoor::Commands::CredentialCreateCommand.new(user: user)
+      credential = credential_command.perform
       application = repository.add_application(user, {
         full_name: "testing/application",
         description: "testing application",

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "bcrypt"
-require "securerandom"
-
 class UserRepository < Hanami::Repository
   include BCrypt
 
@@ -16,9 +13,7 @@ class UserRepository < Hanami::Repository
   end
 
   def master_user!
-    user = users.where(category: User::MASTER).first
-    raise Backdoor::Errors::UndefinedEntity if user.nil?
-    user
+    check_existence!(master_user)
   end
 
   def create_master_user(data)
@@ -31,9 +26,7 @@ class UserRepository < Hanami::Repository
   end
 
   def find!(uuid)
-    user = users.where(uuid: uuid).first
-    raise Backdoor::Errors::UndefinedEntity if user.nil?
-    user
+    check_existence!(find(uuid))
   end
 
   def update_user(uuid, data)
@@ -59,15 +52,27 @@ class UserRepository < Hanami::Repository
       .one
   end
 
+  def owned_credential!(user_id, credential_id)
+    check_existence!(owned_credential(user_id, credential_id), "credential not found")
+  end
+
   def find_with_credentials(uuid)
     aggregate(:credentials).where(uuid: uuid).map_to(User).one
   end
 
-  def add_credential(user)
-    data = {
-      client_key: "W#{SecureRandom.hex(User::CLIENT_KEY_LENGTH)}"[0..31].upcase,
-      client_secret: SecureRandom.hex(User::CLIENT_SECRET_LENGTH)
-    }
+  def find_with_credentials!(uuid)
+    check_existence!(find_with_credentials(uuid))
+  end
+
+  def add_credential(user, data)
+    data[:client_secret] = Password.create(data[:client_secret]) unless data[:client_secret].nil?
     assoc(:credentials, user).add(data)
+  end
+
+  private
+
+  def check_existence!(entity, message = "user not found")
+    raise Backdoor::Errors::UndefinedEntity, message if entity.nil?
+    entity
   end
 end

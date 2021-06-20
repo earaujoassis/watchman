@@ -11,9 +11,7 @@ class ApplicationRepository < Hanami::Repository
   end
 
   def find!(uuid)
-    application = applications.where(uuid: uuid).first
-    raise Backdoor::Errors::UndefinedEntity if application.nil?
-    application
+    check_existence!(find(uuid))
   end
 
   # FIXME belongs_to associations are not properly working
@@ -49,11 +47,22 @@ class ApplicationRepository < Hanami::Repository
       .one
   end
 
+  def child_action!(application_id, action_id)
+    check_existence!(child_action(application_id, action_id))
+  end
+
   def pending_actions
     actions
       .join(applications)
       .where(current_status: Action::CREATED)
       .map_to(Action)
       .to_a
+  end
+
+  private
+
+  def check_existence!(entity, message = "application not found")
+    raise Backdoor::Errors::UndefinedEntity, message if entity.nil?
+    entity
   end
 end

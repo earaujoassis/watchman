@@ -35,6 +35,7 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
                     <li className="monospace">repo_deployment</li>
                     <li className="monospace">public_repo</li>
                     <li className="monospace">repo:invite</li>
+                    <li className="monospace">security_events</li>
                   </ul>
                 </li>
                 <li>
