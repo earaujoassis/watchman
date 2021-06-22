@@ -7,6 +7,8 @@ class User < Hanami::Entity
 
   MASTER = "master"
 
+  PASSPHRASE_MINIMUM_SIZE = 16
+
   def passphrase_match?(passphrase)
     Password.new(self.passphrase) == passphrase
   end
