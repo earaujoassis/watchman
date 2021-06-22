@@ -6,13 +6,19 @@ module Api
       class Create
         include Api::Action
 
-        params do
-          required(:user).schema do
-            required(:email).filled(:str?, format?: /@/)
-            required(:github_token).filled(:str?)
-            required(:passphrase).filled(:str?)
+        params Class.new(Hanami::Action::Params) {
+          predicate(:minimum_size?, message: "doesn't have minimum size of #{User::PASSPHRASE_MINIMUM_SIZE}") do |current|
+            current.length >= User::PASSPHRASE_MINIMUM_SIZE
           end
-        end
+
+          validations do
+            required(:user).schema do
+              required(:email).filled(:str?, format?: /@/)
+              required(:github_token).filled(:str?)
+              required(:passphrase) { filled? & str? & minimum_size? }
+            end
+          end
+        }
 
         def call(params)
           repository = UserRepository.new

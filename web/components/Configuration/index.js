@@ -53,11 +53,11 @@ const editableConfiguration = ({ internalSetConfigurationDisplayMode, updateUser
           </div>
           <div className="input-box">
             <label htmlFor="user_github_token">GitHub Token</label>
-            <input type="text" id="user_github_token" name="github_token" />
+            <input type="text" required id="user_github_token" name="github_token" />
           </div>
           <div className="input-box">
             <label htmlFor="user_passphrase_confirmation">Confirm password</label>
-            <input type="password" id="user_passphrase_confirmation" name="passphrase_confirmation" />
+            <input type="password" required minLength="16" id="user_passphrase_confirmation" name="passphrase_confirmation" />
           </div>
           <button type="submit" className="button" disabled={loading.includes('user')}>Save</button>
           <div className="input-box">
