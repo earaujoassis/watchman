@@ -33,7 +33,7 @@ module Api
           self.status = 201
         rescue Backdoor::Errors::UndefinedEntity => e
           halt 404, { error: e.message }
-        rescue Backdoor::Errors::ActionError => e
+        rescue Backdoor::Errors::CommandError => e
           halt 406, {
             error: {
               message: e.message,

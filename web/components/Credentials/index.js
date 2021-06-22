@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 import { SpinningSquare } from '../UI';
 import { ListCredentials } from './ListCredentials';
+import { Modal } from './Modal';
 
 import './style.css';
 
@@ -12,6 +13,8 @@ const configuration = ({
   createCredential,
   fetchCredentials,
   inactivateCredential,
+  internalSetModalDisplay,
+  displayModal,
   loading,
   user = {},
   credentials = []
@@ -36,13 +39,19 @@ const configuration = ({
       <h2><Link to="/configuration">Configuration</Link> &gt; Credentials</h2>
       <div className="configuration-section">
         <div className="input-box">
-          <button className="anchor" type="button" onClick={() => createCredential(user.id)}>
+          <button className="anchor" type="button" onClick={() => internalSetModalDisplay(true)}>
             Generate credential for agents or bots
           </button>
         </div>
         <ListCredentials
           inactivateCredential={inactivateCredential}
           credentials={credentials}
+          user={user}
+        />
+        <Modal
+          createCredential={createCredential}
+          internalSetModalDisplay={internalSetModalDisplay}
+          displayModal={displayModal}
           user={user}
         />
         <div className="input-box">
@@ -55,17 +64,19 @@ const configuration = ({
 
 const mapStateToProps = state => {
   return {
+    credentials: state.root.credentials,
+    displayModal: state.root.displayModal,
     loading: state.root.loading,
-    user: state.root.user,
-    credentials: state.root.credentials
+    user: state.root.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createCredential: (userId) => dispatch(actions.createCredential(userId)),
+    createCredential: (userId, data) => dispatch(actions.createCredential(userId, data)),
     fetchCredentials: (id) => dispatch(actions.fetchCredentials(id)),
-    inactivateCredential: (userId, credentialId) => dispatch(actions.inactivateCredential(userId, credentialId))
+    inactivateCredential: (userId, credentialId) => dispatch(actions.inactivateCredential(userId, credentialId)),
+    internalSetModalDisplay: (displayModal) => dispatch(actions.internalSetModalDisplay(displayModal))
   };
 };
 
