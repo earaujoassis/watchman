@@ -11,7 +11,7 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
 
   def perform
     validate
-    raise Backdoor::Errors::ActionError.new("cannot create action", @errors) unless valid?
+    raise Backdoor::Errors::CommandError.new("cannot create action", @errors) unless valid?
     repository = ActionRepository.new
     @params[:credential_id] = @credential.id
     @params[:application_id] = @application.id
@@ -20,7 +20,7 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
     begin
       action = repository.create(@params)
     rescue PG::Error
-      raise Backdoor::Errors::ActionError, "cannot create action: database error"
+      raise Backdoor::Errors::CommandError, "cannot create action: database error"
     end
     action
   end
@@ -32,18 +32,7 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
     validator(validate_commit_hash, :commit_hash, "is not valid")
   end
 
-  def valid?
-    return false if @valid.nil?
-    @valid
-  end
-
   private
-
-  def validator(rule, attr, message)
-    @valid = rule if @valid.nil?
-    @errors[attr] = message unless rule
-    @valid = rule && @valid
-  end
 
   def validate_managed_realm
     @application.managed_realm == @params[:payload][:managed_realm]

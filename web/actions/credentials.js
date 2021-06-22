@@ -24,12 +24,13 @@ export const credentialRecordError = (error) => {
   };
 };
 
-export const createCredential = (userId, _description) => {
+export const createCredential = (userId, data) => {
   return dispatch => {
     dispatch(credentialRecordStart());
     axios({
       url: `/api/users/${userId}/credentials`,
       method: 'POST',
+      data: data,
       responseType: 'blob'
     })
       .then(response => {

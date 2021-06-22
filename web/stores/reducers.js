@@ -160,22 +160,23 @@ const reportRecordError = (state, action) => {
   });
 };
 
-const credentialReportStart = (state, action) => {
+const credentialRecordStart = (state, action) => {
   NProgress.start();
   return Object.assign({}, state, { loading: addLoading(state, 'credential') });
 };
 
-const credentialReportSuccess = (state, action) => {
+const credentialRecordSuccess = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'credential'),
     success: true,
     error: null,
-    credentials: action.user.credentials
+    credentials: action.user.credentials,
+    displayModal: false
   });
 };
 
-const credentialReportError = (state, action) => {
+const credentialRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'credential'),
@@ -214,9 +215,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REPORT_RECORD_START: return reportRecordStart(state, action);
     case actionTypes.REPORT_RECORD_SUCCESS: return reportRecordSuccess(state, action);
     case actionTypes.REPORT_RECORD_ERROR: return reportRecordError(state, action);
-    case actionTypes.CREDENTIAL_RECORD_START: return credentialReportStart(state, action);
-    case actionTypes.CREDENTIAL_RECORD_SUCCESS: return credentialReportSuccess(state, action);
-    case actionTypes.CREDENTIAL_RECORD_ERROR: return credentialReportError(state, action);
+    case actionTypes.CREDENTIAL_RECORD_START: return credentialRecordStart(state, action);
+    case actionTypes.CREDENTIAL_RECORD_SUCCESS: return credentialRecordSuccess(state, action);
+    case actionTypes.CREDENTIAL_RECORD_ERROR: return credentialRecordError(state, action);
     case actionTypes.INTERNAL_CONFIGURATION_DISPLAY_MODE: return internalConfigurationDisplayMode(state, action);
     case actionTypes.INTERNAL_DISPLAY_MODAL: return internalSetModalDisplay(state, action);
     default: return state;
