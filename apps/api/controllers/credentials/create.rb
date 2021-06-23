@@ -21,9 +21,7 @@ module Api
         def call(params)
           repository = UserRepository.new
           user = repository.find!(params[:id])
-          unless user.passphrase_match?(params[:user][:passphrase_confirmation])
-            halt 401, { error: "wrong passphrase" }
-          end
+          user.passphrase_must_match!(params[:user][:passphrase_confirmation])
 
           command = Backdoor::Commands::CredentialCreateCommand.new(
             params: params[:credential] || Hash.new,
@@ -40,6 +38,8 @@ module Api
           self.body = content
         rescue Backdoor::Errors::UndefinedEntity => e
           halt 404, { error: e.message }
+        rescue Backdoor::Errors::PassphraseConfirmationError => e
+          halt 401, { error: e.message }
         rescue Backdoor::Errors::CommandError => e
           halt 406, {
             error: {
