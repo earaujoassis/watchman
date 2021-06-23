@@ -39,21 +39,19 @@ class Backdoor::Services::Security
   end
 
   def encrypt(data)
-    encrypt_key = Digest::SHA256.digest(key)
-    aes = OpenSSL::Cipher.new("AES-256-CBC")
-    aes.encrypt
-    aes.key = encrypt_key
-    version + Base64.encode64(aes.update(data) + aes.final)
+    cipher = OpenSSL::Cipher.new("AES-256-CBC")
+    cipher.encrypt
+    cipher.key = Digest::SHA256.digest(key)
+    version + Base64.encode64(cipher.update(data) + cipher.final)
   end
 
   def decrypt(data)
     encrypted_data = retrieve_encrypted_data!(data)
-    encrypt_key = Digest::SHA256.digest(key)
-    aes = OpenSSL::Cipher.new("AES-256-CBC")
-    aes.decrypt
-    aes.padding = 0
-    aes.key = Digest::SHA256.digest(encrypt_key)
-    aes.update(encrypted_data) + aes.final
+    cipher = OpenSSL::Cipher.new("AES-256-CBC")
+    cipher.decrypt
+    cipher.padding = 0
+    cipher.key = Digest::SHA256.digest(key)
+    cipher.update(encrypted_data) + cipher.final
   end
 
   private
