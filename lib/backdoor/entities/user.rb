@@ -17,6 +17,10 @@ class User < Hanami::Entity
     raise Backdoor::Errors::PassphraseConfirmationError unless passphrase_match?(passphrase)
   end
 
+  def github_token!
+    Backdoor::Services::Security.new.decrypt(self.github_token).strip
+  end
+
   def serialize
     {
       id: self.uuid,
