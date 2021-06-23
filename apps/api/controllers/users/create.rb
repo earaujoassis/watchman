@@ -21,9 +21,17 @@ module Api
         }
 
         def call(params)
-          repository = UserRepository.new
-          repository.create_master_user(params[:user])
-          self.body = { user: repository.master_user.serialize }
+          user = Backdoor::Commands::UserCreateCommand.new(params: params[:user]).perform
+          self.body = { user: user.serialize }
+        rescue Backdoor::Errors::CommandError => e
+          halt 406, {
+            error: {
+              message: e.message,
+              reasons: e.errors
+            }
+          }
+        rescue Backdoor::Services::Security::Error => e
+          halt 503, { error: e.message }
         end
       end
     end
