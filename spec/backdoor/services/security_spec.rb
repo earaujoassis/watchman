@@ -4,19 +4,19 @@ RSpec.describe Backdoor::Services::Security, type: :service do
   let(:encryptor) { described_class.new }
 
   it "should encrypt and decrypt data if all information necessary is available" do
-    plain_message = "Secret message to encrypt"
+    plain_message = "Secret message to encrypt in test"
 
-    encryptor.key = "OLVZV7gh14iAs571ru7HUVvJjnjgAnvDwCHUXLJNyY3kvZmFfm0jSXtxQxkD45jY"
-    encryptor.version = "XCwp5vjL6u5C6KOy"
-    expect(encryptor.key).to eq("OLVZV7gh14iAs571ru7HUVvJjnjgAnvDwCHUXLJNyY3kvZmFfm0jSXtxQxkD45jY")
-    expect(encryptor.version).to eq("XCwp5vjL6u5C6KOy")
+    encryptor.key = "wCHUXLJNyY3kvZmFfm0jSXtxQxkD45jYOLVZV7gh14iAs571ru7HUVvJjnjgAnvD"
+    encryptor.version = "6u5C6KOyXCwp5vjL"
+    expect(encryptor.key).to eq("wCHUXLJNyY3kvZmFfm0jSXtxQxkD45jYOLVZV7gh14iAs571ru7HUVvJjnjgAnvD")
+    expect(encryptor.version).to eq("6u5C6KOyXCwp5vjL")
 
     encrypted_message = encryptor.encrypt(plain_message)
     expect(encrypted_message).not_to eq(plain_message)
-    expect(encrypted_message).to start_with("XCwp5vjL6u5C6KOy")
+    expect(encrypted_message).to start_with("6u5C6KOyXCwp5vjL")
 
     once_again_plain_message = encryptor.decrypt(encrypted_message)
-    expect(once_again_plain_message).not_to start_with("XCwp5vjL6u5C6KOy")
+    expect(once_again_plain_message).not_to start_with("6u5C6KOyXCwp5vjL")
     expect(once_again_plain_message).not_to eq(plain_message)
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Backdoor::Services::Security, type: :service do
   end
 
   it "should raise an error when key-version changes" do
-    plain_message = "Secret message to encrypt"
+    plain_message = "Secret message to encrypt in test"
 
     encryptor.key = "OLVZV7gh14iAs571ru7HUVvJjnjgAnvDwCHUXLJNyY3kvZmFfm0jSXtxQxkD45jY"
     encryptor.version = "XCwp5vjL6u5C6KOy"
