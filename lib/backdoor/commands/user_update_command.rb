@@ -13,8 +13,6 @@ class Backdoor::Commands::UserUpdateCommand < Backdoor::Commands::BaseCommand
     user = repository.find!(@user_id)
     user.passphrase_must_match!(@params[:passphrase_confirmation])
 
-    encryptor = Backdoor::Services::Security.new
-    @params[:github_token] = encryptor.encrypt(@params[:github_token])
     repository.update_user(@user_id, @params.slice(:github_token))
     repository.master_user
   end

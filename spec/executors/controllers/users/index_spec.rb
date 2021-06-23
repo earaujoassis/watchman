@@ -19,7 +19,7 @@ RSpec.describe Executors::Controllers::Users::Index, type: :action do
         headers: {
           "Accept" => "application/vnd.github.v3+json",
           "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-          "Authorization" => "token github_token",
+          "Authorization" => "token testing_github_token",
           "Content-Type" => "application/json"
         })
       .to_return(status: 200, body: github_response, headers: { "Content-Type" => "application/json" })
@@ -28,6 +28,6 @@ RSpec.describe Executors::Controllers::Users::Index, type: :action do
     expect(status_code).to eq 200
     expect(body[:user][:name]).to eq "monalisa octocat"
     expect(body[:user][:email]).to eq "octocat@github.com"
-    expect(body[:user][:token]).to eq "github_token"
+    expect(body[:user][:token]).to eq "testing_github_token"
   end
 end

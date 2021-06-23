@@ -21,7 +21,7 @@ RSpec.describe "Requests: /api/executors/users", type: :requests do
         headers: {
           "Accept" => "application/vnd.github.v3+json",
           "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-          "Authorization" => "token github_token",
+          "Authorization" => "token testing_github_token",
           "Content-Type" => "application/json"
         })
       .to_return(status: 200, body: github_response, headers: { "Content-Type" => "application/json" })
@@ -34,7 +34,7 @@ RSpec.describe "Requests: /api/executors/users", type: :requests do
       user: {
         name: "monalisa octocat",
         email: "octocat@github.com",
-        token: "github_token"
+        token: "testing_github_token"
       }
     }))
   end

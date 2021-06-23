@@ -18,6 +18,7 @@ class UserRepository < Hanami::Repository
 
   def create_master_user(data)
     data[:passphrase] = Password.create(data[:passphrase]) unless data[:passphrase].nil?
+    data[:github_token] = Backdoor::Services::Security.new.encrypt(data[:github_token]) unless data[:github_token].nil?
     self.create(data.clone.merge({ category: User::MASTER }))
   end
 
@@ -32,6 +33,7 @@ class UserRepository < Hanami::Repository
   def update_user(uuid, data)
     user = self.find(uuid)
     data[:passphrase] = Password.create(data[:passphrase]) unless data[:passphrase].nil?
+    data[:github_token] = Backdoor::Services::Security.new.encrypt(data[:github_token]) unless data[:github_token].nil?
     self.update(user.id, data)
   end
 

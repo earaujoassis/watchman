@@ -9,8 +9,6 @@ class Backdoor::Commands::UserCreateCommand < Backdoor::Commands::BaseCommand
 
   def perform
     repository = UserRepository.new
-    encryptor = Backdoor::Services::Security.new
-    @params[:github_token] = encryptor.encrypt(@params[:github_token])
     repository.create_master_user(@params)
     repository.master_user
   end
