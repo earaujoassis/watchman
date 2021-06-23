@@ -13,6 +13,10 @@ class User < Hanami::Entity
     Password.new(self.passphrase) == passphrase
   end
 
+  def passphrase_must_match!(passphrase)
+    raise Backdoor::Errors::PassphraseConfirmationError unless passphrase_match?(passphrase)
+  end
+
   def serialize
     {
       id: self.uuid,
