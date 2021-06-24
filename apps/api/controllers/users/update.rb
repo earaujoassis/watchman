@@ -16,16 +16,21 @@ module Api
         end
 
         def call(params)
-          repository = UserRepository.new
-          user = repository.find!(params[:id])
-          unless user.passphrase_match?(params[:user][:passphrase_confirmation])
-            halt 401, { error: "wrong passphrase" }
-          end
-
-          repository.update_user(params[:id], params[:user].slice(:github_token))
-          self.body = { user: repository.master_user.serialize }
+          user = Backdoor::Commands::UserUpdateCommand.new(params: params[:user], user_id: params[:id]).perform
+          self.body = { user: user.serialize }
         rescue Backdoor::Errors::UndefinedEntity
           self.body = { user: nil }
+        rescue Backdoor::Errors::PassphraseConfirmationError => e
+          halt 401, { error: e.message }
+        rescue Backdoor::Errors::CommandError => e
+          halt 406, {
+            error: {
+              message: e.message,
+              reasons: e.errors
+            }
+          }
+        rescue Backdoor::Services::Security::Error => e
+          halt 503, { error: e.message }
         end
       end
     end

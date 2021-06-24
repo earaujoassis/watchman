@@ -6,18 +6,32 @@ module Api
       class Create
         include Api::Action
 
-        params do
-          required(:user).schema do
-            required(:email).filled(:str?, format?: /@/)
-            required(:github_token).filled(:str?)
-            required(:passphrase).filled(:str?)
+        params Class.new(Hanami::Action::Params) {
+          predicate(:minimum_size?, message: "doesn't have minimum size of #{User::PASSPHRASE_MINIMUM_SIZE}") do |current|
+            current.length >= User::PASSPHRASE_MINIMUM_SIZE
           end
-        end
+
+          validations do
+            required(:user).schema do
+              required(:email).filled(:str?, format?: /@/)
+              required(:github_token).filled(:str?)
+              required(:passphrase) { filled? & str? & minimum_size? }
+            end
+          end
+        }
 
         def call(params)
-          repository = UserRepository.new
-          repository.create_master_user(params[:user])
-          self.body = { user: repository.master_user.serialize }
+          user = Backdoor::Commands::UserCreateCommand.new(params: params[:user]).perform
+          self.body = { user: user.serialize }
+        rescue Backdoor::Errors::CommandError => e
+          halt 406, {
+            error: {
+              message: e.message,
+              reasons: e.errors
+            }
+          }
+        rescue Backdoor::Services::Security::Error => e
+          halt 503, { error: e.message }
         end
       end
     end
