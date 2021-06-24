@@ -13,7 +13,17 @@ RSpec.describe Executors::Controllers::Users::Index, type: :action do
     expect(body).to eq({ user: nil })
   end
 
-  it "should the user if it already exists" do
+  it "should return Service Unavailable when encryption key version has changed" do
+    user = fixture_generate_github_user
+    original_version = ENV["SECRET_KEY_VERSION"]
+    ENV["SECRET_KEY_VERSION"] = "tKcheA1MsfyIweBZ"
+    perform_request
+    expect(status_code).to eq 503
+    expect(body).to eq({ error: "version mismatch; cannot decrypt" })
+    ENV["SECRET_KEY_VERSION"] = original_version
+  end
+
+  it "should return the user if it already exists" do
     stub_request(:get, "https://api.github.com/user")
       .with(
         headers: {
