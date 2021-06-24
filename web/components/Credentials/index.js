@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions';
-import { SpinningSquare } from '../UI';
+import * as actions from '@actions';
+import { SpinningSquare } from '@common/UI';
 import { ListCredentials } from './ListCredentials';
 import { Modal } from './Modal';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../actions';
+import * as actions from '@actions';
 import { ListProjects } from './ListProjects';
 import { Modal } from './Modal';
 

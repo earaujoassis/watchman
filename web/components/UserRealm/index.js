@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../actions';
-import { extractDataForm } from '../../utils';
-import { SpinningSquare } from '../UI';
+import * as actions from '@actions';
+import { extractDataForm } from '@utils/forms';
+import { SpinningSquare } from '@common/UI';
 
 import './style.css';
 

@@ -7,5 +7,6 @@ export { createCredential, fetchCredentials, inactivateCredential } from './cred
 export {
   internalSetConfigurationDisplayMode,
   internalSetConfigurationDisplayModeError,
-  internalSetModalDisplay
+  internalSetModalDisplay,
+  internalSetToastDisplay
 } from './internal';

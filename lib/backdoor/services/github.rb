@@ -14,7 +14,7 @@ class Backdoor::Services::GitHub
   rescue Octokit::Unauthorized
     raise Error, "unauthorized_access"
   rescue StandardError
-    raise Error, "internal"
+    raise Error, "internal error"
   end
 
   def user
@@ -22,6 +22,6 @@ class Backdoor::Services::GitHub
   rescue Octokit::Unauthorized
     raise Error, "unauthorized_access"
   rescue StandardError
-    raise Error, "internal"
+    raise Error, "internal error"
   end
 end

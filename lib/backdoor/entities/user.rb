@@ -18,7 +18,7 @@ class User < Hanami::Entity
   end
 
   def github_token!
-    Backdoor::Services::Security.new.decrypt(self.github_token).strip
+    Backdoor::Services::Security.new.decrypt(self.github_token)
   end
 
   def serialize
