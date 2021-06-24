@@ -12,6 +12,7 @@
 }
 
 .layout-root__siblings {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex: 1;

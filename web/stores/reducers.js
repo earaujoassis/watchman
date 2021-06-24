@@ -8,9 +8,10 @@ const initialState = {
   servers: undefined,
   reportTopics: undefined,
   reportView: undefined,
-  error: undefined,
   loading: [],
-  success: false,
+  error: undefined,
+  success: undefined,
+  displayToast: false,
   displayModal: false,
   configurationMode: {
     mode: 'default',
@@ -52,6 +53,7 @@ const userRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'user'),
+    displayToast: true,
     success: false,
     error: action.error
   });
@@ -76,6 +78,7 @@ const projectRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'project'),
+    displayToast: true,
     success: false,
     error: action.error
   });
@@ -100,6 +103,7 @@ const applicationRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'application'),
+    displayToast: true,
     success: false,
     error: action.error
   });
@@ -124,6 +128,7 @@ const serverRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'server'),
+    displayToast: true,
     success: false,
     error: action.error
   });
@@ -155,6 +160,7 @@ const reportRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'report'),
+    displayToast: true,
     success: false,
     error: action.error
   });
@@ -180,6 +186,7 @@ const credentialRecordError = (state, action) => {
   NProgress.done();
   return Object.assign({}, state, {
     loading: reduceLoading(state, 'credential'),
+    displayToast: true,
     success: false,
     error: action.error
   });
@@ -194,6 +201,12 @@ const internalConfigurationDisplayMode = (state, action) => {
 const internalSetModalDisplay = (state, action) => {
   return Object.assign({}, state, {
     displayModal: action.displayModal
+  });
+};
+
+const internalSetToastDisplay = (state, action) => {
+  return Object.assign({}, state, {
+    displayToast: action.displayToast
   });
 };
 
@@ -220,6 +233,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CREDENTIAL_RECORD_ERROR: return credentialRecordError(state, action);
     case actionTypes.INTERNAL_CONFIGURATION_DISPLAY_MODE: return internalConfigurationDisplayMode(state, action);
     case actionTypes.INTERNAL_DISPLAY_MODAL: return internalSetModalDisplay(state, action);
+    case actionTypes.INTERNAL_DISPLAY_TOAST: return internalSetToastDisplay(state, action);
     default: return state;
   }
 };
