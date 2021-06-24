@@ -1,20 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Controllers::Servers::Notify, type: :action do
-  let(:github_response) do
-    '[
-      {
-        "name": "v0.2.4",
-        "commit": {
-          "sha": "f5f421621a700ee6f3e816a0a81fa85eab9d5f1a",
-          "url": "https://api.github.com/repos/earaujoassis/watchman/commits/f5f421621a700ee6f3e816a0a81fa85eab9d5f1a"
-        },
-        "zipball_url": "https://github.com/earaujoassis/watchman/zipball/v0.2.4",
-        "tarball_url": "https://github.com/earaujoassis/watchman/tarball/v0.2.4",
-        "node_id": "MDQ6VXNlcjE="
-      }
-    ]'
-  end
+  let(:github_response) { github_repositories_tags_response }
 
   before(:each) do
     clear_repositories
