@@ -13,7 +13,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@components': path.resolve(__dirname, 'web/components')
+      '@actions': path.resolve(__dirname, 'web/actions'),
+      '@common': path.resolve(__dirname, 'web/common'),
+      '@components': path.resolve(__dirname, 'web/components'),
+      '@utils': path.resolve(__dirname, 'web/utils')
     }
   },
   devtool: 'cheap-module-source-map',

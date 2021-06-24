@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SpinningSquare } from '../UI';
+import { SpinningSquare } from '@common/UI';
 
 export const ListProjects = ({ internalSetModalDisplay, setCurrentProject, currentProject, loading, projects }) => {
   if (loading.includes('project')) return <SpinningSquare />;
