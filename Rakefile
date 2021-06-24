@@ -15,6 +15,7 @@ end
 namespace :foreman do
   desc "Run the foreman Procfile"
   task :all do
+    sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
     sh %{#{FileUtils::RUBY} -S bundle exec foreman start -p 3000 -e /dev/null}
   end
 
@@ -25,6 +26,11 @@ namespace :foreman do
   task :web do
     sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
     sh %{#{FileUtils::RUBY} -S bundle exec foreman start -p 3000 -e /dev/null web}
+  end
+
+  task :development do
+    sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
+    sh %{#{FileUtils::RUBY} -S bundle exec foreman start -p 3000 -e /dev/null -c web=1,webpacker=1}
   end
 end
 

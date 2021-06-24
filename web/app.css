@@ -87,7 +87,7 @@ textarea {
 }
 
 .input {
-  max-width: calc(100% - 80px);
+  max-width: calc(100% - 160px);
   cursor: default;
   border-color: hsl(0,0%,90%)
 }
@@ -96,6 +96,17 @@ input:focus {
   border-color: #2684FF;
   box-shadow: 0 0 0 1px #2684FF;
   transition: all 0.4s ease;
+}
+
+input:invalid {
+  border-color: #ff7226;
+  box-shadow: 0 0 0 1px #ff7226;
+}
+
+form:invalid button[type=submit],
+form:invalid input[type=submit] {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .input-box ~ .input-box {

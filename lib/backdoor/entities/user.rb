@@ -7,8 +7,18 @@ class User < Hanami::Entity
 
   MASTER = "master"
 
+  PASSPHRASE_MINIMUM_SIZE = 16
+
   def passphrase_match?(passphrase)
     Password.new(self.passphrase) == passphrase
+  end
+
+  def passphrase_must_match!(passphrase)
+    raise Backdoor::Errors::PassphraseConfirmationError unless passphrase_match?(passphrase)
+  end
+
+  def github_token!
+    Backdoor::Services::Security.new.decrypt(self.github_token).strip
   end
 
   def serialize

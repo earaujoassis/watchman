@@ -53,15 +53,15 @@ const root = ({ children, loading, user, fetchUser, createUser, subscribeUser })
               }}>
                 <div className="input-box">
                   <label htmlFor="user_email">E-mail</label>
-                  <input type="email" id="user_email" name="email" />
+                  <input type="email" required id="user_email" name="email" />
                 </div>
                 <div className="input-box">
                   <label htmlFor="user_passphrase">Password</label>
-                  <input type="password" id="user_passphrase" name="passphrase" />
+                  <input type="password" required minLength="16" id="user_passphrase" name="passphrase" />
                 </div>
                 <div className="input-box">
                   <label htmlFor="user_github_token">GitHub Token</label>
-                  <input type="text" id="user_github_token" name="github_token" />
+                  <input type="text" required id="user_github_token" name="github_token" />
                 </div>
                 <button type="submit" className="button">Save</button>
               </form>
