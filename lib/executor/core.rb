@@ -8,7 +8,7 @@ module Executor
       def perform(commands)
         user = Executor::Users.user[:user]
         actions = Executor::Actions.all_pending[:actions]
-        Executor.logger.info("No actions to process") if actions.empty?
+        Executor.logger.warn("No actions to process") if actions.empty?
         actions.each do |action|
           Dir.mktmpdir do |workdir|
             action_type = action[:type].to_sym
