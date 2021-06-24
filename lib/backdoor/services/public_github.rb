@@ -14,7 +14,7 @@ class Backdoor::Services::PublicGitHub
   rescue Octokit::Unauthorized
     raise Error, "unauthorized_access"
   rescue StandardError
-    raise Error, "internal"
+    raise Error, "internal error"
   end
 
   def latest_tag
