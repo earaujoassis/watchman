@@ -25,3 +25,10 @@ export const internalSetModalDisplay = (displayModal = false) => {
     displayModal
   };
 };
+
+export const internalSetToastDisplay = (displayToast = false) => {
+  return {
+    type: actionTypes.INTERNAL_DISPLAY_TOAST,
+    displayToast
+  };
+};

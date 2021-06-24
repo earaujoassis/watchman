@@ -6,6 +6,7 @@ import Menu from '@components/Menu';
 import Footer from '@components/Footer';
 import UserRealm from '@components/UserRealm';
 import Terminal from '@components/Terminal';
+import Toast from '@components/Toast';
 
 import './style.css';
 
@@ -31,6 +32,7 @@ const layout = ({ children, location }) => {
               <Footer />
             </div>
             {withTerminal(location.pathname) ? <Terminal /> : null}
+            <Toast />
           </div>
         </div>
       </div>
