@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions';
-import { extractDataForm } from '../../utils';
+import * as actions from '@actions';
+import { extractDataForm } from '@utils/forms';
 
 import './style.css';
 
