@@ -1,3 +1,0 @@
-export {
-  extractDataForm
-} from './forms';

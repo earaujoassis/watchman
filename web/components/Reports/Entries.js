@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import { SpinningSquare } from '../UI';
+import { SpinningSquare } from '@common/UI';
 
 const fromNow = (updatedAt) => {
   return moment.utc(updatedAt, 'YYYY-MM-DD HH:mm:ss UTC').startOf('minute').fromNow();

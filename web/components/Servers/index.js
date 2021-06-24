@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import * as actions from '../../actions';
-import { useInterval } from '../../utils/hooks';
-import { SpinningSquare } from '../UI';
+import * as actions from '@actions';
+import { useInterval } from '@utils/hooks';
+import { SpinningSquare } from '@common/UI';
 
 import './style.css';
 

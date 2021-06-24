@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { extractDataForm } from '../../utils';
+import { extractDataForm } from '@utils/forms';
 
 export const Modal = ({
   createCredential,

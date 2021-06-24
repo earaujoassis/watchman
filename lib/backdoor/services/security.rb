@@ -42,7 +42,7 @@ class Backdoor::Services::Security
     cipher = OpenSSL::Cipher.new("AES-256-CBC")
     cipher.encrypt
     cipher.key = Digest::SHA256.digest(key)
-    version + Base64.encode64(cipher.update(data) + cipher.final)
+    version + Base64.encode64(cipher.update(data.strip) + cipher.final)
   end
 
   def decrypt(data)
@@ -51,7 +51,8 @@ class Backdoor::Services::Security
     cipher.decrypt
     cipher.padding = 0
     cipher.key = Digest::SHA256.digest(key)
-    cipher.update(encrypted_data) + cipher.final
+    plain_data = cipher.update(encrypted_data) + cipher.final
+    plain_data.strip.delete("\b")
   end
 
   private
