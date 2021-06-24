@@ -38,7 +38,7 @@ module Executor
       @logger ||= begin
         $stdout.sync = true
         logger = Logger.new(STDOUT)
-        logger.level = Logger::INFO
+        logger.level = Logger::WARN
         logger
       end
       @logger
