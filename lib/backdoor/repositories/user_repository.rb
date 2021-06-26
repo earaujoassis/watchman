@@ -6,6 +6,7 @@ class UserRepository < Hanami::Repository
   associations do
     has_many :applications
     has_many :credentials
+    has_many :sessions
   end
 
   def master_user
@@ -37,12 +38,17 @@ class UserRepository < Hanami::Repository
     self.update(user.id, data)
   end
 
+  def add_application(user, data)
+    assoc(:applications, user).add(data)
+  end
+
   def find_with_applications(uuid)
     aggregate(:applications).where(uuid: uuid).map_to(User).one
   end
 
-  def add_application(user, data)
-    assoc(:applications, user).add(data)
+  def add_credential(user, data)
+    data[:client_secret] = Password.create(data[:client_secret]) unless data[:client_secret].nil?
+    assoc(:credentials, user).add(data)
   end
 
   def owned_credential(user_id, credential_id)
@@ -66,9 +72,21 @@ class UserRepository < Hanami::Repository
     check_existence!(find_with_credentials(uuid))
   end
 
-  def add_credential(user, data)
-    data[:client_secret] = Password.create(data[:client_secret]) unless data[:client_secret].nil?
-    assoc(:credentials, user).add(data)
+  def add_session(user, data)
+    assoc(:sessions, user).add(data)
+  end
+
+  def owned_session(user_id, session_id)
+    sessions
+      .join(users)
+      .where(users__uuid: user_id)
+      .where(sessions__uuid: session_id)
+      .map_to(Session)
+      .one
+  end
+
+  def owned_session!(user_id, session_id)
+    check_existence!(owned_session(user_id, session_id), "session not found")
   end
 
   private
