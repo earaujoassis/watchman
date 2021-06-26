@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Executors::Controllers::Users::Index, type: :action do
-  let(:github_response) { github_user_response }
+  let(:github_response) { Helpers::Fixtures.load_json(name: "github_user_response") }
 
   before(:each) do
     clear_repositories

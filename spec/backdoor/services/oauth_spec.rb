@@ -2,27 +2,8 @@
 
 RSpec.describe Backdoor::Services::OAuth, type: :service do
   let(:service) { described_class.factory }
-  let(:retrieve_token_response) do
-    '{
-      "_status": "success",
-      "_message": "Token granted",
-      "user_id": "user_id",
-      "access_token": "access_token",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "refresh_token": "refresh_token",
-      "scope": "read"
-    }'
-  end
-  let(:retrieve_user_data_response) do
-    '{
-      "user": {
-        "first_name": "John",
-        "last_name": "Doe",
-        "email": "john.doe@testing.com"
-      }
-    }'
-  end
+  let(:retrieve_token_response) { Helpers::Fixtures.load_json(name: "oauth_retrieve_token_response") }
+  let(:retrieve_user_data_response) { Helpers::Fixtures.load_json(name: "oauth_retrieve_user_data_response") }
 
   describe ".factory" do
     it "should create an service instance with values from ENV var" do
