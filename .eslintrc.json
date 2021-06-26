@@ -1,21 +1,21 @@
 {
   "env": {
-      "browser": true,
-      "es6": true
+    "browser": true,
+    "es6": true
   },
   "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly",
-      "NProgress": "readonly",
-      "__COMMIT_HASH__": "readonly"
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "NProgress": "readonly",
+    "__COMMIT_HASH__": "readonly"
   },
   "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module",
-      "parser": "babel-eslint"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "parser": "babel-eslint"
   },
   "extends": [
     "standard",
@@ -23,7 +23,7 @@
     "plugin:react/recommended"
   ],
   "plugins": [
-      "react"
+    "react"
   ],
   "rules": {
     "semi": ["error", "always"],
