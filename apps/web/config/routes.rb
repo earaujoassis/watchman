@@ -17,3 +17,8 @@ get "/reports", to: DEFAULT_ROUTE
 get "/reports/:report_id/from/:server_id", to: DEFAULT_ROUTE
 
 redirect "/", to: "/configuration"
+
+root to: "home#index"
+
+get "/signin", to: "home#signin"
+get "/callback", to: "home#callback"
