@@ -32,6 +32,12 @@ namespace :foreman do
     sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
     sh %{#{FileUtils::RUBY} -S bundle exec foreman start -p 3000 -e /dev/null -c web=1,webpacker=1}
   end
+
+  desc "Just like foreman:development, but it uses local .env file as a provider of env vars"
+  task :local do
+    sh %{#{FileUtils::RUBY} -S bundle exec hanami db migrate}
+    sh %{#{FileUtils::RUBY} -S bundle exec foreman start -p 3000 -e .env -c web=1,webpacker=1}
+  end
 end
 
 desc "Run the Rubocop code analyzer/linter"
