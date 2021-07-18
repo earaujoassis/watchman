@@ -50,5 +50,6 @@ RUN bundle exec hanami assets precompile
 
 EXPOSE 3000
 
+USER 1010
 ENTRYPOINT [ "rake" ]
 CMD [ "foreman:web" ]
