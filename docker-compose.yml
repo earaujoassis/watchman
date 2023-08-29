@@ -36,8 +36,8 @@ services:
       - "3000:3000"
     restart: always
     environment:
-      WEB_SESSIONS_SECRET: xRaQLWtL2JUcr8hjgglQOVJ6hRZhIZ6MitXhORpH4ToN7E5OSsVWugEkLdCLikfJ
-      API_SESSIONS_SECRET: MqHTzC0tnbp4mdEFzO39Z1KZfBoDojxWvi3NTBrYMgRCCCkyiB8oMTzBqBrpYOz1
-      DATABASE_URL: postgresql://watchman:8GWbz2JF4FMe1Q8X@watchman-postgres/backdoor_production
+      WATCHMAN_WEB_SESSIONS_SECRET: xRaQLWtL2JUcr8hjgglQOVJ6hRZhIZ6MitXhORpH4ToN7E5OSsVWugEkLdCLikfJ
+      WATCHMAN_API_SESSIONS_SECRET: MqHTzC0tnbp4mdEFzO39Z1KZfBoDojxWvi3NTBrYMgRCCCkyiB8oMTzBqBrpYOz1
+      WATCHMAN_DATABASE_URL: postgresql://watchman:8GWbz2JF4FMe1Q8X@watchman-postgres/backdoor_production
     networks:
       - watchman-network
