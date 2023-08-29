@@ -19,7 +19,7 @@ class Backdoor::Services::Security
 
   def key
     @key ||= begin
-      value = ENV["SECRET_KEY"]
+      value = ENV["WATCHMAN_SECRET_KEY"]
       validate!(:key, value, 64)
       value
     end
@@ -32,7 +32,7 @@ class Backdoor::Services::Security
 
   def version
     @version ||= begin
-      value = ENV["SECRET_KEY_VERSION"]
+      value = ENV["WATCHMAN_SECRET_KEY_VERSION"]
       validate!(:version, value, 16)
       value
     end

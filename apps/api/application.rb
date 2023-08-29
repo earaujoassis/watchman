@@ -80,7 +80,7 @@ module Api
       #
       # See: http://www.rubydoc.info/gems/rack/Rack/Session/Cookie
       #
-      # sessions :cookie, secret: ENV["API_SESSIONS_SECRET"]
+      sessions :cookie, secret: ENV["WATCHMAN_API_SESSIONS_SECRET"]
 
       # middleware.use Rack::Protection
 
