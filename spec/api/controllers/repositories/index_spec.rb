@@ -20,12 +20,12 @@ RSpec.describe Api::Controllers::Repositories::Index, type: :action do
 
   it "should return Service Unavailable when encryption key version has changed" do
     user = fixture_generate_github_user
-    original_version = ENV["SECRET_KEY_VERSION"]
-    ENV["SECRET_KEY_VERSION"] = "tKcheA1MsfyIweBZ"
+    original_version = ENV["WATCHMAN_SECRET_KEY_VERSION"]
+    ENV["WATCHMAN_SECRET_KEY_VERSION"] = "tKcheA1MsfyIweBZ"
     perform_request_with_params({ id: user.uuid })
     expect(status_code).to eq 503
     expect(body).to eq({ error: "version mismatch; cannot decrypt" })
-    ENV["SECRET_KEY_VERSION"] = original_version
+    ENV["WATCHMAN_SECRET_KEY_VERSION"] = original_version
   end
 
   it "should return user's repositories for given :id" do
