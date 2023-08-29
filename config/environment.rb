@@ -28,7 +28,7 @@ Hanami.configure do
     #  * SQL adapter
     #    adapter :sql, 'postgresql://localhost/backdoor_development'
     #
-    adapter :sql, ENV.fetch("DATABASE_URL")
+    adapter :sql, ENV.fetch("WATCHMAN_DATABASE_URL")
 
     ##
     # Migrations
@@ -57,7 +57,7 @@ Hanami.configure do
     logger level: :info, formatter: :json, filter: []
 
     # mailer do
-    #  delivery :smtp, address: ENV.fetch('SMTP_HOST'), port: ENV.fetch('SMTP_PORT')
+    #  delivery :smtp, address: ENV.fetch('WATCHMAN_SMTP_HOST'), port: ENV.fetch('WATCHMAN_SMTP_PORT')
     # end
   end
 end

@@ -82,7 +82,7 @@ module Executors
       #
       # See: http://www.rubydoc.info/gems/rack/Rack/Session/Cookie
       #
-      # sessions :cookie, secret: ENV["EXECUTOR_SESSIONS_SECRET"]
+      # sessions :cookie, secret: ENV["WATCHMAN_EXECUTOR_SESSIONS_SECRET"]
 
       # middleware.use Rack::Protection
 
