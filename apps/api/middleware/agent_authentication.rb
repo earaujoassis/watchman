@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  module Authentication
+  module AgentAuthentication
     def self.included(action)
       action.class_eval do
         before :authenticate!
@@ -11,7 +11,7 @@ module Api
     private
 
     def authenticate!
-      authentication = Backdoor::Services::Authentication.new(request.env)
+      authentication = Backdoor::Services::AgentAuthentication.new(request.env)
       unless authentication.authentic_client?
         halt 401, { error: "Invalid client credentials" }
       end

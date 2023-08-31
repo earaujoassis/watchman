@@ -8,6 +8,9 @@ const menu = () => {
     <div role="menu" className="menu-root">
       <ul className="menu-list">
         <li>
+          <Link to="/dashboard" title="Dashboard"><i className="fas fa-solid fa-chart-line"></i></Link>
+        </li>
+        <li>
           <Link to="/configuration" title="Configuration"><i className="fas fa-cog"></i></Link>
         </li>
         <li>

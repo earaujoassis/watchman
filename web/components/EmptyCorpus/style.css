@@ -1,0 +1,23 @@
+.empty-corpus-root {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.empty-corpus-root__corpus {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.empty-corpus-root__siblings {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.empty-corpus-root__empty {
+  flex: 1;
+  padding: 20px;
+}
