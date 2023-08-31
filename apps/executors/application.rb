@@ -196,7 +196,9 @@ module Executors
       #
       # See: http://www.rubydoc.info/gems/hanami-controller#Configuration
       controller.prepare do
+        include Backdoor::Middleware::ExceptionHandler
         include Executors::SidecarContext
+        include Backdoor::Middleware::CSRFProtectionHandler
         use JsonViewer
       end
 
@@ -214,7 +216,7 @@ module Executors
     #
     configure :development do
       # Don't handle exceptions, render the stack trace
-      handle_exceptions false
+      # handle_exceptions false
     end
 
     ##
@@ -222,7 +224,7 @@ module Executors
     #
     configure :test do
       # Don't handle exceptions, render the stack trace
-      handle_exceptions false
+      # handle_exceptions false
     end
 
     ##

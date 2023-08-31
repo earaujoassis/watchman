@@ -7,6 +7,8 @@ module Backdoor
 
   module Errors; end
 
+  module Middleware; end
+
   module Services; end
 
   module Sockets; end

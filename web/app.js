@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Layout from './containers/Layout';
+import Dashboard from './components/Dashboard';
 import Configuration from './components/Configuration';
 import Credentials from './components/Credentials';
 import Projects from './components/Projects';
@@ -14,6 +15,7 @@ import './app.css';
 const app = props => {
   const routes = (
     <Switch>
+      <Route path="/dashboard" exact component={Dashboard} />
       <Route path="/configuration" exact component={Configuration} />
       <Route path="/configuration/credentials" exact component={Credentials} />
       <Route path="/projects" exact component={Projects} />

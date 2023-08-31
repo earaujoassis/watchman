@@ -7,6 +7,7 @@ require "hanami/model/sql"
 require "faye/websocket"
 require "permessage_deflate"
 require "json"
+require "sentry-ruby"
 require_relative "../lib/backdoor"
 require_relative "../apps/web/application"
 require_relative "../apps/api/application"
@@ -54,7 +55,17 @@ Hanami.configure do
   end
 
   environment :production do
-    logger level: :info, formatter: :json, filter: []
+    logger level: :info, filter: %w[passphrase passphrase_confirmation github_token code]
+
+    if ENV.has_key?("WATCHMAN_SENTRY_URL")
+      Sentry.init do |config|
+        config.dsn = ENV.fetch("WATCHMAN_SENTRY_URL")
+        config.transport.ssl_verification = false
+        config.environment = ENV.fetch("HANAMI_ENV")
+        config.release = "watchman@#{ENV.fetch("COMMIT_HASH")}"
+        config.traces_sample_rate = 1.0
+      end
+    end
 
     # mailer do
     #  delivery :smtp, address: ENV.fetch('WATCHMAN_SMTP_HOST'), port: ENV.fetch('WATCHMAN_SMTP_PORT')

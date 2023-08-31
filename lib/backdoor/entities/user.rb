@@ -9,6 +9,10 @@ class User < Hanami::Entity
 
   PASSPHRASE_MINIMUM_SIZE = 16
 
+  def match_external_user_id?(external_user_id)
+    self.external_user_id == external_user_id
+  end
+
   def passphrase_match?(passphrase)
     Password.new(self.passphrase) == passphrase
   end
@@ -21,9 +25,14 @@ class User < Hanami::Entity
     Backdoor::Services::Security.new.decrypt(self.github_token)
   end
 
+  def is_user_complete?
+    !self.passphrase.nil? && !self.github_token.nil?
+  end
+
   def serialize
     {
       id: self.uuid,
+      is_user_complete: self.is_user_complete?,
       email: self.email
     }
   end

@@ -14,6 +14,9 @@ gem "hanami", "~> 1.3"
 gem "hanami-model", "~> 1.3"
 gem "hanami-utils"
 gem "hanami-validations"
+gem "oauth2"
+gem "faraday", "~> 1.4"
+gem "faraday_middleware", "~> 1.2"
 gem "octokit", "~> 4.0"
 gem "permessage_deflate"
 gem "pg"
@@ -48,4 +51,5 @@ group :test do
 end
 
 group :production do
+  gem "sentry-ruby", "~> 5.10"
 end

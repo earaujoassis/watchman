@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Backdoor::Services::Authentication, type: :service do
+RSpec.describe Backdoor::Services::AgentAuthentication, type: :service do
   let(:service) { described_class.new }
 
   before(:all) do
