@@ -11,7 +11,7 @@ module Executors::Controllers::Users
       self.body = {
         user: {
           name: github_user[:name],
-          email: user.email,
+          git_commit_email: user.git_commit_email,
           token: user.github_token!
         }
       }

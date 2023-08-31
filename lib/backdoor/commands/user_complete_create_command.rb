@@ -10,7 +10,7 @@ class Backdoor::Commands::UserCompleteCreateCommand < Backdoor::Commands::BaseCo
   def perform
     repository = UserRepository.new
     user = repository.master_user
-    repository.update_user(user.uuid, @params.slice(:github_token, :passphrase))
+    repository.update_user(user.uuid, @params.slice(:github_token, :passphrase, :git_commit_email))
     repository.master_user
   end
 end

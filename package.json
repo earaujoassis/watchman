@@ -14,10 +14,10 @@
     "url": "git+https://github.com/earaujoassis/watchman.git"
   },
   "keywords": [
-    "continuous",
-    "deployment",
+    "continuous deployment",
+    "continuous integration",
+    "software deployment",
     "github",
-    "integration",
     "microservice"
   ],
   "author": "Ewerton Carlos Assis <earaujoassis@gmail.com>",
@@ -49,7 +49,7 @@
     "redux-thunk": "^2.3.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.3",
-    "webpack": "^5.38.1",
+    "webpack": "^5.88.2",
     "webpack-cli": "^4.7.2"
   },
   "devDependencies": {

@@ -24,7 +24,7 @@ class Executor::Commands::GitOpsUpdater
 
   def perform
     Executor::GitHelpers.clone_project(workdir: @workdir, project: @action[:application], token: @user[:token])
-    Executor::GitHelpers.config(user_name: @user[:name], user_email: @user[:email])
+    Executor::GitHelpers.config(user_name: @user[:name], user_email: @user[:git_commit_email])
     Executor::GitHelpers.context do |git|
       git.chdir do
         Executor::ChartHelpers.load_values(path: "#{@action[:managed_realm]}/#{@action[:managed_project]}/values.yaml")

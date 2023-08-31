@@ -236,13 +236,23 @@ a:hover,
   background: rgba(0, 0, 0, 0.6);
 }
 
-.global-modal-box {
+.global-modal-wrapper {
   position: absolute;
   z-index: 2002;
-  top: 20%;
-  bottom: auto;
-  left: 25%;
-  right: 25%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+}
+
+.global-modal-box {
+  max-width: 640px;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   border-radius: 2px;

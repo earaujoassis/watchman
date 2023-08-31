@@ -26,14 +26,15 @@ class User < Hanami::Entity
   end
 
   def is_user_complete?
-    !self.passphrase.nil? && !self.github_token.nil?
+    !self.passphrase.nil? && !self.github_token.nil? && !self.git_commit_email.nil?
   end
 
   def serialize
     {
       id: self.uuid,
       is_user_complete: self.is_user_complete?,
-      email: self.email
+      email: self.email,
+      git_commit_email: self.git_commit_email
     }
   end
 end

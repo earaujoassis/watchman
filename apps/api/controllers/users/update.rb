@@ -11,6 +11,7 @@ module Api::Controllers::Users
       required(:user).schema do
         required(:github_token).filled(:str?)
         required(:passphrase_confirmation).filled(:str?)
+        optional(:git_commit_email).filled(:str?)
       end
     end
 
