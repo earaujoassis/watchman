@@ -3,7 +3,7 @@
 module Api::Controllers::Servers
   class Notify
     include Api::Action
-    include Api::Authentication
+    include Api::AgentAuthentication
 
     params do
       required(:server).schema do

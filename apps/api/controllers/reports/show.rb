@@ -3,6 +3,7 @@
 module Api::Controllers::Reports
   class Show
     include Api::Action
+    include Api::UserAuthentication
 
     params do
       required(:server_id).filled(:str?)

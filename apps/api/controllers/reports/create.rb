@@ -3,7 +3,7 @@
 module Api::Controllers::Reports
   class Create
     include Api::Action
-    include Api::Authentication
+    include Api::AgentAuthentication
 
     params do
       required(:server).schema do

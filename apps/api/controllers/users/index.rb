@@ -3,6 +3,7 @@
 module Api::Controllers::Users
   class Index
     include Api::Action
+    include Api::UserAuthentication
 
     def call(params)
       user = UserRepository.new.master_user

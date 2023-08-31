@@ -3,7 +3,7 @@
 module Api::Controllers::Actions
   class Update
     include Api::Action
-    include Api::Authentication
+    include Api::AgentAuthentication
     MEGABYTE = 1024 ** 2
 
     params do

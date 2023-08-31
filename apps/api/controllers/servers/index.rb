@@ -3,6 +3,7 @@
 module Api::Controllers::Servers
   class Index
     include Api::Action
+    include Api::UserAuthentication
 
     def call(params)
       repository = ServerRepository.new

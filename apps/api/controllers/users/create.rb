@@ -3,6 +3,7 @@
 module Api::Controllers::Users
   class Create
     include Api::Action
+    include Api::UserAuthentication
 
     params Class.new(Hanami::Action::Params) {
       predicate(:minimum_size?, message: "doesn't have minimum size of #{User::PASSPHRASE_MINIMUM_SIZE}") do |current|
@@ -11,7 +12,6 @@ module Api::Controllers::Users
 
       validations do
         required(:user).schema do
-          required(:email).filled(:str?, format?: /@/)
           required(:github_token).filled(:str?)
           required(:passphrase) { filled? & str? & minimum_size? }
         end
@@ -19,7 +19,7 @@ module Api::Controllers::Users
     }
 
     def call(params)
-      user = Backdoor::Commands::UserCreateCommand.new(params: params[:user]).perform
+      user = Backdoor::Commands::UserCompleteCreateCommand.new(params: params[:user]).perform
       self.body = { user: user.serialize }
     rescue Backdoor::Errors::CommandError => e
       halt 406, {
