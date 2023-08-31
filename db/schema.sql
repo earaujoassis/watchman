@@ -263,10 +263,11 @@ CREATE TABLE public.users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     email text NOT NULL,
-    github_token text NOT NULL,
+    github_token text,
     category text NOT NULL,
     uuid text DEFAULT public.uuid_generate_v4() NOT NULL,
-    passphrase text NOT NULL
+    passphrase text,
+    git_commit_email text
 );
 
 
@@ -711,6 +712,8 @@ COPY public.schema_migrations (filename) FROM stdin;
 20210614044214_associate_actions_to_credentials.rb
 20210620040146_users_passphrase_not_null.rb
 20210626052930_create_sessions.rb
+20230830015811_modifiy_users_and_sessions_for_oauth.rb
+20230831060439_add_commit_email_to_users.rb
 \.
 
 
