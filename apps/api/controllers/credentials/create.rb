@@ -3,6 +3,7 @@
 module Api::Controllers::Credentials
   class Create
     include Api::Action
+    include Api::UserAuthentication
 
     params do
       required(:id).filled(:str?)

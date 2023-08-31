@@ -250,8 +250,7 @@ module Web
       #
       # See: http://www.rubydoc.info/gems/hanami-controller#Configuration
       controller.prepare do
-        # include MyAuthentication # included in all the actions
-        # before :authenticate!    # run an authentication before callback
+        include Backdoor::Middleware::ExceptionHandler
       end
 
       # Configure the code that will yield each time Web::View is included
@@ -269,7 +268,7 @@ module Web
     #
     configure :development do
       # Don't handle exceptions, render the stack trace
-      handle_exceptions false
+      # handle_exceptions false
     end
 
     ##
@@ -277,15 +276,13 @@ module Web
     #
     configure :test do
       # Don't handle exceptions, render the stack trace
-      handle_exceptions false
+      # handle_exceptions false
     end
 
     ##
     # PRODUCTION
     #
     configure :production do
-      handle_exceptions false
-
       assets do
         # Don't compile static assets in production mode (eg. Sass, ES6)
         #

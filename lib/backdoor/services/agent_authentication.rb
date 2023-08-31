@@ -2,7 +2,7 @@
 
 require "base64"
 
-class Backdoor::Services::Authentication
+class Backdoor::Services::AgentAuthentication
   def initialize(env)
     @env = env
   end

@@ -99,6 +99,8 @@ GEM
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     faye-websocket (0.11.1)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
@@ -184,6 +186,8 @@ GEM
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.7)
+    nokogiri (1.11.7-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.11.7-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.7-x86_64-linux)
@@ -285,6 +289,8 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
+    sentry-ruby (5.10.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sequel (4.49.0)
     shotgun (0.9.2)
       rack (>= 1.0)
@@ -323,6 +329,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-darwin-20
   x86_64-linux
 
@@ -336,6 +343,8 @@ DEPENDENCIES
   coveralls
   dotenv (~> 2.4)
   dry-types
+  faraday (~> 1.4)
+  faraday_middleware (~> 1.2)
   faye-websocket
   foreman
   git
@@ -357,10 +366,11 @@ DEPENDENCIES
   rubocop
   rubocop-github
   rufus-scheduler (~> 3.6)
+  sentry-ruby (~> 5.10)
   shotgun
   webmock
   whois
   yaml
 
 BUNDLED WITH
-   2.2.19
+   2.4.10

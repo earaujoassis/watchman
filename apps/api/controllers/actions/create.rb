@@ -3,7 +3,7 @@
 module Api::Controllers::Actions
   class Create
     include Api::Action
-    include Api::Authentication
+    include Api::AgentAuthentication
 
     params do
       required(:id).filled(:str?)
@@ -20,7 +20,7 @@ module Api::Controllers::Actions
     end
 
     def call(params)
-      credential = Backdoor::Services::Authentication.new(request.env).retrieve_credential!
+      credential = Backdoor::Services::AgentAuthentication.new(request.env).retrieve_credential!
       application = ApplicationRepository.new.find!(params[:id])
 
       Backdoor::Commands::ActionCreateCommand.new(

@@ -3,6 +3,7 @@
 module Api::Controllers::Users
   class Update
     include Api::Action
+    include Api::UserAuthentication
 
     params do
       required(:id).filled(:str?)

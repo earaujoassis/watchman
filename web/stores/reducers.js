@@ -55,7 +55,8 @@ const userRecordError = (state, action) => {
     loading: reduceLoading(state, 'user'),
     displayToast: true,
     success: false,
-    error: action.error
+    error: action.error,
+    user: { error: true }
   });
 };
 

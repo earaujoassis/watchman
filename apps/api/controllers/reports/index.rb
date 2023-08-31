@@ -3,6 +3,7 @@
 module Api::Controllers::Reports
   class Index
     include Api::Action
+    include Api::UserAuthentication
 
     params do
       required(:id).filled(:str?)

@@ -3,6 +3,7 @@
 module Api::Controllers::Credentials
   class Inactivate
     include Api::Action
+    include Api::UserAuthentication
 
     params do
       required(:user_id).filled(:str?)

@@ -2,7 +2,6 @@
 
 require "bcrypt"
 require "securerandom"
-require_relative "./base_command"
 
 class Backdoor::Commands::CredentialCreateCommand < Backdoor::Commands::BaseCommand
   attr_reader :client_key

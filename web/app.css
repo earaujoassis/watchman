@@ -150,7 +150,7 @@ form:invalid input[type=submit] {
 }
 
 .button {
-  display: block;
+  display: inline-block;
   position: relative;
   margin: 18px 0;
   border: 0;
@@ -162,8 +162,13 @@ form:invalid input[type=submit] {
   outline: none;
   cursor: pointer;
   text-transform: uppercase;
+  text-decoration: none;
   font-weight: 700;
   font-size: 1rem;
+}
+
+.button:hover {
+  text-decoration: none;
 }
 
 .button:active {
@@ -234,7 +239,7 @@ a:hover,
 .global-modal-box {
   position: absolute;
   z-index: 2002;
-  top: 10%;
+  top: 20%;
   bottom: auto;
   left: 25%;
   right: 25%;

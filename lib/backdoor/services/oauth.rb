@@ -6,8 +6,7 @@ require "oauth2"
 class Backdoor::Services::OAuth
   class Error < StandardError; end
 
-  attr_reader :oauth_service_url
-  attr_reader :callback_url
+  attr_reader :token
 
   SCOPE = "read"
 
@@ -27,19 +26,19 @@ class Backdoor::Services::OAuth
     @client_key = client_key
     @client_secret = client_secret
     @callback_url = callback_url
-    @client = OAuth2::Client.new(client_key, client_secret, site: oauth_service_url, scope: SCOPE)
+    @client = OAuth2::Client.new(client_key, client_secret, site: oauth_service_url, scope: SCOPE, ssl: {verify: false})
     @token = nil
   end
 
   def authorize_url
-    @client.auth_code.authorize_url(redirect_uri: callback_url, scope: SCOPE)
+    @client.auth_code.authorize_url(redirect_uri: @callback_url, scope: SCOPE)
   end
 
   def retrieve_token(code:)
     @token ||= begin
       @client.auth_code.get_token(
         code,
-        redirect_uri: callback_url,
+        redirect_uri: @callback_url,
         headers: { "Authorization" => "Basic #{client_authorization_token}" }
       )
     rescue StandardError => e

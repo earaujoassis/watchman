@@ -3,7 +3,7 @@
 module Api::Controllers::Reports
   class Update
     include Api::Action
-    include Api::Authentication
+    include Api::AgentAuthentication
 
     def call(params)
       tempfile = params[:report][:body][:tempfile]
