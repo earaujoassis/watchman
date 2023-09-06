@@ -37,7 +37,6 @@ class Executor::Commands::GitOpsUpdater
     )
     Executor::GitHelpers.push
   rescue Git::GitExecuteError => e
-    puts "Error: #{e.message}"
-    # TODO Handle error / notify to Sentry
+    raise Executor::Error, e.message
   end
 end
