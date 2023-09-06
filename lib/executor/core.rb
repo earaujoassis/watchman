@@ -27,6 +27,8 @@ module Executor
         end
       rescue Executor::Error => e
         Executor.logger.error("Failed to process actions: #{e}")
+      rescue StandardError => e
+        Sentry.capture_exception(e)
       end
 
       def success(action:)

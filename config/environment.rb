@@ -61,7 +61,7 @@ Hanami.configure do
       Sentry.init do |config|
         config.dsn = ENV.fetch("WATCHMAN_SENTRY_URL")
         config.transport.ssl_verification = false
-        config.environment = ENV.fetch("HANAMI_ENV")
+        config.environment = ENV.fetch("HANAMI_ENV", "development")
         config.release = "watchman@#{ENV.fetch("COMMIT_HASH")}"
         config.traces_sample_rate = 1.0
       end
