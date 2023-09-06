@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "logger"
+require "sentry-ruby"
 
 module Executor
   module Backdoor; end
@@ -15,6 +16,15 @@ module Executor
     def setup!
       root = File.expand_path("../../", __FILE__)
       Dir.glob(File.join(root, "lib", "executor", "**", "*.rb")).each { |f| require f }
+      if ENV.has_key?("EXECUTOR_SENTRY_URL")
+        Sentry.init do |config|
+          config.dsn = ENV.fetch("EXECUTOR_SENTRY_URL")
+          config.transport.ssl_verification = false
+          config.environment = ENV.fetch("EXECUTOR_ENV", "development")
+          config.release = "executor@#{ENV.fetch("COMMIT_HASH")}"
+          config.traces_sample_rate = 1.0
+        end
+      end
       # change to working directory
       self
     end
@@ -32,6 +42,8 @@ module Executor
     def tick!
       self.logger.info("Starting a new tick!")
       self.setup!.start!
+    rescue StandardError => e
+      Sentry.capture_exception(e)
     end
 
     def logger
