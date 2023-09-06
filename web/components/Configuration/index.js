@@ -21,12 +21,16 @@ const defaultConfiguration = ({ internalSetConfigurationDisplayMode, user = {} }
           <span className="input">(information unavailable)</span>
         </div>
         <div className="input-box">
+          <span className="label">Email for <span className="monospace">git-commit</span></span>
+          <span className="input">{user.git_commit_email}</span>
+        </div>
+        <div className="input-box">
           <button
             type="button"
             className="anchor"
             onClick={() => internalSetConfigurationDisplayMode('editable')}
           >
-            Update GitHub Token
+            Update GitHub Token and Email for <span className="monospace">git-commit</span>
           </button>
         </div>
         <div className="input-box">
@@ -44,7 +48,7 @@ const editableConfiguration = ({ internalSetConfigurationDisplayMode, updateUser
       <div className="configuration-section">
         <form onSubmit={(e) => {
           e.preventDefault();
-          const data = { user: extractDataForm(e.target, ['github_token', 'passphrase_confirmation']) };
+          const data = { user: extractDataForm(e.target, ['github_token', 'passphrase_confirmation', 'git_commit_email']) };
           updateUser(user.id, data);
         }}>
           <div className="input-box">
@@ -53,11 +57,15 @@ const editableConfiguration = ({ internalSetConfigurationDisplayMode, updateUser
           </div>
           <div className="input-box">
             <label htmlFor="user_github_token">GitHub Token</label>
-            <input type="text" required id="user_github_token" name="github_token" />
+            <input required autoComplete="off" type="text" id="user_github_token" name="github_token" />
+          </div>
+          <div className="input-box">
+            <label htmlFor="user_git_commit_email">Email for <span className="monospace">git-commit</span></label>
+            <input required autoComplete="off" type="email" id="user_git_commit_email" name="git_commit_email" />
           </div>
           <div className="input-box">
             <label htmlFor="user_passphrase_confirmation">Confirm password</label>
-            <input type="password" required minLength="16" id="user_passphrase_confirmation" name="passphrase_confirmation" />
+            <input required autoComplete="off" type="password" minLength="16" id="user_passphrase_confirmation" name="passphrase_confirmation" />
           </div>
           <button type="submit" className="button" disabled={loading.includes('user')}>Save</button>
           <div className="input-box">
