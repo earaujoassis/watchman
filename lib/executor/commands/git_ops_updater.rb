@@ -36,5 +36,8 @@ class Executor::Commands::GitOpsUpdater
       commit_message: "bot: updated #{@action[:managed_project]} to #{@action[:commit_hash]}"
     )
     Executor::GitHelpers.push
+  rescue Git::GitExecuteError => e
+    puts "Error: #{e.message}"
+    # TODO Handle error / notify to Sentry
   end
 end
