@@ -48,11 +48,12 @@ export const Modal = ({
                 }}>
                 <div className="input-box">
                   <label htmlFor="managed_realm">Deployable charts top-level folder</label>
-                  <input type="text" id="managed_realm" name="managed_realm" required />
+                  <input required autoComplete="off" type="text" id="managed_realm" name="managed_realm" />
                 </div>
                 <div className="input-box">
+                  <p>Separate project names by comma</p>
                   <label htmlFor="managed_projects">Managed projects</label>
-                  <textarea id="managed_projects" name="managed_projects"></textarea>
+                  <input required autoComplete="off" id="managed_projects" name="managed_projects" />
                 </div>
                 <button type="submit" className="button">Setup project</button>
               </form>

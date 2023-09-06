@@ -39,11 +39,11 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
   end
 
   def validate_managed_project
-    @application.managed_projects.split("\n").include?(@params[:payload][:managed_project])
+    @application.managed_projects.split(",").include?(@params[:payload][:managed_project])
   end
 
   def validate_commit_hash
     return true if @params[:payload][:commit_hash].nil?
-    (@params[:payload][:commit_hash] =~ /^\w{7}$/) == 0
+    (@params[:payload][:commit_hash] =~ /^\w{7,8}$/) == 0
   end
 end
