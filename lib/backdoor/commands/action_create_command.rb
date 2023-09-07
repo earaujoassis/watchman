@@ -44,6 +44,6 @@ class Backdoor::Commands::ActionCreateCommand < Backdoor::Commands::BaseCommand
 
   def validate_commit_hash
     return true if @params[:payload][:commit_hash].nil?
-    (@params[:payload][:commit_hash] =~ /^\w{7,8}$/) == 0
+    (@params[:payload][:commit_hash] =~ /^\w{5,13}$/) == 0
   end
 end
