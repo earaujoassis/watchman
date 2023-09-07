@@ -53,3 +53,5 @@ end
 group :production do
   gem "sentry-ruby", "~> 5.10"
 end
+
+gem "stackprof", "~> 0.2.25"
