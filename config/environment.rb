@@ -7,6 +7,7 @@ require "hanami/model/sql"
 require "faye/websocket"
 require "permessage_deflate"
 require "json"
+require "stackprof"
 require "sentry-ruby"
 require_relative "../lib/backdoor"
 require_relative "../apps/web/application"
@@ -63,6 +64,7 @@ Hanami.configure do
         config.transport.ssl_verification = false
         config.environment = ENV.fetch("HANAMI_ENV", "development")
         config.release = "watchman@#{ENV.fetch("COMMIT_HASH")}"
+        config.profiles_sample_rate = 1.0
         config.traces_sample_rate = 1.0
       end
     end
