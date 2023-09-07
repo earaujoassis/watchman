@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "logger"
+require "stackprof"
 require "sentry-ruby"
 
 module Executor
@@ -22,6 +23,7 @@ module Executor
           config.transport.ssl_verification = false
           config.environment = ENV.fetch("EXECUTOR_ENV", "development")
           config.release = "executor@#{ENV.fetch("COMMIT_HASH")}"
+          config.profiles_sample_rate = 1.0
           config.traces_sample_rate = 1.0
         end
       end
