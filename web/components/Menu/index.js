@@ -11,12 +11,6 @@ const menu = () => {
           <Link to="/dashboard" title="Dashboard"><i className="fas fa-solid fa-chart-line"></i></Link>
         </li>
         <li>
-          <Link to="/configuration" title="Configuration"><i className="fas fa-cog"></i></Link>
-        </li>
-        <li>
-          <Link to="/projects" title="GitHub Projects"><i className="fab fa-github"></i></Link>
-        </li>
-        <li>
           <Link to="/applications" title="Applications"><i className="fas fa-rocket"></i></Link>
         </li>
         <li>
@@ -24,6 +18,12 @@ const menu = () => {
         </li>
         <li>
           <Link to="/reports" title="Reports"><i className="fas fa-file-medical-alt"></i></Link>
+        </li>
+        <li>
+          <Link to="/projects" title="GitHub Projects"><i className="fab fa-github"></i></Link>
+        </li>
+        <li>
+          <Link to="/configuration" title="Configuration"><i className="fas fa-cog"></i></Link>
         </li>
       </ul>
     </div>
