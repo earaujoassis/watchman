@@ -37,9 +37,9 @@ module Executor
         )
       end
 
-      def failure(action:, error: error_message)
+      def failure(action:, error:)
         Executor::Actions.update(
-          uuid: action[:action_id], current_status: "failed", status_reason: error_message
+          uuid: action[:action_id], current_status: "failed", status_reason: error
         )
       end
 
