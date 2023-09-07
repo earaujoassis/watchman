@@ -13,7 +13,7 @@ module Executor
       def update_image_tag(tag:, path: ["image", "tag"])
         content = @content.clone
         *head, tail = path
-        head.inject(content) { |hash, key| hash[key] }[tail] = tag
+        head.inject(content) { |hash, key| hash[key] }[tail] = "'#{tag}'"
         @content = content
       end
 
