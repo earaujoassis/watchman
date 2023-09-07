@@ -20,12 +20,14 @@ module Executor
                 command.perform!(user: user, action: action, workdir: workdir)
                 success(action: action)
               rescue Executor::Error => e
+                Sentry.capture_exception(e)
                 failure(action: action, error: e.to_s)
               end
             end
           end
         end
       rescue Executor::Error => e
+        Sentry.capture_exception(e)
         Executor.logger.error("Failed to process actions: #{e}")
       rescue StandardError => e
         Sentry.capture_exception(e)
