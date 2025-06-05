@@ -1,1 +1,34 @@
+# https://help.github.com/articles/ignoring-files
+#
+
 .DS_Store
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files.
+/.env*
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.gitkeep
+!/tmp/.gitkeep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.gitkeep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.gitkeep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.gitkeep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# RSpec
+spec/examples.txt
