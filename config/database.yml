@@ -1,0 +1,46 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: watchman_development
+  # username: watchman
+  # password:
+  # host: localhost
+  # port: 5432
+  # schema_search_path: myapp,sharedapp,public
+  # Minimum log levels, in increasing order:
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+  # Defaults to warning.
+  min_messages: log
+
+test:
+  <<: *default
+  database: watchman_test
+
+#
+#   DATABASE_URL="postgres://user:password@host/database_name"
+#   production:
+#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
+#
+production:
+  primary: &primary_production
+    <<: *default
+    database: watchman_production
+    username: watchman
+    password: <%= ENV["WATCHMAN_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: watchman_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: watchman_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: watchman_production_cable
+    migrations_paths: db/cable_migrate
