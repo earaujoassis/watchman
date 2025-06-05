@@ -3,12 +3,13 @@ Rails.application.routes.draw do
 
   get "custom_health", to: "application#health"
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  root "root#index"
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [ :index, :show, :create ]
+      namespace :users do
+        resources :profile, only: [ :show, :create ]
+      end
     end
   end
 end
