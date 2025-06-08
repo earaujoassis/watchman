@@ -18,7 +18,7 @@
 FactoryBot.define do
   factory :user do
     sequence_id { 1 }
-    public_id { "MyString" }
-    active { false }
+    public_id { Faker::Alphanumeric.alphanumeric(number: 32) }
+    active { true }
   end
 end
