@@ -14,7 +14,6 @@
 #  index_users_on_public_id    (public_id) UNIQUE
 #  index_users_on_sequence_id  (sequence_id) UNIQUE
 #
-
 class User < ApplicationRecord
   validates :public_id, presence: true, uniqueness: true
 end
