@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :users do
-        resources :profile, only: [ :show, :create ]
+        resource :profile, only: [ :show, :create ]
       end
     end
   end

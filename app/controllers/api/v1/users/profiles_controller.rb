@@ -1,4 +1,4 @@
-class Api::V1::Users::ProfileController < Api::V1::BaseController
+class Api::V1::Users::ProfilesController < Api::V1::BaseController
   def show
     user = User.find(params[:id])
     render_json_success(user)

@@ -1,4 +1,4 @@
-class RootController < Api::V1::BaseController
+class RootController < ApplicationController
   def index
     render json: { message: "root" }
   end
