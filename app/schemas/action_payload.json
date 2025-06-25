@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "required": ["managed_project", "managed_realm", "commit_hash"],
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "managed_project": {
+      "type": "string"
+    },
+    "managed_realm": {
+      "type": "string"
+    },
+    "commit_hash": {
+      "type": "string"
+    }
+  }
+}
